@@ -26,4 +26,5 @@ dependencies {
     compile 'io.reactivex:rxandroid:1.0.1'
     compile 'com.android.support:support-v4:23.0.0'
     compile 'com.android.support:design:23.0.0'
+    compile 'com.github.navasmdc:MaterialDesign:1.5@aar'
 }
