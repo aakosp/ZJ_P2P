@@ -29,10 +29,10 @@ public class LoginActivity extends BaseActivity {
         acEditText_login_id = (AppCompatEditText) findViewById(R.id.etId);
         acEditText_login_pwd = (AppCompatEditText) findViewById(R.id.etPwd);
         btn_login_login = (Button) findViewById(R.id.btnLogin);
-        this.getCompositeSubscription().add(new);
+
     }
 
-    static Observable<String> sampleObservable(){
+    public static Observable<String> sampleObservable(){
         return Observable.defer(new Func0<Observable<String>>() {
             @Override
             public Observable<String> call() {

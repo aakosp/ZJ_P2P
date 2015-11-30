@@ -1,6 +1,7 @@
 package com.aako.zjp2p.util.net;
 
 import android.content.Context;
+import android.support.v4.util.LruCache;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -20,7 +21,6 @@ public class VolleyUtils {
 
     private static VolleyUtils mVolleyUtils;
     private RequestQueue mVolleyRequestQueue;
-    private Observable observable;
 
     private VolleyUtils() {
     }
@@ -82,6 +82,7 @@ public class VolleyUtils {
 
     public void doPost(final String url, final Map<String, String> params, final HttpCallback callback, final Object tag){
         doRequest(Request.Method.POST, url, params, callback, tag);
+
     }
 
 }

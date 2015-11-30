@@ -3,6 +3,9 @@ package com.aako.zjp2p.util.net;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 
+import java.io.File;
+import java.io.FileFilter;
+
 import rx.Observable;
 import rx.Subscriber;
 
@@ -27,6 +30,7 @@ public class RxRequestAdapter<T> implements Response.Listener<T>, Response.Error
     @Override
     public void onResponse(T response) {
         mResponse = response;
+        FileFilter java = (File f) -> f.getName().endsWith("*.java");
     }
 
     @Override
