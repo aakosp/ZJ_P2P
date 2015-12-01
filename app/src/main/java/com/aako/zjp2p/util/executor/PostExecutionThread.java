@@ -1,4 +1,4 @@
-package com.aako.zjp2p.interactor;
+package com.aako.zjp2p.util.executor;
 
 import rx.Scheduler;
 

@@ -2,8 +2,9 @@ package com.aako.zjp2p.interactor;
 
 import android.support.annotation.NonNull;
 
-import java.util.concurrent.Executor;
+import com.aako.zjp2p.util.executor.PostExecutionThread;
 
+import java.util.concurrent.Executor;
 import rx.Observable;
 import rx.Subscriber;
 import rx.Subscription;

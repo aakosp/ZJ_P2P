@@ -2,6 +2,8 @@ package com.aako.zjp2p.ui;
 
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatEditText;
+import android.util.Log;
+
 import com.aako.zjp2p.R;
 import com.aako.zjp2p.ui.base.BaseActivity;
 import com.gc.materialdesign.views.Button;
@@ -29,10 +31,10 @@ public class LoginActivity extends BaseActivity {
         acEditText_login_id = (AppCompatEditText) findViewById(R.id.etId);
         acEditText_login_pwd = (AppCompatEditText) findViewById(R.id.etPwd);
         btn_login_login = (Button) findViewById(R.id.btnLogin);
-
+        btn_login_login.setOnClickListener(view -> Log.d(TAG, "Lambda"));
     }
 
-    public static Observable<String> sampleObservable(){
+    public static Observable<String> sampleObservable() {
         return Observable.defer(new Func0<Observable<String>>() {
             @Override
             public Observable<String> call() {
