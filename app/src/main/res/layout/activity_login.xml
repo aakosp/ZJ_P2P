@@ -9,19 +9,29 @@
         android:layout_centerVertical="true"
         android:orientation="vertical">
 
-        <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/etId"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/userName"
-            android:inputType="textEmailAddress" />
+            android:layout_height="wrap_content">
 
-        <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/etPwd"
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/etId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/userName"
+                android:inputType="textEmailAddress" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/userPwd"
-            android:inputType="textPassword" />
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/etPwd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/userPwd"
+                android:inputType="textPassword" />
+        </android.support.design.widget.TextInputLayout>
 
         <com.gc.materialdesign.views.ButtonRectangle
             android:id="@+id/btnLogin"

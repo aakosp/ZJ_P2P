@@ -30,7 +30,6 @@ public class RxRequestAdapter<T> implements Response.Listener<T>, Response.Error
     @Override
     public void onResponse(T response) {
         mResponse = response;
-        FileFilter java = (File f) -> f.getName().endsWith("*.java");
     }
 
     @Override

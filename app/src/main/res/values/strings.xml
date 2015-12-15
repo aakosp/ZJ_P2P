@@ -3,4 +3,18 @@
     <string name="userName">用户名</string>
     <string name="userPwd">密码</string>
     <string name="login">登录</string>
+
+    <string name="main_activity">首页</string>
+    <string name="profile">我的账户</string>
+    <string name="initiate">我发起的</string>
+    <string name="spreading">我的推广</string>
+    <string name="participated">我参与的</string>
+    <string name="integral">我的积分</string>
+
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
 </resources>
