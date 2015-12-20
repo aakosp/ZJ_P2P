@@ -1,4 +1,4 @@
-package com.aako.zjp2p.ui.widget;
+package com.aako.zjp2p.ui.widget.loopviewpager;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -15,7 +15,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.aako.zjp2p.R;
-import com.aako.zjp2p.ui.widget.hold.ShapeHolder;
+import com.aako.zjp2p.ui.widget.loopviewpager.hold.ShapeHolder;
 
 import java.util.ArrayList;
 import java.util.List;

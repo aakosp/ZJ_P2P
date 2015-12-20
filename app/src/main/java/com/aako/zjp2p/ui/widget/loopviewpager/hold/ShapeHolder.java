@@ -1,4 +1,4 @@
-package com.aako.zjp2p.ui.widget.hold;
+package com.aako.zjp2p.ui.widget.loopviewpager.hold;
 
 import android.graphics.Paint;
 import android.graphics.drawable.ShapeDrawable;
