@@ -10,22 +10,22 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 /**
- * Created by aako on 15-12-15.
+ * Created by aako on 15-12-23.
  */
-public class FragmentNews extends Fragment {
+public class FragmentSpreading extends Fragment{
     TextView curView;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Log.d("FragmentNews", "FragmentNews onCreateView begin");
+        Log.d("FragmentSpreading", "FragmentSpreading onCreateView begin");
         if (null != curView) {
             ((ViewGroup) curView.getParent()).removeView(curView);
             return curView;
         }
         curView = new TextView(this.getContext());
-        curView.setText("FragmentNews...");
-        Log.d("FragmentNews", "FragmentNews onCreateView end");
+        curView.setText("FragmentSpreading...");
+        Log.d("FragmentSpreading", "FragmentSpreading onCreateView begin");
         return curView;
     }
 }

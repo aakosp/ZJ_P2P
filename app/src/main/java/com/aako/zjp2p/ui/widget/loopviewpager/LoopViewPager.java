@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 
 import com.aako.zjp2p.ui.widget.loopviewpager.adapter.LoopPagerAdapter;
@@ -13,12 +14,14 @@ import com.aako.zjp2p.ui.widget.loopviewpager.adapter.LoopPagerAdapter;
  */
 public class LoopViewPager extends ViewPager {
 
+    private static final String TAG = " LoopViewPager ";
+
     private static final boolean DEFAULT_BOUNDARY_CASHING = true;
 
     OnPageChangeListener mOuterPageChangeListener;
     private LoopPagerAdapter mAdapter;
     private boolean mBoundaryCaching = DEFAULT_BOUNDARY_CASHING;
-    private ViewPagerScroller scroller;
+//    private ViewPagerScroller scroller;
     private boolean canLoop = true;
     private boolean isCanScroll = true;
 
@@ -135,6 +138,7 @@ public class LoopViewPager extends ViewPager {
 
         @Override
         public void onPageSelected(int position) {
+            Log.d(TAG, "mAdapter==null : "+(null==mAdapter));
             int realPosition = mAdapter.toRealPosition(position);
             if (mPreviousPosition != realPosition) {
                 mPreviousPosition = realPosition;
@@ -191,9 +195,9 @@ public class LoopViewPager extends ViewPager {
         }
     };
 
-    public void setScroller(ViewPagerScroller scroller) {
-        this.scroller = scroller;
-    }
+//    public void setScroller(ViewPagerScroller scroller) {
+//        this.scroller = scroller;
+//    }
 
     public boolean isCanLoop() {
         return canLoop;

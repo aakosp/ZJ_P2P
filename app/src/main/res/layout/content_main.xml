@@ -15,11 +15,11 @@
 
 
     <fragment
-        android:id="@+id/fragmentNews"
+        android:id="@+id/fragmentHome"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        class="com.aako.zjp2p.ui.activity.FragmentNews" />
+        class="com.aako.zjp2p.ui.activity.FragmentHome" />
 
     <fragment
         android:id="@+id/fragmentProfile"
@@ -27,5 +27,33 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         class="com.aako.zjp2p.ui.activity.FragmentProfile" />
+
+    <fragment
+        android:id="@+id/fragmentInitiate"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        class="com.aako.zjp2p.ui.activity.FragmentInitiate" />
+
+    <fragment
+        android:id="@+id/fragmentSpreading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        class="com.aako.zjp2p.ui.activity.FragmentSpreading" />
+
+    <fragment
+        android:id="@+id/fragmentParticipated"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        class="com.aako.zjp2p.ui.activity.FragmentParticipated" />
+
+    <fragment
+        android:id="@+id/fragmentIntegral"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        class="com.aako.zjp2p.ui.activity.FragmentIntegral" />
 
 </LinearLayout>

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -14,11 +15,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import com.aako.zjp2p.R;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private Fragment[] mFragments;
+    private static final String TAG = " MainActivity ";
+
+    private Map<Integer, Fragment> mFragments = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,14 +50,14 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        mFragments.put(R.id.main, getSupportFragmentManager().findFragmentById(R.id.fragmentHome));
+        mFragments.put(R.id.profile, getSupportFragmentManager().findFragmentById(R.id.fragmentProfile));
+        mFragments.put(R.id.initiate, getSupportFragmentManager().findFragmentById(R.id.fragmentInitiate));
+        mFragments.put(R.id.spreading, getSupportFragmentManager().findFragmentById(R.id.fragmentSpreading));
+        mFragments.put(R.id.participated, getSupportFragmentManager().findFragmentById(R.id.fragmentParticipated));
+        mFragments.put(R.id.integral, getSupportFragmentManager().findFragmentById(R.id.fragmentIntegral));
 
-        mFragments = new Fragment[2];
-        Log.d("getSupportFragment", (null==getSupportFragmentManager()) +"");
-        mFragments[0] = getSupportFragmentManager().findFragmentById(R.id.fragmentNews);
-        mFragments[1] = getSupportFragmentManager().findFragmentById(R.id.fragmentProfile);
-
-        getSupportFragmentManager().beginTransaction().hide(mFragments[0]).hide(mFragments[1]).show(mFragments[0]).commit();
-
+        navigationToFragment(R.id.main);
     }
 
     @Override
@@ -69,23 +74,22 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        switch (item.getItemId()) {
-            case R.id.main:
-                break;
-            case R.id.profile:
-                getSupportFragmentManager().beginTransaction().show(mFragments[1]).hide(mFragments[0]).commit();
-                break;
-            case R.id.initiate:
-                break;
-            case R.id.spreading:
-                break;
-            case R.id.participated:
-                break;
-            case R.id.integral:
-                break;
-        }
+        navigationToFragment(item.getItemId());
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void navigationToFragment(int id){
+        if(!mFragments.containsKey(id)){
+            return;
+        }
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out,
+                android.R.anim.fade_in, android.R.anim.fade_out);
+        for(int key : mFragments.keySet()){
+            fragmentTransaction = fragmentTransaction.hide(mFragments.get(key));
+        }
+        fragmentTransaction.show(mFragments.get(id)).commit();
     }
 }

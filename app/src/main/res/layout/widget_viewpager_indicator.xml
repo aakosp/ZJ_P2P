@@ -12,15 +12,10 @@
         android:layout_gravity="center" />
 
     <com.aako.zjp2p.ui.widget.loopviewpager.CircleIndicator
-        android:id="@+id/indicator"
+        android:id="@id/indicator"
+        android:layout_gravity="bottom"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_centerVertical="true"
-        CircleIndicator:ci_background="@android:color/white"
-        CircleIndicator:ci_gravity="center"
-        CircleIndicator:ci_margin="5dp"
-        CircleIndicator:ci_mode="outside"
-        CircleIndicator:ci_radius="10dp"
-        CircleIndicator:ci_selected_background="0xffe6454a" />
+        android:layout_height="48dp"
+        android:layout_marginBottom="48dp" />
 
 </LinearLayout>
