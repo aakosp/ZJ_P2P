@@ -7,7 +7,7 @@ import android.view.View;
 /**
  * Created by ZL on 2015/11/23.
  */
-public class utils {
+public class UiUtils {
     /**
      * Convert Dp to Pixel
      */

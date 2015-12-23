@@ -16,48 +16,12 @@ public class LoopViewPager extends ViewPager {
 
     private static final String TAG = " LoopViewPager ";
 
-    private static final boolean DEFAULT_BOUNDARY_CASHING = true;
+    private static final boolean DEFAULT_BOUNDARY_CASHING = false;
 
     OnPageChangeListener mOuterPageChangeListener;
     private LoopPagerAdapter mAdapter;
     private boolean mBoundaryCaching = DEFAULT_BOUNDARY_CASHING;
-//    private ViewPagerScroller scroller;
-    private boolean canLoop = true;
-    private boolean isCanScroll = true;
 
-    public LoopViewPager(Context context) {
-        super(context);
-        init();
-    }
-
-    public LoopViewPager(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        init();
-    }
-
-    public boolean isCanScroll() {
-        return isCanScroll;
-    }
-
-    public void setCanScroll(boolean isCanScroll) {
-        this.isCanScroll = isCanScroll;
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent ev) {
-        if (isCanScroll)
-            return super.onTouchEvent(ev);
-        else
-            return false;
-    }
-
-    @Override
-    public boolean onInterceptTouchEvent(MotionEvent ev) {
-        if (isCanScroll)
-            return super.onInterceptTouchEvent(ev);
-        else
-            return false;
-    }
 
     /**
      * helper function which may be used when implementing FragmentPagerAdapter
@@ -66,12 +30,12 @@ public class LoopViewPager extends ViewPager {
      * @param count
      * @return (position-1)%count
      */
-    public static int toRealPosition(int position, int count) {
-        position = position - 1;
-        if (position < 0) {
+    public static int toRealPosition( int position, int count ){
+        position = position-1;
+        if( position < 0 ){
             position += count;
-        } else {
-            position = position % count;
+        }else{
+            position = position%count;
         }
         return position;
     }
@@ -89,10 +53,11 @@ public class LoopViewPager extends ViewPager {
         }
     }
 
-    public void setAdapter(PagerAdapter adapter, boolean canLoop) {
-        mAdapter = new LoopPagerAdapter(adapter, canLoop);
+    @Override
+    public void setAdapter(PagerAdapter adapter) {
+        mAdapter = new LoopPagerAdapter(adapter);
         mAdapter.setBoundaryCaching(mBoundaryCaching);
-        setAdapter(mAdapter);
+        super.setAdapter(mAdapter);
         setCurrentItem(0, false);
     }
 
@@ -101,18 +66,13 @@ public class LoopViewPager extends ViewPager {
         return mAdapter != null ? mAdapter.getRealAdapter() : mAdapter;
     }
 
-
     @Override
     public int getCurrentItem() {
         return mAdapter != null ? mAdapter.toRealPosition(super.getCurrentItem()) : 0;
     }
 
     public void setCurrentItem(int item, boolean smoothScroll) {
-        int realItem = 0;
-        try {
-            realItem = mAdapter.toInnerPosition(item);
-        } catch (NullPointerException e) {
-        }
+        int realItem = mAdapter.toInnerPosition(item);
         super.setCurrentItem(realItem, smoothScroll);
     }
 
@@ -126,6 +86,16 @@ public class LoopViewPager extends ViewPager {
     @Override
     public void setOnPageChangeListener(OnPageChangeListener listener) {
         mOuterPageChangeListener = listener;
+    };
+
+    public LoopViewPager(Context context) {
+        super(context);
+        init();
+    }
+
+    public LoopViewPager(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        init();
     }
 
     private void init() {
@@ -138,7 +108,7 @@ public class LoopViewPager extends ViewPager {
 
         @Override
         public void onPageSelected(int position) {
-            Log.d(TAG, "mAdapter==null : "+(null==mAdapter));
+
             int realPosition = mAdapter.toRealPosition(position);
             if (mPreviousPosition != realPosition) {
                 mPreviousPosition = realPosition;
@@ -154,7 +124,8 @@ public class LoopViewPager extends ViewPager {
             int realPosition = position;
             if (mAdapter != null) {
                 realPosition = mAdapter.toRealPosition(position);
-                if (canLoop && positionOffset == 0
+
+                if (positionOffset == 0
                         && mPreviousOffset == 0
                         && (position == 0 || position == mAdapter.getCount() - 1)) {
                     setCurrentItem(realPosition, false);
@@ -182,11 +153,9 @@ public class LoopViewPager extends ViewPager {
             if (mAdapter != null) {
                 int position = LoopViewPager.super.getCurrentItem();
                 int realPosition = mAdapter.toRealPosition(position);
-
-                if (canLoop && state == ViewPager.SCROLL_STATE_IDLE
+                if (state == ViewPager.SCROLL_STATE_IDLE
                         && (position == 0 || position == mAdapter.getCount() - 1)) {
-                    //如果是0或者最后一个View，为了无限循环,滚动结束会预先跳到相反的View，如0跳最后，最后跳0
-                    setCurrentItem(realPosition, false);//如果为false，就不会刷新视图，也就出现第一次加载的时候往前滚，会有空白View。
+                    setCurrentItem(realPosition, false);
                 }
             }
             if (mOuterPageChangeListener != null) {
@@ -194,12 +163,4 @@ public class LoopViewPager extends ViewPager {
             }
         }
     };
-
-//    public void setScroller(ViewPagerScroller scroller) {
-//        this.scroller = scroller;
-//    }
-
-    public boolean isCanLoop() {
-        return canLoop;
-    }
 }
