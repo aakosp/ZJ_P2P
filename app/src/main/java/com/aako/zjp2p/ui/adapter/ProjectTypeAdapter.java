@@ -25,8 +25,7 @@ public class ProjectTypeAdapter extends BaseAdapter {
                 UiUtils.dpToPx(context.getResources().getDimension(R.dimen.button_width), context.getResources()),
                 UiUtils.dpToPx(context.getResources().getDimension(R.dimen.button_height), context.getResources()));
         for (int i = 0; i < 6; i++) {
-            ButtonRectangle button = new ButtonRectangle(context);
-            button.setLayoutParams(params);
+            ButtonRectangle button = (ButtonRectangle) View.inflate(context, R.layout.item_project_type, null);
             button.setText(strs[i]);
             buttons.put(i, button);
         }

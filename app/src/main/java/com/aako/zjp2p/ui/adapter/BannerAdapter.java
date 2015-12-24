@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.aako.zjp2p.R;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.net.URI;
@@ -24,7 +25,7 @@ public class BannerAdapter extends PagerAdapter {
 
     private Context context;
     private List<String> bannerUrl = new ArrayList<>();
-    private SparseArray<SimpleDraweeView> banners = new SparseArray<>();
+    private SparseArray<View> banners = new SparseArray<>();
 
     public BannerAdapter(Context context) {
         this.context = context;
@@ -55,11 +56,12 @@ public class BannerAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup view, int position) {
-        SimpleDraweeView banner = banners.get(position);
+        View banner = banners.get(position);
         if (null == banner) {
-            banner = new SimpleDraweeView(context);
+            banner = View.inflate(context, R.layout.item_banner, view);
         }
-        banner.setImageURI(Uri.parse(bannerUrl.get(position)));
+        SimpleDraweeView img = (SimpleDraweeView) banner.findViewById(R.id.img);
+        img.setImageURI(Uri.parse(bannerUrl.get(position)));
         banners.put(position, banner);
         return banner;
     }

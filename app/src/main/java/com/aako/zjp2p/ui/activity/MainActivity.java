@@ -14,6 +14,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.TextView;
+
 import com.aako.zjp2p.R;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,6 +25,8 @@ public class MainActivity extends AppCompatActivity
 
     private static final String TAG = " MainActivity ";
 
+    private TextView tv_mainActivity_title;
+
     private Map<Integer, Fragment> mFragments = new HashMap<>();
 
     @Override
@@ -30,6 +34,8 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        tv_mainActivity_title = (TextView) toolbar.findViewById(R.id.title);
+        toolbar.setTitle("");
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
