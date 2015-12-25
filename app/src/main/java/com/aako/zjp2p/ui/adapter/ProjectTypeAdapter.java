@@ -1,6 +1,7 @@
 package com.aako.zjp2p.ui.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,8 @@ import com.gc.materialdesign.views.ButtonRectangle;
  */
 public class ProjectTypeAdapter extends BaseAdapter {
 
+    private static final String TAG = " ProjectTypeAdapter ";
+
     private SparseArray<ButtonRectangle> buttons = new SparseArray<>(6);
     private String[] strs = {"p2p", "众筹", "创投", "基金", "公益", "梦想"};
 
@@ -26,6 +29,8 @@ public class ProjectTypeAdapter extends BaseAdapter {
                 UiUtils.dpToPx(context.getResources().getDimension(R.dimen.button_height), context.getResources()));
         for (int i = 0; i < 6; i++) {
             ButtonRectangle button = (ButtonRectangle) View.inflate(context, R.layout.item_project_type, null);
+//            ButtonRectangle button = (ButtonRectangle) view.findViewById(R.id.btn);
+            Log.d(TAG, "button==null : "+(button==null));
             button.setText(strs[i]);
             buttons.put(i, button);
         }

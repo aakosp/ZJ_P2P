@@ -42,11 +42,12 @@ public class FragmentHome extends BaseFragment {
         BannerAdapter bannerAdapter = new BannerAdapter(this.getContext());
         List<String> bannerUrl = new ArrayList<>();
         bannerUrl.add("http://b.hiphotos.baidu.com/image/h%3D200/sign=9a3972dc65d9f2d33f1123ef99ed8a53/3b87e950352ac65cf1f52b4efcf2b21193138a1f.jpg");
+        bannerUrl.add("");
         bannerAdapter.setUrls(bannerUrl);
         loopViewPager.setAdapter(bannerAdapter);
         circleIndicator.setViewPager(loopViewPager);
 
-//        gridView.setAdapter(new ProjectTypeAdapter(this.getContext()));
+        gridView.setAdapter(new ProjectTypeAdapter(this.getContext()));
     }
 
 

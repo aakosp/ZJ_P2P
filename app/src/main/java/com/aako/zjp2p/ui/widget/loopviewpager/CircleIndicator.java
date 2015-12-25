@@ -14,7 +14,9 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.animation.Interpolator;
 import android.widget.LinearLayout;
+
 import static android.support.v4.view.ViewPager.OnPageChangeListener;
+
 import com.aako.zjp2p.R;
 import com.aako.zjp2p.ui.widget.loopviewpager.adapter.LoopPagerAdapter;
 
@@ -169,14 +171,14 @@ public class CircleIndicator extends LinearLayout {
         @Override
         public void onPageSelected(int position) {
 
-            if (mViewpager.getAdapter() == null || mViewpager.getAdapter().getCount() <= 0 || mLastPosition==mViewpager.getCurrentItem()) {
+            if (mViewpager.getAdapter() == null || mViewpager.getAdapter().getCount() <= 0 || mLastPosition == mViewpager.getCurrentItem()) {
                 return;
             }
 
             if (mAnimatorIn.isRunning()) mAnimatorIn.cancel();
             if (mAnimatorOut.isRunning()) mAnimatorOut.cancel();
 
-            Log.d(TAG, "getChildAt : " + position+ "; "+mLastPosition+ " getCurrentItem : "+mViewpager.getCurrentItem());
+            Log.d(TAG, "getChildAt : " + position + "; " + mLastPosition + " getCurrentItem : " + mViewpager.getCurrentItem());
             if (mLastPosition >= 0) {
                 View currentIndicator = getChildAt(mLastPosition);
                 currentIndicator.setBackgroundResource(mIndicatorUnselectedBackgroundResId);
@@ -212,7 +214,6 @@ public class CircleIndicator extends LinearLayout {
             } else {
                 mLastPosition = -1;
             }
-
             createIndicators();
         }
     };

@@ -4,7 +4,7 @@ import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
-import android.util.Log;
+import android.view.MotionEvent;
 
 import com.aako.zjp2p.ui.widget.loopviewpager.adapter.LoopPagerAdapter;
 
@@ -15,77 +15,66 @@ public class LoopViewPager extends ViewPager {
 
     private static final String TAG = " LoopViewPager ";
 
-    private static final boolean DEFAULT_BOUNDARY_CASHING = false;
-
     OnPageChangeListener mOuterPageChangeListener;
     private LoopPagerAdapter mAdapter;
-    private boolean mBoundaryCaching = DEFAULT_BOUNDARY_CASHING;
 
+    private boolean isCanScroll = true;
+    private boolean canLoop = true;
 
-    /**
-     * helper function which may be used when implementing FragmentPagerAdapter
-     *
-     * @param position
-     * @param count
-     * @return (position-1)%count
-     */
-    public static int toRealPosition( int position, int count ){
-        position = position-1;
-        if( position < 0 ){
-            position += count;
-        }else{
-            position = position%count;
-        }
-        return position;
-    }
-
-    /**
-     * If set to true, the boundary views (i.e. first and last) will never be destroyed
-     * This may help to prevent "blinking" of some views
-     *
-     * @param flag
-     */
-    public void setBoundaryCaching(boolean flag) {
-        mBoundaryCaching = flag;
-        if (mAdapter != null) {
-            mAdapter.setBoundaryCaching(flag);
-        }
-    }
-
-    @Override
-    public void setAdapter(PagerAdapter adapter) {
-        mAdapter = new LoopPagerAdapter(adapter);
-        mAdapter.setBoundaryCaching(mBoundaryCaching);
+    public void setAdapter(PagerAdapter adapter, boolean canLoop) {
+        mAdapter = (LoopPagerAdapter) adapter;
+        mAdapter.setCanLoop(canLoop);
+        mAdapter.setViewPager(this);
         super.setAdapter(mAdapter);
-        setCurrentItem(0, false);
+
+        setCurrentItem(getFristItem(), false);
+    }
+
+    public int getFristItem() {
+        return canLoop ? mAdapter.getRealCount() : 0;
+    }
+
+    public int getLastItem() {
+        return mAdapter.getRealCount() - 1;
+    }
+
+    public boolean isCanScroll() {
+        return isCanScroll;
+    }
+
+    public void setCanScroll(boolean isCanScroll) {
+        this.isCanScroll = isCanScroll;
     }
 
     @Override
-    public PagerAdapter getAdapter() {
-        return mAdapter != null ? mAdapter.getRealAdapter() : mAdapter;
+    public boolean onTouchEvent(MotionEvent ev) {
+        if (isCanScroll)
+            return super.onTouchEvent(ev);
+        else
+            return false;
     }
 
     @Override
-    public int getCurrentItem() {
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        if (isCanScroll)
+            return super.onInterceptTouchEvent(ev);
+        else
+            return false;
+    }
+
+    public LoopPagerAdapter getAdapter() {
+        return mAdapter;
+    }
+
+    public int getRealItem() {
         return mAdapter != null ? mAdapter.toRealPosition(super.getCurrentItem()) : 0;
-    }
-
-    public void setCurrentItem(int item, boolean smoothScroll) {
-        int realItem = mAdapter.toInnerPosition(item);
-        super.setCurrentItem(realItem, smoothScroll);
-    }
-
-    @Override
-    public void setCurrentItem(int item) {
-        if (getCurrentItem() != item) {
-            setCurrentItem(item, true);
-        }
     }
 
     @Override
     public void setOnPageChangeListener(OnPageChangeListener listener) {
         mOuterPageChangeListener = listener;
-    };
+    }
+
 
     public LoopViewPager(Context context) {
         super(context);
@@ -102,12 +91,10 @@ public class LoopViewPager extends ViewPager {
     }
 
     private OnPageChangeListener onPageChangeListener = new OnPageChangeListener() {
-        private float mPreviousOffset = -1;
         private float mPreviousPosition = -1;
 
         @Override
         public void onPageSelected(int position) {
-
             int realPosition = mAdapter.toRealPosition(position);
             if (mPreviousPosition != realPosition) {
                 mPreviousPosition = realPosition;
@@ -121,17 +108,7 @@ public class LoopViewPager extends ViewPager {
         public void onPageScrolled(int position, float positionOffset,
                                    int positionOffsetPixels) {
             int realPosition = position;
-            if (mAdapter != null) {
-                realPosition = mAdapter.toRealPosition(position);
 
-                if (positionOffset == 0
-                        && mPreviousOffset == 0
-                        && (position == 0 || position == mAdapter.getCount() - 1)) {
-                    setCurrentItem(realPosition, false);
-                }
-            }
-
-            mPreviousOffset = positionOffset;
             if (mOuterPageChangeListener != null) {
                 if (realPosition != mAdapter.getRealCount() - 1) {
                     mOuterPageChangeListener.onPageScrolled(realPosition,
@@ -149,17 +126,23 @@ public class LoopViewPager extends ViewPager {
 
         @Override
         public void onPageScrollStateChanged(int state) {
-            if (mAdapter != null) {
-                int position = LoopViewPager.super.getCurrentItem();
-                int realPosition = mAdapter.toRealPosition(position);
-                if (state == ViewPager.SCROLL_STATE_IDLE
-                        && (position == 0 || position == mAdapter.getCount() - 1)) {
-                    setCurrentItem(realPosition, false);
-                }
-            }
             if (mOuterPageChangeListener != null) {
                 mOuterPageChangeListener.onPageScrollStateChanged(state);
             }
         }
     };
+
+    public boolean isCanLoop() {
+        return canLoop;
+    }
+
+    public void setCanLoop(boolean canLoop) {
+        this.canLoop = canLoop;
+        if (canLoop == false) {
+            setCurrentItem(getRealItem(), false);
+        }
+        if (mAdapter == null) return;
+        mAdapter.setCanLoop(canLoop);
+        mAdapter.notifyDataSetChanged();
+    }
 }

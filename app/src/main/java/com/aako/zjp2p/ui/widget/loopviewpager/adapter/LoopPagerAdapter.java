@@ -1,157 +1,110 @@
 package com.aako.zjp2p.ui.widget.loopviewpager.adapter;
 
-import android.os.Parcelable;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
-import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.aako.zjp2p.R;
+import com.aako.zjp2p.ui.widget.loopviewpager.LoopViewPager;
+import com.aako.zjp2p.ui.widget.loopviewpager.holder.Holder;
+import com.aako.zjp2p.ui.widget.loopviewpager.holder.ViewHolderCreator;
+
+import java.util.List;
 
 /**
  * Created by aako on 2015/12/20.
  */
-public class LoopPagerAdapter extends PagerAdapter {
+public class LoopPagerAdapter<T> extends PagerAdapter {
 
-    private PagerAdapter mAdapter;
+    private static final String TAG = " LoopPagerAdapter ";
 
-    private SparseArray<ToDestroy> mToDestroy = new SparseArray<>();
-
-    private boolean mBoundaryCaching = true;
-
-    public void setBoundaryCaching(boolean flag) {
-        mBoundaryCaching = flag;
-    }
-
-    public LoopPagerAdapter(PagerAdapter adapter) {
-        this.mAdapter = adapter;
-    }
-
-    @Override
-    public void notifyDataSetChanged() {
-        mToDestroy = new SparseArray<ToDestroy>();
-        super.notifyDataSetChanged();
-    }
+    protected List<T> mDatas;
+    protected ViewHolderCreator holderCreator;
+    private View.OnClickListener onItemClickListener;
+    private boolean canLoop = true;
+    private LoopViewPager viewPager;
+    private final int MULTIPLE_COUNT = 300;
 
     public int toRealPosition(int position) {
         int realCount = getRealCount();
         if (realCount == 0)
             return 0;
-        int realPosition = (position-1) % realCount;
-        if (realPosition < 0)
-            realPosition += realCount;
-
+        int realPosition = position % realCount;
         return realPosition;
-    }
-
-    public int toInnerPosition(int realPosition) {
-        int position = (realPosition + 1);
-        return position;
-    }
-
-    private int getRealFirstPosition() {
-        return 1;
-    }
-
-    private int getRealLastPosition() {
-        return getRealFirstPosition() + getRealCount() - 1;
     }
 
     @Override
     public int getCount() {
-        return mAdapter.getCount() + 2;
+        return canLoop ? getRealCount() * MULTIPLE_COUNT : getRealCount();
     }
 
     public int getRealCount() {
-        return mAdapter.getCount();
-    }
-
-    public PagerAdapter getRealAdapter() {
-        return mAdapter;
+        return mDatas == null ? 0 : mDatas.size();
     }
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        int realPosition = (mAdapter instanceof FragmentPagerAdapter || mAdapter instanceof FragmentStatePagerAdapter)
-                ? position
-                : toRealPosition(position);
+        int realPosition = toRealPosition(position);
 
-        if (mBoundaryCaching) {
-            ToDestroy toDestroy = mToDestroy.get(position);
-            if (toDestroy != null) {
-                mToDestroy.remove(position);
-                return toDestroy.object;
-            }
-        }
-        return mAdapter.instantiateItem(container, realPosition);
+        View view = getView(realPosition, null, container);
+        if (onItemClickListener != null) view.setOnClickListener(onItemClickListener);
+        container.addView(view);
+        return view;
     }
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        int realFirst = getRealFirstPosition();
-        int realLast = getRealLastPosition();
-        int realPosition = (mAdapter instanceof FragmentPagerAdapter || mAdapter instanceof FragmentStatePagerAdapter)
-                ? position
-                : toRealPosition(position);
-
-        if (mBoundaryCaching && (position == realFirst || position == realLast)) {
-            mToDestroy.put(position, new ToDestroy(container, realPosition,
-                    object));
-        } else {
-            mAdapter.destroyItem(container, realPosition, object);
-        }
+        View view = (View) object;
+        container.removeView(view);
     }
-
-    /*
-     * Delegate rest of methods directly to the inner adapter.
-     */
 
     @Override
     public void finishUpdate(ViewGroup container) {
-        mAdapter.finishUpdate(container);
+        int position = viewPager.getCurrentItem();
+        if (position == 0) {
+            position = viewPager.getFristItem();
+        } else if (position == getCount() - 1) {
+            position = viewPager.getLastItem();
+        }
+        try {
+            viewPager.setCurrentItem(position, false);
+        } catch (IllegalStateException e) {
+        }
     }
 
     @Override
     public boolean isViewFromObject(View view, Object object) {
-        return mAdapter.isViewFromObject(view, object);
+        return view == object;
     }
 
-    @Override
-    public void restoreState(Parcelable bundle, ClassLoader classLoader) {
-        mAdapter.restoreState(bundle, classLoader);
+    public void setCanLoop(boolean canLoop) {
+        this.canLoop = canLoop;
     }
 
-    @Override
-    public Parcelable saveState() {
-        return mAdapter.saveState();
+    public void setViewPager(LoopViewPager viewPager) {
+        this.viewPager = viewPager;
     }
 
-    @Override
-    public void startUpdate(ViewGroup container) {
-        mAdapter.startUpdate(container);
+    public LoopPagerAdapter(ViewHolderCreator holderCreator, List<T> datas) {
+        this.holderCreator = holderCreator;
+        this.mDatas = datas;
     }
 
-    @Override
-    public void setPrimaryItem(ViewGroup container, int position, Object object) {
-        mAdapter.setPrimaryItem(container, position, object);
-    }
-
-    /*
-     * End delegation
-     */
-
-    /**
-     * Container class for caching the boundary views
-     */
-    static class ToDestroy {
-        ViewGroup container;
-        int position;
-        Object object;
-
-        public ToDestroy(ViewGroup container, int position, Object object) {
-            this.container = container;
-            this.position = position;
-            this.object = object;
+    public View getView(int position, View view, ViewGroup container) {
+        Holder holder = null;
+        if (view == null) {
+            holder = (Holder) holderCreator.createHolder();
+            view = holder.createView(container.getContext());
+            view.setTag(R.id.item_tag, holder);
+        } else {
+            holder = (Holder<T>) view.getTag(R.id.item_tag);
         }
+        if (mDatas != null && !mDatas.isEmpty())
+            holder.UpdateUI(container.getContext(), position, mDatas.get(position));
+        return view;
+    }
+
+    public void setOnItemClickListener(View.OnClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 }

@@ -11,6 +11,7 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:title">@style/CustomWindowTitleBackground</item>
+        <item name="android:screenOrientation">portrait</item>
     </style>
 
     <style name="CustomWindowTitleBackground">
