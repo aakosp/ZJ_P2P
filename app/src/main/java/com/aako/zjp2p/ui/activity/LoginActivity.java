@@ -4,21 +4,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.AppCompatEditText;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 
 import com.aako.zjp2p.R;
-import com.aako.zjp2p.ui.base.BaseActivity;
+import com.aako.zjp2p.ui.base.BaseAppCompatActivity;
 import com.gc.materialdesign.views.Button;
-
-import rx.Observable;
-import rx.functions.Func0;
 
 /**
  * Created by ZL on 2015/11/23.
  */
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends BaseAppCompatActivity {
     private static final String TAG = "LoginActivity";
 
+    TextView tv_login_title;
     AppCompatEditText acEditText_login_id, acEditText_login_pwd;
     TextInputLayout til_login_id;
     Button btn_login_login;
@@ -29,6 +29,10 @@ public class LoginActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         intent_login_toMain = new Intent();
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        tv_login_title = (TextView) toolbar.findViewById(R.id.title);
+        toolbar.setTitle("");
+        setSupportActionBar(toolbar);
     }
 
     @Override

@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">ZJP2P</string>
-    <string name="userName">用户名</string>
-    <string name="userPwd">密码</string>
     <string name="login">登录</string>
+    <string name="userName">请输入您的手机号</string>
+    <string name="userPwd">请输入进的密码</string>
 
     <string name="main_activity">首页</string>
     <string name="profile">我的账户</string>
