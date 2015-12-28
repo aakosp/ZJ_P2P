@@ -6,6 +6,7 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.aako.zjp2p.R;
@@ -19,7 +20,7 @@ public class LoginActivity extends BaseAppCompatActivity {
     private static final String TAG = "LoginActivity";
 
     TextView tv_login_title;
-    AppCompatEditText acEditText_login_id, acEditText_login_pwd;
+    EditText acEditText_login_id, acEditText_login_pwd;
     TextInputLayout til_login_id;
     Button btn_login_login;
     Intent intent_login_toMain;
@@ -38,8 +39,8 @@ public class LoginActivity extends BaseAppCompatActivity {
     @Override
     protected void initViews() {
 //        til_login_id = (TextInputLayout) findViewById(R.id.tilId);
-        acEditText_login_id = (AppCompatEditText) findViewById(R.id.etId);
-        acEditText_login_pwd = (AppCompatEditText) findViewById(R.id.etPwd);
+        acEditText_login_id = (EditText) findViewById(R.id.etId);
+        acEditText_login_pwd = (EditText) findViewById(R.id.etPwd);
         btn_login_login = (Button) findViewById(R.id.btnLogin);
         btn_login_login.setOnClickListener(new OnClickListenerImp());
     }

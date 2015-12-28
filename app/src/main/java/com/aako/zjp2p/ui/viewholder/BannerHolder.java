@@ -13,6 +13,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
  */
 public class BannerHolder implements Holder<Uri> {
     private SimpleDraweeView simpleDraweeView;
+
     @Override
     public View createView(Context context) {
         simpleDraweeView = (SimpleDraweeView) View.inflate(context, R.layout.item_banner, null);

@@ -1,6 +1,7 @@
 package com.aako.zjp2p.ui.widget.loopviewpager.adapter;
 
 import android.support.v4.view.PagerAdapter;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 

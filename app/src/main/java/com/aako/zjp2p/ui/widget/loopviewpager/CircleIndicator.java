@@ -28,7 +28,7 @@ public class CircleIndicator extends LinearLayout {
     private static final String TAG = " CircleIndicator ";
 
     private final static int DEFAULT_INDICATOR_WIDTH = 5;
-    private ViewPager mViewpager;
+    private LoopViewPager mViewpager;
     private int mIndicatorMargin = -1;
     private int mIndicatorWidth = -1;
     private int mIndicatorHeight = -1;
@@ -151,7 +151,7 @@ public class CircleIndicator extends LinearLayout {
         return animatorIn;
     }
 
-    public void setViewPager(ViewPager viewPager) {
+    public void setViewPager(LoopViewPager viewPager) {
         mViewpager = viewPager;
         if (mViewpager != null && mViewpager.getAdapter() != null) {
             createIndicators();
@@ -170,28 +170,27 @@ public class CircleIndicator extends LinearLayout {
 
         @Override
         public void onPageSelected(int position) {
-
-            if (mViewpager.getAdapter() == null || mViewpager.getAdapter().getCount() <= 0 || mLastPosition == mViewpager.getCurrentItem()) {
+            if (mViewpager.getAdapter() == null || mViewpager.getAdapter().getRealCount() <= 0 || mLastPosition == mViewpager.getRealItem()) {
                 return;
             }
 
             if (mAnimatorIn.isRunning()) mAnimatorIn.cancel();
             if (mAnimatorOut.isRunning()) mAnimatorOut.cancel();
 
-            Log.d(TAG, "getChildAt : " + position + "; " + mLastPosition + " getCurrentItem : " + mViewpager.getCurrentItem());
             if (mLastPosition >= 0) {
                 View currentIndicator = getChildAt(mLastPosition);
                 currentIndicator.setBackgroundResource(mIndicatorUnselectedBackgroundResId);
                 mAnimatorIn.setTarget(currentIndicator);
                 mAnimatorIn.start();
             }
-
-            View selectedIndicator = getChildAt(mViewpager.getCurrentItem());
+            Log.d(TAG, "position : "+position +" getCurrentItem:"+mViewpager.getRealItem());
+            View selectedIndicator = getChildAt(mViewpager.getRealItem());
+            Log.d(TAG, "selectedIndicator==NULL : "+(selectedIndicator==null));
             selectedIndicator.setBackgroundResource(mIndicatorBackgroundResId);
             mAnimatorOut.setTarget(selectedIndicator);
             mAnimatorOut.start();
 
-            mLastPosition = mViewpager.getCurrentItem();
+            mLastPosition = mViewpager.getRealItem();
         }
 
         @Override
@@ -204,13 +203,13 @@ public class CircleIndicator extends LinearLayout {
         public void onChanged() {
             super.onChanged();
 
-            int newCount = mViewpager.getAdapter().getCount();
+            int newCount = mViewpager.getAdapter().getRealCount();
             int currentCount = getChildCount();
 
             if (newCount == currentCount) {  // No change
                 return;
             } else if (mLastPosition < newCount) {
-                mLastPosition = mViewpager.getCurrentItem();
+                mLastPosition = mViewpager.getRealItem();
             } else {
                 mLastPosition = -1;
             }
@@ -232,12 +231,13 @@ public class CircleIndicator extends LinearLayout {
 
     private void createIndicators() {
         removeAllViews();
-        int count = mViewpager.getAdapter().getCount();
+        int count =  mViewpager.getAdapter().getRealCount();
         if (count <= 0) {
             return;
         }
         int currentItem = mViewpager.getCurrentItem();
 
+        Log.d(TAG, "count : " + count);
         for (int i = 0; i < count; i++) {
             if (currentItem == i) {
                 addIndicator(mIndicatorBackgroundResId, mImmediateAnimatorOut);

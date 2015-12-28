@@ -32,46 +32,55 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.design.widget.TextInputLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
             android:src="@mipmap/default_img" />
 
-        <android.support.v7.widget.AppCompatEditText
+
+        <EditText
             android:id="@+id/etId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/fab_margin"
             android:hint="@string/userName"
             android:inputType="textEmailAddress" />
-    </android.support.design.widget.TextInputLayout>
+    </LinearLayout>
 
-    <android.support.design.widget.TextInputLayout
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
             android:src="@mipmap/default_img" />
 
-        <android.support.v7.widget.AppCompatEditText
+        <EditText
             android:id="@+id/etPwd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/fab_margin"
             android:hint="@string/userPwd"
             android:inputType="textPassword" />
-    </android.support.design.widget.TextInputLayout>
+    </LinearLayout>
 
     <com.gc.materialdesign.views.ButtonRectangle
         android:id="@+id/btnLogin"
-        android:layout_width="@dimen/button_width"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/button_height"
+        android:layout_margin="@dimen/fab_margin"
         android:text="@string/login" />
 
 </LinearLayout>

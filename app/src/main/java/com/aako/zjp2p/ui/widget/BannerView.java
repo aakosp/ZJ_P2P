@@ -67,7 +67,6 @@ public class BannerView<T> extends FrameLayout {
         View hView = LayoutInflater.from(context).inflate(R.layout.widget_banner_view, this, true);
         viewPager = (LoopViewPager) hView.findViewById(R.id.lvp);
         indicator = (CircleIndicator) hView.findViewById(R.id.indicator);
-        indicator.setViewPager(viewPager);
         initViewPagerScroll();
     }
 
@@ -75,7 +74,7 @@ public class BannerView<T> extends FrameLayout {
         this.mDatas = datas;
         pageAdapter = new LoopPagerAdapter(holderCreator, mDatas);
         viewPager.setAdapter(pageAdapter, canLoop);
-
+        indicator.setViewPager(viewPager);
         return this;
     }
 
@@ -265,4 +264,6 @@ public class BannerView<T> extends FrameLayout {
         this.canLoop = canLoop;
         viewPager.setCanLoop(canLoop);
     }
+
+
 }
