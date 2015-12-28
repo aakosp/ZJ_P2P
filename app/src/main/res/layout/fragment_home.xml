@@ -4,7 +4,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
+    <com.aako.zjp2p.ui.widget.BannerView
+        android:id="@+id/banners"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/nav_header_height"/>
 
     <GridView
         android:id="@+id/grid"

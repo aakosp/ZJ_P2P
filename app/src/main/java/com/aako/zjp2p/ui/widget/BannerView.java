@@ -19,10 +19,8 @@ import com.aako.zjp2p.ui.widget.loopviewpager.adapter.LoopPagerAdapter;
 import com.aako.zjp2p.ui.widget.loopviewpager.holder.ViewHolderCreator;
 import com.aako.zjp2p.ui.widget.loopviewpager.listener.OnItemClickListener;
 import com.aako.zjp2p.ui.widget.loopviewpager.listener.PageChangeListener;
-import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
