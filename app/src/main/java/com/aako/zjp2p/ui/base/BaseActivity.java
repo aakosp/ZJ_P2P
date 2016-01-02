@@ -18,11 +18,11 @@ public abstract class BaseActivity extends Activity {
      */
     protected abstract void initViews();
 
-    @Override
-    public void setContentView(int layoutResID) {
-        super.setContentView(layoutResID);
-        initViews();
-    }
+    /**
+     * 获取布局 layoutResID
+     * @return id
+     */
+    protected abstract int getContentViewId();
 
     void setHandler(WeakRefereneceHandler handler){
         mHandler = handler;
@@ -49,6 +49,8 @@ public abstract class BaseActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(getContentViewId());
+        initViews();
     }
 
     @Override

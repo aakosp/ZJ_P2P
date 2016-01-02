@@ -14,10 +14,10 @@
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_margin="@dimen/def_padding"
-        app:backgroundColorValue="@color/green"
-        app:titleColor="@android:color/white"
-        app:titleSize="35dp"
-        app:titleText="登录"
+        app:rlv_backgroundColorValue="@color/green"
+        app:rlv_titleColor="@android:color/white"
+        app:rlv_titleSize="35dp"
+        app:rlv_titleText="登录"
         android:src="@android:drawable/sym_def_app_icon" />
 
     <TextView

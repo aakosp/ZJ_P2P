@@ -24,8 +24,7 @@ public class FragmentHome extends BaseFragment {
     private GridView gridView;
 
     @Override
-    protected void initViews(LayoutInflater inflater) {
-        curView = inflater.inflate(R.layout.fragment_home, null);
+    protected void initViews() {
         bannerView = (BannerView) findViewById(R.id.banners);
         gridView = (GridView) findViewById(R.id.grid);
 
@@ -44,5 +43,8 @@ public class FragmentHome extends BaseFragment {
         gridView.setAdapter(new ProjectTypeAdapter(this.getContext()));
     }
 
-
+    @Override
+    protected int getContentViewId() {
+        return R.layout.fragment_home;
+    }
 }

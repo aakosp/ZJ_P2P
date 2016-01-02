@@ -6,7 +6,15 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="def_padding">16dp</dimen>
-    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="def_margin">16dp</dimen>
     <dimen name="icon_size">24dp</dimen>
     <dimen name="icon_padding">16dp</dimen>
+
+    <dimen name="text_size">14sp</dimen>
+
+    <dimen name="program_top">11dp</dimen>
+    <dimen name="program_middle">10dp</dimen>
+    <dimen name="program_bottom">14dp</dimen>
+
+    <dimen name="divider">1dp</dimen>
 </resources>

@@ -18,9 +18,15 @@ public abstract class BaseFragment extends Fragment {
     public View curView;
 
     /**
-     * 初始化 curView
+     * 初始化窗体内Views
      */
-    protected abstract void initViews(LayoutInflater inflater);
+    protected abstract void initViews();
+
+    /**
+     * 获取布局 layoutResID
+     * @return id
+     */
+    protected abstract int getContentViewId();
 
     @Nullable
     @Override
@@ -29,7 +35,8 @@ public abstract class BaseFragment extends Fragment {
             ((ViewGroup) curView.getParent()).removeView(curView);
             return curView;
         }
-        initViews(inflater);
+        curView = inflater.inflate(getContentViewId(), null);
+        initViews();
         return curView;
     }
 

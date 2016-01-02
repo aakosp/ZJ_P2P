@@ -15,9 +15,9 @@
         android:layout_height="wrap_content"
         android:columnWidth="@dimen/button_width"
         android:gravity="center"
-        android:horizontalSpacing="@dimen/fab_margin"
+        android:horizontalSpacing="@dimen/def_margin"
         android:numColumns="3"
         android:stretchMode="columnWidth"
-        android:verticalSpacing="@dimen/fab_margin" />
+        android:verticalSpacing="@dimen/def_margin" />
 
 </LinearLayout>

@@ -21,4 +21,26 @@
         <attr name="rlv_titleColor" format="color" />
         <attr name="rlv_backgroundColorValue" format="color" />
     </declare-styleable>
+
+    <declare-styleable name="TopBar">
+        <attr name="barTitleBackground" format="reference" />
+        <attr name="titleText" format="reference|string" />
+        <attr name="titleBackground" format="reference" />
+        <attr name="leftButtonBackground" format="reference" />
+        <attr name="leftButtonText" format="reference|string" />
+        <attr name="leftButtonVisible" format="boolean" />
+        <attr name="rightButtonBackground" format="reference" />
+        <attr name="rightButtonText" format="reference|string" />
+        <attr name="rightButtonVisible" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="imagetextbutton">
+        <attr name="img_src" format="reference" />
+        <attr name="img_width" format="dimension" />
+        <attr name="img_height" format="dimension" />
+        <attr name="text_src" format="reference" />
+        <attr name="text_color" format="reference" />
+        <attr name="text_size" format="dimension" />
+        <attr name="space" format="integer"></attr>
+    </declare-styleable>
 </resources>
