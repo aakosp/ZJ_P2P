@@ -7,17 +7,18 @@
     <com.aako.zjp2p.ui.widget.BannerView
         android:id="@+id/banners"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/nav_header_height"/>
+        android:layout_height="@dimen/nav_header_height" />
 
     <GridView
         android:id="@+id/grid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/divider"
         android:columnWidth="@dimen/button_width"
         android:gravity="center"
-        android:horizontalSpacing="@dimen/def_margin"
+        android:horizontalSpacing="@dimen/divider"
         android:numColumns="3"
         android:stretchMode="columnWidth"
-        android:verticalSpacing="@dimen/def_margin" />
+        android:verticalSpacing="@dimen/divider" />
 
 </LinearLayout>

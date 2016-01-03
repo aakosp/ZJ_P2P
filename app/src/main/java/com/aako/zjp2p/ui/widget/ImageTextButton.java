@@ -3,9 +3,13 @@ package com.aako.zjp2p.ui.widget;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
+import android.view.Gravity;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -17,6 +21,8 @@ import com.aako.zjp2p.R;
  * Created by yajuanyin on 16/1/2.
  */
 public class ImageTextButton extends LinearLayout {
+
+    private static final String TAG = "ImageTextButton";
     private TextView mText;
     private ImageView mImg;
     private int resId_img;
@@ -41,17 +47,17 @@ public class ImageTextButton extends LinearLayout {
                 resId_img = typedArray.getResourceId(
                         R.styleable.imagetextbutton_img_src, 0);
                 imgWidth = typedArray.getDimensionPixelOffset(
-                        R.styleable.imagetextbutton_img_width, 20);
+                        R.styleable.imagetextbutton_img_width, LayoutParams.WRAP_CONTENT);
                 imgHeight = typedArray.getDimensionPixelOffset(
-                        R.styleable.imagetextbutton_img_height, 20);
+                        R.styleable.imagetextbutton_img_height, LayoutParams.WRAP_CONTENT);
                 textSize = typedArray.getDimensionPixelSize(
                         R.styleable.imagetextbutton_text_size, 12);
                 textColor = typedArray.getResourceId(
-                        R.styleable.imagetextbutton_text_color, Color.BLACK);
+                        R.styleable.imagetextbutton_text_color, R.color.text);
                 resId_txt = typedArray.getResourceId(
                         R.styleable.imagetextbutton_text_src, 0);
-                space = typedArray.getResourceId(
-                        R.styleable.imagetextbutton_space, 2);
+                space = typedArray.getDimensionPixelOffset(
+                        R.styleable.imagetextbutton_space, R.dimen.program_middle);
             }
             typedArray.recycle();
         }
@@ -66,11 +72,13 @@ public class ImageTextButton extends LinearLayout {
         if (LinearLayout.HORIZONTAL == this.getOrientation()) {
             txtParams.leftMargin = space;
         } else {
+            Log.d(TAG, "topMargin : "+space);
             txtParams.topMargin = space;
         }
         mText.setLayoutParams(txtParams);
         mText.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
-        //mText.setTextColor(this.getResources().getColor(textColor));
+        mText.setTextColor(getResources().getColor(textColor));
+//        mText.getPaint().setFakeBoldText(true);
         this.addView(mImg);
         this.addView(mText);
 

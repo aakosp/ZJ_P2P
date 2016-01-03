@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ZJP2P</string>
+    <string name="app_name">中金财付通</string>
     <string name="login">登录</string>
     <string name="userName">请输入您的手机号</string>
     <string name="userPwd">请输入进的密码</string>
@@ -20,4 +20,11 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+    <string name="p2p">p2p理财</string>
+    <string name="zc">众筹</string>
+    <string name="ct">创投</string>
+    <string name="jj">基金</string>
+    <string name="gy">公益</string>
+    <string name="mx">梦想</string>
 </resources>

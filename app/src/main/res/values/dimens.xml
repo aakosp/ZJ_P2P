@@ -15,6 +15,15 @@
     <dimen name="program_top">11dp</dimen>
     <dimen name="program_middle">10dp</dimen>
     <dimen name="program_bottom">14dp</dimen>
+    <dimen name="program_height">75dp</dimen>
 
     <dimen name="divider">1dp</dimen>
+
+    <dimen name="button_width">132dp</dimen>
+    <dimen name="button_height">54dp</dimen>
+    <dimen name="button_corner">2dp</dimen>
+    <dimen name="button_elevation">2dp</dimen>
+
+    <dimen name="title_size">20sp</dimen>
+    <dimen name="program_size">18sp</dimen>
 </resources>
