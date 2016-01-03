@@ -10,4 +10,7 @@
     <color name="textColorPrimary">#e1f5fe</color>
 
     <color name="title">#333333</color>
+    <color name="loan">#555555</color>
+    <color name="month">#81A0A5</color>
+    <color name="all">#FE0000</color>
 </resources>

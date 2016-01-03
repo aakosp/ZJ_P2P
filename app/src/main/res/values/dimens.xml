@@ -26,4 +26,9 @@
 
     <dimen name="title_size">20sp</dimen>
     <dimen name="program_size">18sp</dimen>
+    <dimen name="loan_size">16sp</dimen>
+
+    <dimen name="label_tjtz">44dp</dimen>
+    <dimen name="item_loan">115dp</dimen>
+    <dimen name="item_loan_title">41dp</dimen>
 </resources>

@@ -33,6 +33,7 @@ public class ImageTextButton extends LinearLayout {
     private int textColor;
     private String strText;
     private int space;
+//    private boolean hasDivider = false;
 
     public ImageTextButton(Context context) {
         this(context, null);
@@ -58,6 +59,7 @@ public class ImageTextButton extends LinearLayout {
                         R.styleable.imagetextbutton_text_src, 0);
                 space = typedArray.getDimensionPixelOffset(
                         R.styleable.imagetextbutton_space, R.dimen.program_middle);
+//                hasDivider = typedArray.getBoolean(R.styleable.imagetextbutton_has_divider, false);
             }
             typedArray.recycle();
         }
@@ -72,7 +74,6 @@ public class ImageTextButton extends LinearLayout {
         if (LinearLayout.HORIZONTAL == this.getOrientation()) {
             txtParams.leftMargin = space;
         } else {
-            Log.d(TAG, "topMargin : "+space);
             txtParams.topMargin = space;
         }
         mText.setLayoutParams(txtParams);

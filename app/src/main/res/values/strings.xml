@@ -27,4 +27,7 @@
     <string name="jj">基金</string>
     <string name="gy">公益</string>
     <string name="mx">梦想</string>
+
+    <string name="more">更多</string>
+    <string name="guide">推荐投资项目</string>
 </resources>

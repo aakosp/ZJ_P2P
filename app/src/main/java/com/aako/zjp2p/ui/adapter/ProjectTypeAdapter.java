@@ -5,10 +5,8 @@ import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
 
 import com.aako.zjp2p.R;
-import com.aako.zjp2p.ui.util.UiUtils;
 import com.aako.zjp2p.ui.widget.ImageTextButton;
 
 /**

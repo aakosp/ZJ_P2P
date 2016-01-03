@@ -21,4 +21,35 @@
         android:stretchMode="columnWidth"
         android:verticalSpacing="@dimen/divider" />
 
+    <LinearLayout
+        android:id="@+id/label_more"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/label_tjtz"
+        android:background="@android:color/white"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/def_padding">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/label_tjtz"
+            android:text="@string/guide"
+            android:textColor="@color/loan"
+            android:textSize="@dimen/program_size" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/label_tjtz"
+            android:text="@string/more"
+            android:textColor="@color/loan"
+            android:textSize="@dimen/loan_size" />
+
+    </LinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider"
+        android:background="@color/divider" />
+
+
 </LinearLayout>
