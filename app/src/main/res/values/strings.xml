@@ -30,4 +30,7 @@
 
     <string name="more">更多</string>
     <string name="guide">推荐投资项目</string>
+
+    <string name="yqnh">预期年化</string>
+    <string name="rzje">融资金额</string>
 </resources>

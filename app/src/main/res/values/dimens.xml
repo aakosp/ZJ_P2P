@@ -10,8 +10,6 @@
     <dimen name="icon_size">24dp</dimen>
     <dimen name="icon_padding">16dp</dimen>
 
-    <dimen name="text_size">14sp</dimen>
-
     <dimen name="program_top">11dp</dimen>
     <dimen name="program_middle">10dp</dimen>
     <dimen name="program_bottom">14dp</dimen>
@@ -24,11 +22,20 @@
     <dimen name="button_corner">2dp</dimen>
     <dimen name="button_elevation">2dp</dimen>
 
-    <dimen name="title_size">20sp</dimen>
-    <dimen name="program_size">18sp</dimen>
-    <dimen name="loan_size">16sp</dimen>
+
 
     <dimen name="label_tjtz">44dp</dimen>
     <dimen name="item_loan">115dp</dimen>
     <dimen name="item_loan_title">41dp</dimen>
+
+    <dimen name="circle_outside">62dp</dimen>
+    <dimen name="circle_inside">60dp</dimen>
+
+    <!-- 字体大小 -->
+    <dimen name="title_size">20sp</dimen>
+    <dimen name="program_size">18sp</dimen>
+    <dimen name="loan_title_size">16sp</dimen>
+    <dimen name="text_size">14sp</dimen>
+    <dimen name="loan_desc_size">12sp</dimen>
+    <dimen name="loan_num_size">24sp</dimen>
 </resources>

@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/divider"
-        android:columnWidth="@dimen/button_width"
+        android:columnWidth="@dimen/divider"
         android:gravity="center"
         android:horizontalSpacing="@dimen/divider"
         android:numColumns="3"
@@ -25,23 +25,28 @@
         android:id="@+id/label_more"
         android:layout_width="match_parent"
         android:layout_height="@dimen/label_tjtz"
+        android:layout_marginTop="@dimen/def_padding"
         android:background="@android:color/white"
         android:orientation="horizontal"
-        android:paddingLeft="@dimen/def_padding">
+        android:paddingLeft="@dimen/def_padding"
+        android:paddingRight="@dimen/def_padding">
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/label_tjtz"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
             android:text="@string/guide"
             android:textColor="@color/loan"
             android:textSize="@dimen/program_size" />
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/label_tjtz"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:gravity="center_vertical"
             android:text="@string/more"
             android:textColor="@color/loan"
-            android:textSize="@dimen/loan_size" />
+            android:textSize="@dimen/loan_title_size" />
 
     </LinearLayout>
 
