@@ -32,6 +32,7 @@ public class FragmentHome extends BaseFragment {
         List<Uri> bannerUrl = new ArrayList<>();
         bannerUrl.add(Uri.parse("http://b.hiphotos.baidu.com/image/h%3D200/sign=9a3972dc65d9f2d33f1123ef99ed8a53/3b87e950352ac65cf1f52b4efcf2b21193138a1f.jpg"));
         bannerUrl.add(Uri.parse("http://d.hiphotos.baidu.com/image/h%3D200/sign=99e997010e24ab18ff16e63705fbe69a/267f9e2f07082838d4bfae33bf99a9014c08f163.jpg"));
+        bannerUrl.add(Uri.parse("http://img04.taobaocdn.com/imgextra/i4/2076373656/TB2PI1LXVXXXXXNXXXXXXXXXXXX_!!2076373656.jpg_.webp"));
         bannerView.setPages(new ViewHolderCreator<BannerHolder>() {
 
             @Override
