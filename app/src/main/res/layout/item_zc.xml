@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/item_zc_height">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/img"
+        android:layout_width="@dimen/img_zc_size"
+        android:layout_height="@dimen/img_zc_size"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="@dimen/def_padding"
+        fresco:actualImageScaleType="focusCrop" />
+
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/def_padding"
+        android:layout_toRightOf="@+id/img"
+        android:text="云中飞呼啦圈止鼾器"
+        android:textColor="@color/zc_title"
+        android:textSize="@dimen/loan_title_size" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:layout_toRightOf="@+id/img"
+        android:ellipsize="end"
+        android:lines="2"
+        android:paddingTop="@dimen/def_padding"
+        android:text="一切等待都是值得的！为了提升咱们家磁吸线导电性能，我们不惜成本"
+        android:textColor="@color/loan_text"
+        android:textSize="@dimen/loan_desc_size" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/img"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/def_padding">
+
+        <TextView
+            android:id="@+id/wcd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="16.0%"
+            android:textColor="@color/loan_yqnh"
+            android:textSize="@dimen/loan_desc_size" />
+
+        <TextView
+            android:id="@+id/ycje"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="￥1.9万 已筹"
+            android:textColor="@color/loan_yqnh"
+            android:textSize="@dimen/loan_desc_size" />
+
+        <TextView
+            android:id="@+id/syts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="剩 22天"
+            android:textColor="@color/loan_yqnh"
+            android:textSize="@dimen/loan_desc_size" />
+    </LinearLayout>
+
+
+</RelativeLayout>
