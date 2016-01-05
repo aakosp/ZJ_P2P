@@ -11,7 +11,12 @@ public class UiUtils {
     /**
      * Convert Dp to Pixel
      */
-    public static int dpToPx(float dp, Resources resources){
+    public static float sp2px(Resources resources, float sp){
+        final float scale = resources.getDisplayMetrics().scaledDensity;
+        return sp * scale;
+    }
+
+    public static int dp2px(Resources resources, float dp){
         float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, resources.getDisplayMetrics());
         return (int) px;
     }

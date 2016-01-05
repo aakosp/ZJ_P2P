@@ -17,11 +17,12 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
      */
     protected abstract void initViews();
 
-    @Override
-    public void setContentView(int layoutResID) {
-        super.setContentView(layoutResID);
-        initViews();
-    }
+    /**
+     * 获取布局 layoutResID
+     * @return id
+     */
+    protected abstract int getContentViewId();
+
 
     void setHandler(WeakRefereneceHandler handler) {
         mHandler = handler;
@@ -48,6 +49,8 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(getContentViewId());
+        initViews();
     }
 
     @Override

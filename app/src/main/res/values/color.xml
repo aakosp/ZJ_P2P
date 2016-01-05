@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="button_solid">#FFF</color>
-    <color name="background">#e1f5fe</color>
-    <color name="colorPrimaryDark">#0288d1</color>
-    <color name="colorPrimary">#03a9f4</color>
+    <color name="background">#F5F5F5</color>
+    <color name="red">#D94B41</color>
+    <color name="text">#B5B5B5</color>
+    <color name="divider">#E6E6E6</color>
+    <color name="colorPrimaryDark">#D94B41</color>
+    <color name="colorPrimary">#D94B41</color>
     <color name="textColorPrimary">#e1f5fe</color>
+
+    <color name="title">#333333</color>
+    <color name="loan">#555555</color>
+    <color name="month">#81A0A5</color>
+    <color name="loan_yqnh">#FE0000</color>
+    <color name="loan_text">#A7A7A7</color>
+    <color name="loan_rzje">#565656</color>
 </resources>

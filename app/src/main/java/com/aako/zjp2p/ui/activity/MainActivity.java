@@ -1,26 +1,25 @@
 package com.aako.zjp2p.ui.activity;
 
-import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.aako.zjp2p.R;
+import com.aako.zjp2p.ui.base.BaseAppCompatActivity;
+
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends BaseAppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = " MainActivity ";
@@ -30,9 +29,7 @@ public class MainActivity extends AppCompatActivity
     private Map<Integer, Fragment> mFragments = new HashMap<>();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    protected void initViews() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         tv_mainActivity_title = (TextView) toolbar.findViewById(R.id.title);
         toolbar.setTitle("");
@@ -64,6 +61,11 @@ public class MainActivity extends AppCompatActivity
         mFragments.put(R.id.integral, getSupportFragmentManager().findFragmentById(R.id.fragmentIntegral));
 
         navigationToFragment(R.id.main);
+    }
+
+    @Override
+    protected int getContentViewId() {
+        return R.layout.activity_main;
     }
 
     @Override

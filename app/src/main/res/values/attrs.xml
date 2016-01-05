@@ -14,4 +14,53 @@
     <declare-styleable name="ConvenientBanner">
         <attr name="canLoop" format="boolean" />
     </declare-styleable>
+
+    <declare-styleable name="RoundedLetterView">
+        <attr name="rlv_titleText" format="string" />
+        <attr name="rlv_titleSize" format="dimension" />
+        <attr name="rlv_titleColor" format="color" />
+        <attr name="rlv_backgroundColorValue" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="TopBar">
+        <attr name="barTitleBackground" format="reference" />
+        <attr name="titleText" format="reference|string" />
+        <attr name="titleBackground" format="reference" />
+        <attr name="leftButtonBackground" format="reference" />
+        <attr name="leftButtonText" format="reference|string" />
+        <attr name="leftButtonVisible" format="boolean" />
+        <attr name="rightButtonBackground" format="reference" />
+        <attr name="rightButtonText" format="reference|string" />
+        <attr name="rightButtonVisible" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="imagetextbutton">
+        <attr name="img_src" format="reference" />
+        <attr name="img_width" format="dimension|reference" />
+        <attr name="img_height" format="dimension|reference" />
+        <attr name="text_src" format="reference" />
+        <attr name="text_color" format="reference" />
+        <attr name="text_size" format="dimension|reference" />
+        <attr name="space" format="reference" />
+        <attr name="has_divider" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="DonutProgress">
+        <attr name="donut_progress" format="integer"/>
+        <attr name="donut_max" format="integer"/>
+        <attr name="donut_unfinished_color" format="color"/>
+        <attr name="donut_finished_color" format="color"/>
+        <attr name="donut_finished_stroke_width" format="dimension"/>
+        <attr name="donut_unfinished_stroke_width" format="dimension"/>
+        <attr name="donut_text_size" format="dimension"/>
+        <attr name="donut_text_color" format="color"/>
+        <attr name="donut_prefix_text" format="string"/>
+        <attr name="donut_suffix_text" format="string"/>
+        <attr name="donut_text" format="string"/>
+        <attr name="donut_background_color" format="color"/>
+        <attr name="donut_inner_bottom_text" format="string"/>
+        <attr name="donut_inner_bottom_text_size" format="dimension"/>
+        <attr name="donut_inner_bottom_text_color" format="color"/>
+        <attr name="donut_circle_starting_degree" format="integer" />
+    </declare-styleable>
 </resources>
