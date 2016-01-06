@@ -43,7 +43,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1">
 
-            <com.aako.zjp2p.ui.widget.CircleProgress
+            <com.aako.zjp2p.widget.CircleProgress
                 android:id="@+id/cp"
                 android:layout_width="@dimen/circle_outside"
                 android:layout_height="@dimen/circle_outside"

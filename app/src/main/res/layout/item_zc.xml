@@ -24,6 +24,7 @@
         android:textSize="@dimen/loan_title_size" />
 
     <TextView
+        android:id="@+id/describe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/title"
