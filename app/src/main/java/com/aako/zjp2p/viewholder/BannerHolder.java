@@ -20,7 +20,7 @@ public class BannerHolder implements Holder<Uri> {
     }
 
     @Override
-    public void UpdateUI(Context context, int position, Uri data) {
+    public void UpdateUI(int position, Uri data) {
         simpleDraweeView.setImageURI(data);
     }
 }

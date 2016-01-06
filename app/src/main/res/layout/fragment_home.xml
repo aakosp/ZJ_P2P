@@ -1,71 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:scrollbars="none">
 
-    <com.aako.zjp2p.widget.BannerView
-        android:id="@+id/banners"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/nav_header_height" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <GridView
-        android:id="@+id/grid"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/divider"
-        android:columnWidth="@dimen/divider"
-        android:gravity="center"
-        android:horizontalSpacing="@dimen/divider"
-        android:numColumns="3"
-        android:stretchMode="columnWidth"
-        android:verticalSpacing="@dimen/divider" />
+        <com.aako.zjp2p.widget.BannerView
+            android:id="@+id/banners"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/nav_header_height" />
 
-    <RelativeLayout
-        android:id="@+id/label_more"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/label_tjtz"
-        android:layout_marginTop="@dimen/def_padding"
-        android:background="@android:color/white"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/def_padding"
-        android:paddingRight="@dimen/def_padding">
+        <GridView
+            android:id="@+id/grid"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/grid_program"
+            android:background="@color/divider"
+            android:columnWidth="@dimen/divider"
+            android:gravity="center"
+            android:horizontalSpacing="@dimen/divider"
+            android:numColumns="3"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="@dimen/divider" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:gravity="center_vertical"
-            android:text="@string/guide"
-            android:textColor="@color/loan"
-            android:textSize="@dimen/program_size" />
+        <RelativeLayout
+            android:id="@+id/label_more"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/label_tjtz"
+            android:layout_marginTop="@dimen/def_padding"
+            android:background="@android:color/white"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/def_padding"
+            android:paddingRight="@dimen/def_padding">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:gravity="center_vertical"
-            android:text="@string/more"
-            android:textColor="@color/loan"
-            android:textSize="@dimen/loan_title_size" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:gravity="center_vertical"
+                android:text="@string/guide"
+                android:textColor="@color/loan"
+                android:textSize="@dimen/program_size" />
 
-    </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:gravity="center_vertical"
+                android:text="@string/more"
+                android:textColor="@color/loan"
+                android:textSize="@dimen/loan_title_size" />
+
+        </RelativeLayout>
 
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/divider"
-        android:background="@color/divider" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider"
+            android:background="@color/divider" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/tjtz"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/tjtz"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/tjzc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/def_padding" />
-
-</LinearLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/tjzc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/def_padding" />
+    </LinearLayout>
+</ScrollView>

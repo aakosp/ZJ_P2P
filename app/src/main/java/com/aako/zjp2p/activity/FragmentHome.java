@@ -1,17 +1,22 @@
 package com.aako.zjp2p.activity;
 
 import android.net.Uri;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.GridView;
+
 import com.aako.zjp2p.R;
 import com.aako.zjp2p.adapter.ProjectTypeAdapter;
 import com.aako.zjp2p.activity.base.BaseFragment;
+import com.aako.zjp2p.adapter.TjtzAdapter;
+import com.aako.zjp2p.entity.Tz;
 import com.aako.zjp2p.viewholder.BannerHolder;
 import com.aako.zjp2p.widget.BannerView;
 import com.aako.zjp2p.viewholder.ViewHolderCreator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by aako on 15-12-15.
@@ -44,6 +49,31 @@ public class FragmentHome extends BaseFragment {
         bannerView.setCanLoop(true);
 
         gridView.setAdapter(new ProjectTypeAdapter(this.getContext()));
+
+        TjtzAdapter adapter = new TjtzAdapter();
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext()) {
+            @Override
+            protected int getExtraLayoutSpace(RecyclerView.State state) {
+                return 300;
+            }
+        };
+        rvTjtz.setLayoutManager(linearLayoutManager);
+        rvTjtz.setAdapter(adapter);
+        for (int i = 0; i < 3; i++) {
+            Tz tz = new Tz();
+            tz.id = i;
+            tz.wcd = (i + 1) * 10;
+            tz.title = "title 标题 " + i;
+            tz.describe = "describe 详细描述 详细描述 " + i;
+            tz.yqnh = (i + 1) * 2 + "";
+            tz.qtje = (i + 1) * 1000 + "";
+            tz.sum = (i + 1) * 200000 + "";
+            tz.time = (i + 1) * 3 + "";
+            tz.rs = (i + 1) * 4 + "";
+            tz.type = i % 2;
+            adapter.addData(tz);
+        }
+
     }
 
     @Override

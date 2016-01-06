@@ -103,6 +103,7 @@
                 android:textSize="@dimen/loan_desc_size" />
 
             <TextView
+                android:id="@+id/sum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="31600元"

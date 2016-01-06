@@ -100,7 +100,7 @@ public class LoopPagerAdapter<T> extends PagerAdapter {
             holder = (Holder<T>) view.getTag(R.id.item_tag);
         }
         if (mDatas != null && !mDatas.isEmpty())
-            holder.UpdateUI(container.getContext(), position, mDatas.get(position));
+            holder.UpdateUI(position, mDatas.get(position));
         return view;
     }
 

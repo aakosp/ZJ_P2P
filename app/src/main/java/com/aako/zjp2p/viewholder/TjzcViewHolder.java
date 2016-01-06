@@ -20,23 +20,22 @@ public class TjzcViewHolder extends RecyclerView.ViewHolder implements Holder<Zc
 
     public TjzcViewHolder(View itemView) {
         super(itemView);
+        createView(null);
     }
-
 
     @Override
     public View createView(Context context) {
-        View view = View.inflate(context, R.layout.item_zc, null);
-        img = (SimpleDraweeView) view.findViewById(R.id.img);
-        title = (TextView) view.findViewById(R.id.title);
-        describe = (TextView) view.findViewById(R.id.describe);
-        wcd = (TextView) view.findViewById(R.id.wcd);
-        ycje = (TextView) view.findViewById(R.id.ycje);
-        syts = (TextView) view.findViewById(R.id.syts);
-        return view;
+        img = (SimpleDraweeView) this.itemView.findViewById(R.id.img);
+        title = (TextView) this.itemView.findViewById(R.id.title);
+        describe = (TextView) this.itemView.findViewById(R.id.describe);
+        wcd = (TextView) this.itemView.findViewById(R.id.wcd);
+        ycje = (TextView) this.itemView.findViewById(R.id.ycje);
+        syts = (TextView) this.itemView.findViewById(R.id.syts);
+        return this.itemView;
     }
 
     @Override
-    public void UpdateUI(Context context, int position, Zc data) {
+    public void UpdateUI(int position, Zc data) {
         img.setImageURI(Uri.parse(data.img));
         title.setText(data.title);
         describe.setText(data.describe);
