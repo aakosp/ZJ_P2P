@@ -28,7 +28,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
+            android:layout_gravity="end"
             android:src="@mipmap/arrow_more" />
 
     </LinearLayout>
@@ -43,13 +43,16 @@
             android:layout_height="match_parent"
             android:layout_weight="1">
 
-            <com.aako.zjp2p.ui.widget.CircleProgress
+            <com.aako.zjp2p.widget.CircleProgress
                 android:id="@+id/cp"
                 android:layout_width="@dimen/circle_outside"
                 android:layout_height="@dimen/circle_outside"
+                app:donut_finished_color="@color/red"
+                app:donut_finished_stroke_width="@dimen/circle_thickness"
                 app:donut_max="100"
                 app:donut_text_color="@color/loan_text"
-                app:donut_text_size="@dimen/loan_title_size" />
+                app:donut_text_size="@dimen/loan_title_size"
+                app:donut_unfinished_stroke_width="@dimen/circle_thickness" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -88,7 +91,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -105,11 +109,10 @@
                 android:textColor="@color/loan_rzje"
                 android:textSize="@dimen/loan_num_size" />
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:orientation="horizontal">
+                android:layout_gravity="bottom">
 
                 <TextView
                     android:id="@+id/time"
@@ -123,13 +126,13 @@
                     android:id="@+id/rs"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
                     android:layout_gravity="right"
-                    android:layout_marginRight="@dimen/loan_desc_size"
                     android:text="2人已投"
                     android:textColor="@color/loan_text"
                     android:textSize="@dimen/loan_desc_size" />
 
-            </LinearLayout>
+            </RelativeLayout>
 
 
         </LinearLayout>

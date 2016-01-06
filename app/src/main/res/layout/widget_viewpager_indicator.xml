@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="center" />
 
-    <com.aako.zjp2p.ui.widget.loopviewpager.CircleIndicator
+    <com.aako.zjp2p.widget.loopviewpager.CircleIndicator
         android:id="@id/indicator"
         android:layout_gravity="bottom"
         android:layout_width="match_parent"
