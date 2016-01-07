@@ -3,26 +3,23 @@ package com.aako.zjp2p.activity;
 import android.net.Uri;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Display;
 import android.view.View;
-import android.widget.GridView;
-import android.widget.LinearLayout;
 
 import com.aako.zjp2p.R;
-import com.aako.zjp2p.adapter.ProjectTypeAdapter;
 import com.aako.zjp2p.activity.base.BaseFragment;
 import com.aako.zjp2p.adapter.TjtzAdapter;
 import com.aako.zjp2p.entity.Tz;
 import com.aako.zjp2p.util.UiUtils;
 import com.aako.zjp2p.viewholder.BannerHolder;
-import com.aako.zjp2p.widget.BannerView;
+import com.aako.zjp2p.viewholder.TjtzViewHolder;
+import com.aako.zjp2p.viewholder.TzHolder;
 import com.aako.zjp2p.viewholder.ViewHolderCreator;
+import com.aako.zjp2p.widget.BannerView;
 import com.aako.zjp2p.widget.FlowLayout;
 import com.aako.zjp2p.widget.ImageTextButton;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * Created by aako on 15-12-15.
@@ -37,16 +34,18 @@ public class FragmentHome extends BaseFragment {
 
     private BannerView bannerView;
     //    private GridView gridView;
-    private FlowLayout flowLayout;
-    private RecyclerView rvTjtz, rvTjzc;
+    //    private RecyclerView rvTjtz, rvTjzc;
+    private FlowLayout flowLayout, flTjtz, flTjzc;
 
     @Override
     protected void initViews() {
         bannerView = (BannerView) findViewById(R.id.banners);
 //        gridView = (GridView) findViewById(R.id.grid);
         flowLayout = (FlowLayout) findViewById(R.id.flowlayout);
-        rvTjtz = (RecyclerView) findViewById(R.id.tjtz);
-        rvTjzc = (RecyclerView) findViewById(R.id.tjzc);
+        flTjtz = (FlowLayout) findViewById(R.id.tjtz);
+        flTjzc = (FlowLayout) findViewById(R.id.tjzc);
+//        rvTjtz = (RecyclerView) findViewById(R.id.tjtz);
+//        rvTjzc = (RecyclerView) findViewById(R.id.tjzc);
 
         List<Uri> bannerUrl = new ArrayList<>();
         bannerUrl.add(Uri.parse("http://b.hiphotos.baidu.com/image/h%3D200/sign=9a3972dc65d9f2d33f1123ef99ed8a53/3b87e950352ac65cf1f52b4efcf2b21193138a1f.jpg"));
@@ -65,7 +64,7 @@ public class FragmentHome extends BaseFragment {
 
         int width = (UiUtils.getWidth() - UiUtils.dp2px(getResources(), 1) * 2) / 3;
 
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, UiUtils.dp2px(getResources(), 85));
+        FlowLayout.LayoutParams params = new FlowLayout.LayoutParams(width, UiUtils.dp2px(getResources(), 85));
 
         flowLayout.setNumColumns(3);
         for (int i = 0; i < 6; i++) {
@@ -76,8 +75,7 @@ public class FragmentHome extends BaseFragment {
             flowLayout.addView(itb);
         }
 
-
-        TjtzAdapter adapter = new TjtzAdapter();
+        /*TjtzAdapter adapter = new TjtzAdapter();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext()) {
             @Override
             protected int getExtraLayoutSpace(RecyclerView.State state) {
@@ -99,8 +97,24 @@ public class FragmentHome extends BaseFragment {
             tz.rs = (i + 1) * 4 + "";
             tz.type = i % 2;
             adapter.addData(tz);
+        }*/
+        for (int i = 0; i < 3; i++) {
+            Tz tz = new Tz();
+            tz.id = i;
+            tz.wcd = (i + 1) * 10;
+            tz.title = "title 标题 " + i;
+            tz.describe = "describe 详细描述 详细描述 " + i;
+            tz.yqnh = (i + 1) * 2 + "";
+            tz.qtje = (i + 1) * 1000 + "";
+            tz.sum = (i + 1) * 200000 + "";
+            tz.time = (i + 1) * 3 + "";
+            tz.rs = (i + 1) * 4 + "";
+            tz.type = i % 2;
+            TzHolder tzHolder = new TzHolder();
+            View v = tzHolder.createView(this.getContext());
+            tzHolder.UpdateUI(i, tz);
+            flTjtz.addView(v);
         }
-
     }
 
     @Override

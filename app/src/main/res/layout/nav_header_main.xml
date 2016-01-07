@@ -13,12 +13,12 @@
         android:id="@+id/login"
         android:layout_width="56dp"
         android:layout_height="56dp"
+        android:layout_gravity="center_horizontal"
         android:layout_margin="@dimen/def_padding"
-        app:rlv_backgroundColorValue="@color/green"
+        app:rlv_backgroundColorValue="@android:color/white"
         app:rlv_titleColor="@android:color/white"
-        app:rlv_titleSize="35dp"
-        app:rlv_titleText="登录"
-        android:src="@android:drawable/sym_def_app_icon" />
+        app:rlv_titleSize="32sp"
+        app:rlv_titleText="登录" />
 
     <TextView
         android:layout_width="match_parent"

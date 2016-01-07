@@ -76,7 +76,7 @@ public class RoundedLetterView extends View {
         //Background Paint
         mBackgroundPaint = new Paint();
         mBackgroundPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
-        mBackgroundPaint.setStyle(Paint.Style.FILL);
+        mBackgroundPaint.setStyle(Paint.Style.STROKE);
         mBackgroundPaint.setColor(mBackgroundColor);
 
         mInnerRectF = new RectF();

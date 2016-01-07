@@ -4,27 +4,27 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/main"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@mipmap/drawer_home_click"
             android:title="@string/main_activity" />
         <item
             android:id="@+id/profile"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@mipmap/drawer_profile"
             android:title="@string/profile" />
         <item
             android:id="@+id/initiate"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@mipmap/drawer_initiate"
             android:title="@string/initiate" />
         <item
             android:id="@+id/spreading"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@mipmap/drawer_spreading"
             android:title="@string/spreading" />
         <item
             android:id="@+id/participated"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@mipmap/drawer_participated"
             android:title="@string/participated" />
         <item
             android:id="@+id/integral"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@mipmap/drawer_integral"
             android:title="@string/integral" />
     </group>
 </menu>

@@ -3,45 +3,63 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="@dimen/item_loan"
+    android:background="@android:color/white"
     android:orientation="vertical"
-    android:paddingLeft="@dimen/def_padding"
-    android:paddingRight="@dimen/def_padding">
+    android:paddingBottom="@dimen/def_padding">
 
-    <LinearLayout
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider"
+        android:background="@color/divider" />
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/item_loan_title"
         android:background="@android:color/white"
-        android:orientation="horizontal">
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/def_padding"
+        android:paddingRight="@dimen/def_padding">
 
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:gravity="center_vertical"
             android:textColor="@color/loan"
             android:textSize="@dimen/loan_title_size" />
 
         <ImageView
             android:id="@+id/loanType"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/loan_topimg_margin"
+            android:layout_toRightOf="@+id/title"
+            android:minHeight="14dp"
+            android:scaleType="centerCrop" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
+            android:layout_alignParentRight="true"
             android:src="@mipmap/arrow_more" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/circle_outside"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/def_padding"
+        android:paddingRight="@dimen/def_padding">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
             <com.aako.zjp2p.widget.CircleProgress
                 android:id="@+id/cp"

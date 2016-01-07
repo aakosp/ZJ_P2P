@@ -16,4 +16,9 @@
     <color name="loan_text">#A7A7A7</color>
     <color name="loan_rzje">#565656</color>
     <color name="zc_title">#787878</color>
+
+    <color name="drawer_end">#1D1D27</color>
+    <color name="drawer_item">#FF252531</color>
+    <color name="drawer_start">#CC1D1D27</color>
+    <color name="drawer_center">#FF1D1D27</color>
 </resources>

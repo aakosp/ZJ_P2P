@@ -67,15 +67,27 @@
             android:layout_height="@dimen/divider"
             android:background="@color/divider" />
 
-        <android.support.v7.widget.RecyclerView
+        <!--<android.support.v7.widget.RecyclerView
+    android:id="@+id/tjtz"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+
+    <android.support.v7.widget.RecyclerView
+    android:id="@+id/tjzc"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/def_padding" />-->
+
+        <com.aako.zjp2p.widget.FlowLayout
             android:id="@+id/tjtz"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <android.support.v7.widget.RecyclerView
+        <com.aako.zjp2p.widget.FlowLayout
             android:id="@+id/tjzc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/def_padding" />
+
     </LinearLayout>
 </ScrollView>
