@@ -63,4 +63,9 @@
         <attr name="donut_inner_bottom_text_color" format="color"/>
         <attr name="donut_circle_starting_degree" format="integer" />
     </declare-styleable>
+
+    <declare-styleable name="FlowLayout">
+        <attr name="android:gravity"/>
+        <attr name="android:numColumns"/>
+    </declare-styleable>
 </resources>

@@ -25,4 +25,8 @@ public class AppUtils extends Application {
         Fresco.initialize(this, FrescoConfig.getImagePipelineConfig(this));
         Log.d(TAG, "Fresco init");
     }
+
+    public static Application getInstance(){
+        return mInstance;
+    }
 }
