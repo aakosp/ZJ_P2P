@@ -21,4 +21,7 @@
     <color name="drawer_item">#FF252531</color>
     <color name="drawer_start">#CC1D1D27</color>
     <color name="drawer_center">#FF1D1D27</color>
+
+    <color name="btn_context_menu_normal">#ffffff</color>
+    <color name="btn_context_menu_pressed">#40000000</color>
 </resources>

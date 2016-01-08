@@ -4,6 +4,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 
 import com.aako.zjp2p.R;
 import com.aako.zjp2p.activity.base.BaseAppCompatActivity;
+import com.aako.zjp2p.widget.ImageTextButton;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,8 +27,10 @@ public class MainActivity extends BaseAppCompatActivity
     private static final String TAG = " MainActivity ";
 
     private TextView tv_mainActivity_title;
+    private ImageTextButton home, profile, initiate, spreading, participated, integral;
 
     private Map<Integer, Fragment> mFragments = new HashMap<>();
+    private OnClickLinstenerImp onClickLinstenerImp;
 
     @Override
     protected void initViews() {
@@ -50,17 +54,24 @@ public class MainActivity extends BaseAppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        home = (ImageTextButton) findViewById(R.id.home);
+        profile = (ImageTextButton) findViewById(R.id.profile);
 
-        mFragments.put(R.id.main, getSupportFragmentManager().findFragmentById(R.id.fragmentHome));
+        onClickLinstenerImp = new OnClickLinstenerImp();
+        home.setOnClickListener(onClickLinstenerImp);
+        profile.setOnClickListener(onClickLinstenerImp);
+
+//        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+//        navigationView.setNavigationItemSelectedListener(this);
+
+        mFragments.put(R.id.home, getSupportFragmentManager().findFragmentById(R.id.fragmentHome));
         mFragments.put(R.id.profile, getSupportFragmentManager().findFragmentById(R.id.fragmentProfile));
         mFragments.put(R.id.initiate, getSupportFragmentManager().findFragmentById(R.id.fragmentInitiate));
         mFragments.put(R.id.spreading, getSupportFragmentManager().findFragmentById(R.id.fragmentSpreading));
         mFragments.put(R.id.participated, getSupportFragmentManager().findFragmentById(R.id.fragmentParticipated));
         mFragments.put(R.id.integral, getSupportFragmentManager().findFragmentById(R.id.fragmentIntegral));
 
-        navigationToFragment(R.id.main);
+        navigationToFragment(R.id.home);
     }
 
     @Override
@@ -88,16 +99,29 @@ public class MainActivity extends BaseAppCompatActivity
         return true;
     }
 
-    private void navigationToFragment(int id){
-        if(!mFragments.containsKey(id)){
+    private void navigationToFragment(int id) {
+        if (!mFragments.containsKey(id)) {
             return;
         }
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out,
                 android.R.anim.fade_in, android.R.anim.fade_out);
-        for(int key : mFragments.keySet()){
+        for (int key : mFragments.keySet()) {
             fragmentTransaction = fragmentTransaction.hide(mFragments.get(key));
         }
         fragmentTransaction.show(mFragments.get(id)).commit();
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+    }
+
+    private class OnClickLinstenerImp implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            v.setEnabled(false);
+            navigationToFragment(v.getId());
+            v.setEnabled(true);
+
+        }
     }
 }

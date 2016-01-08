@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.TypedValue;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ public class ImageTextButton extends LinearLayout {
     private TextView mText;
     private ImageView mImg;
     private int resId_img;
+    private int img_resId_clicked;
     private int resId_txt;
     private int imgWidth;
     private int imgHeight;
@@ -42,6 +44,8 @@ public class ImageTextButton extends LinearLayout {
             if (typedArray != null) {
                 resId_img = typedArray.getResourceId(
                         R.styleable.imagetextbutton_img_src, 0);
+                img_resId_clicked = typedArray.getResourceId(
+                        R.styleable.imagetextbutton_img_clicked_src, 0);
                 imgWidth = typedArray.getDimensionPixelOffset(
                         R.styleable.imagetextbutton_img_width, LayoutParams.WRAP_CONTENT);
                 imgHeight = typedArray.getDimensionPixelOffset(
@@ -84,6 +88,18 @@ public class ImageTextButton extends LinearLayout {
 
         if (resId_txt != 0) {
             mText.setText(resId_txt);
+        }
+
+        if(img_resId_clicked != 0){
+            this.setOnFocusChangeListener(new OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    if(hasFocus)
+                        mImg.setImageResource(resId_img);
+                    else
+                        mImg.setImageResource(img_resId_clicked);
+                }
+            });
         }
     }
 
@@ -158,4 +174,5 @@ public class ImageTextButton extends LinearLayout {
             this.resId_img = resId;
         }
     }
+
 }

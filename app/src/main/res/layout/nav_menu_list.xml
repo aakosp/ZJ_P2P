@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/side_nav_bar"
+    android:padding="@dimen/nav_header_vertical_spacing"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+    <com.aako.zjp2p.widget.RoundedLetterView
+        android:id="@+id/login"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/def_padding"
+        app:rlv_backgroundColorValue="@android:color/white"
+        app:rlv_titleColor="@android:color/white"
+        app:rlv_titleSize="24sp"
+        app:rlv_titleText="登录" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login"
+        android:paddingTop="@dimen/nav_header_vertical_spacing"
+        android:text="Android Studio"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+    <TextView
+        android:id="@+id/name2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/name"
+        android:text="android.studio@android.com" />
+
+
+    <com.aako.zjp2p.widget.ImageTextButton
+        android:id="@+id/home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/name2"
+        android:layout_marginTop="@dimen/nav_header_vertical_spacing"
+        app:img_src="@mipmap/drawer_home"
+        app:space="@dimen/nav_header_vertical_spacing"
+        app:text_size="@dimen/drawer_item_size"
+        app:text_src="@string/main_activity" />
+
+    <com.aako.zjp2p.widget.ImageTextButton
+        android:id="@+id/profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/home"
+        android:layout_marginTop="@dimen/nav_header_vertical_spacing"
+        app:img_src="@mipmap/drawer_profile"
+        app:space="@dimen/nav_header_vertical_spacing"
+        app:text_size="@dimen/drawer_item_size"
+        app:text_src="@string/profile" />
+
+    <com.aako.zjp2p.widget.ImageTextButton
+        android:id="@+id/initiate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profile"
+        android:layout_marginTop="@dimen/nav_header_vertical_spacing"
+        app:img_src="@mipmap/drawer_initiate"
+        app:space="@dimen/nav_header_vertical_spacing"
+        app:text_size="@dimen/drawer_item_size"
+        app:text_src="@string/initiate" />
+
+    <com.aako.zjp2p.widget.ImageTextButton
+        android:id="@+id/spreading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/initiate"
+        android:layout_marginTop="@dimen/nav_header_vertical_spacing"
+        app:img_src="@mipmap/drawer_spreading"
+        app:space="@dimen/nav_header_vertical_spacing"
+        app:text_size="@dimen/drawer_item_size"
+        app:text_src="@string/spreading" />
+
+    <com.aako.zjp2p.widget.ImageTextButton
+        android:id="@+id/participated"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spreading"
+        android:layout_marginTop="@dimen/nav_header_vertical_spacing"
+        app:img_src="@mipmap/drawer_participated"
+        app:space="@dimen/nav_header_vertical_spacing"
+        app:text_size="@dimen/drawer_item_size"
+        app:text_src="@string/participated" />
+
+    <com.aako.zjp2p.widget.ImageTextButton
+        android:id="@+id/integral"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/participated"
+        android:layout_marginTop="@dimen/nav_header_vertical_spacing"
+        app:img_src="@mipmap/drawer_integral"
+        app:space="@dimen/nav_header_vertical_spacing"
+        app:text_size="@dimen/drawer_item_size"
+        app:text_src="@string/integral" />
+
+    <com.aako.zjp2p.widget.ImageTextButton
+        android:id="@+id/logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="40dp"
+        android:layout_marginTop="@dimen/nav_header_vertical_spacing"
+        app:img_src="@mipmap/drawer_integral"
+        app:space="@dimen/nav_header_vertical_spacing"
+        app:text_size="@dimen/drawer_item_size"
+        app:text_src="@string/logout" />
+
+</RelativeLayout>
