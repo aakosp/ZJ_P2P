@@ -58,7 +58,6 @@ public class ImageTextButton extends LinearLayout {
                         R.styleable.imagetextbutton_text_src, 0);
                 space = typedArray.getDimensionPixelOffset(
                         R.styleable.imagetextbutton_space, R.dimen.program_middle);
-//                hasDivider = typedArray.getBoolean(R.styleable.imagetextbutton_has_divider, false);
             }
             typedArray.recycle();
         }
@@ -91,6 +90,7 @@ public class ImageTextButton extends LinearLayout {
         }
 
         if(img_resId_clicked != 0){
+
             this.setOnFocusChangeListener(new OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View v, boolean hasFocus) {

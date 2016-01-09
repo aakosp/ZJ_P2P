@@ -3,11 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="@dimen/nav_header_height"
-    android:background="@drawable/side_nav_bar"
+    android:background="@color/drawer_end"
     android:gravity="bottom"
     android:orientation="vertical"
-    android:padding="@dimen/def_padding"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+    android:padding="@dimen/def_padding">
 
     <com.aako.zjp2p.widget.RoundedLetterView
         android:id="@+id/login"

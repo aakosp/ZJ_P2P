@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/side_nav_bar"
     android:padding="@dimen/nav_header_vertical_spacing"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
@@ -12,7 +11,7 @@
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:layout_gravity="center_horizontal"
-        android:layout_margin="@dimen/def_padding"
+        android:layout_marginTop="@dimen/icon_size"
         app:rlv_backgroundColorValue="@android:color/white"
         app:rlv_titleColor="@android:color/white"
         app:rlv_titleSize="24sp"
@@ -41,9 +40,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/name2"
         android:layout_marginTop="@dimen/nav_header_vertical_spacing"
+        android:background="@drawable/btn_context_menu"
+        android:clickable="true"
+        android:gravity="center_vertical"
         app:img_src="@mipmap/drawer_home"
         app:space="@dimen/nav_header_vertical_spacing"
-        app:text_size="@dimen/drawer_item_size"
+        app:text_size="@dimen/nav_menu_size"
         app:text_src="@string/main_activity" />
 
     <com.aako.zjp2p.widget.ImageTextButton
@@ -52,9 +54,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/home"
         android:layout_marginTop="@dimen/nav_header_vertical_spacing"
+        android:background="@drawable/btn_context_menu"
+        android:clickable="true"
+        android:gravity="center_vertical"
         app:img_src="@mipmap/drawer_profile"
         app:space="@dimen/nav_header_vertical_spacing"
-        app:text_size="@dimen/drawer_item_size"
+        app:text_size="@dimen/nav_menu_size"
         app:text_src="@string/profile" />
 
     <com.aako.zjp2p.widget.ImageTextButton
@@ -63,9 +68,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/profile"
         android:layout_marginTop="@dimen/nav_header_vertical_spacing"
+        android:background="@drawable/btn_context_menu"
+        android:gravity="center_vertical"
         app:img_src="@mipmap/drawer_initiate"
         app:space="@dimen/nav_header_vertical_spacing"
-        app:text_size="@dimen/drawer_item_size"
+        app:text_size="@dimen/nav_menu_size"
         app:text_src="@string/initiate" />
 
     <com.aako.zjp2p.widget.ImageTextButton
@@ -74,9 +81,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/initiate"
         android:layout_marginTop="@dimen/nav_header_vertical_spacing"
+        android:background="@drawable/btn_context_menu"
+        android:gravity="center_vertical"
         app:img_src="@mipmap/drawer_spreading"
         app:space="@dimen/nav_header_vertical_spacing"
-        app:text_size="@dimen/drawer_item_size"
+        app:text_size="@dimen/nav_menu_size"
         app:text_src="@string/spreading" />
 
     <com.aako.zjp2p.widget.ImageTextButton
@@ -85,9 +94,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/spreading"
         android:layout_marginTop="@dimen/nav_header_vertical_spacing"
+        android:background="@drawable/btn_context_menu"
+        android:gravity="center_vertical"
         app:img_src="@mipmap/drawer_participated"
         app:space="@dimen/nav_header_vertical_spacing"
-        app:text_size="@dimen/drawer_item_size"
+        app:text_size="@dimen/nav_menu_size"
         app:text_src="@string/participated" />
 
     <com.aako.zjp2p.widget.ImageTextButton
@@ -96,9 +107,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/participated"
         android:layout_marginTop="@dimen/nav_header_vertical_spacing"
+        android:background="@drawable/btn_context_menu"
+        android:gravity="center_vertical"
         app:img_src="@mipmap/drawer_integral"
         app:space="@dimen/nav_header_vertical_spacing"
-        app:text_size="@dimen/drawer_item_size"
+        app:text_size="@dimen/nav_menu_size"
         app:text_src="@string/integral" />
 
     <com.aako.zjp2p.widget.ImageTextButton
@@ -108,9 +121,11 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="40dp"
         android:layout_marginTop="@dimen/nav_header_vertical_spacing"
+        android:background="@drawable/btn_context_menu"
+        android:gravity="center_vertical"
         app:img_src="@mipmap/drawer_integral"
         app:space="@dimen/nav_header_vertical_spacing"
-        app:text_size="@dimen/drawer_item_size"
+        app:text_size="@dimen/nav_menu_size"
         app:text_src="@string/logout" />
 
 </RelativeLayout>

@@ -38,8 +38,8 @@
 
 
     <!-- 字体大小 -->
-    <dimen name="drawer_item_size">20sp</dimen>
     <dimen name="title_size">20sp</dimen>
+    <dimen name="nav_menu_size">16sp</dimen>
     <dimen name="program_size">16sp</dimen>
     <dimen name="loan_title_size">16sp</dimen>
     <dimen name="text_size">14sp</dimen>
