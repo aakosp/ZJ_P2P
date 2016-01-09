@@ -1,5 +1,6 @@
 package com.aako.zjp2p.activity;
 
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -121,7 +122,17 @@ public class MainActivity extends BaseAppCompatActivity
             v.setEnabled(false);
             navigationToFragment(v.getId());
             v.setEnabled(true);
-
         }
     }
+
+/*    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        if (intent != null) {
+            boolean isExit = intent.getBooleanExtra(TAG, false);
+            if (isExit) {
+                this.finish();
+            }
+        }
+    }*/
 }
