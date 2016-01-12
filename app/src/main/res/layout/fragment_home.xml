@@ -32,7 +32,7 @@
             android:numColumns="3" />
 
         <RelativeLayout
-            android:id="@+id/label_more"
+            android:id="@+id/label_tzmore"
             android:layout_width="match_parent"
             android:layout_height="@dimen/label_tjtz"
             android:layout_marginTop="@dimen/def_padding"
@@ -46,9 +46,9 @@
                 android:layout_height="match_parent"
                 android:layout_alignParentLeft="true"
                 android:gravity="center_vertical"
-                android:text="@string/guide"
+                android:text="@string/guide_tz"
                 android:textColor="@color/loan"
-                android:textSize="@dimen/program_size" />
+                android:textSize="@dimen/text_big_size" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -57,7 +57,7 @@
                 android:gravity="center_vertical"
                 android:text="@string/more"
                 android:textColor="@color/loan"
-                android:textSize="@dimen/loan_title_size" />
+                android:textSize="@dimen/text_big_size" />
 
         </RelativeLayout>
 
@@ -78,16 +78,39 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/def_padding" />-->
 
-        <com.aako.zjp2p.widget.FlowLayout
+        <!--<com.aako.zjp2p.widget.FlowLayout
             android:id="@+id/tjtz"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content" />-->
 
-        <com.aako.zjp2p.widget.FlowLayout
+        <LinearLayout
+            android:id="@+id/tjtz"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+
+        <TextView
+            android:id="@+id/label_zcmore"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/label_tjtz"
+            android:layout_alignParentLeft="true"
+            android:gravity="center_vertical"
+            android:padding="@dimen/def_padding"
+            android:text="@string/guide_zc"
+            android:textColor="@color/loan"
+            android:textSize="@dimen/text_big_size" />
+
+        <LinearLayout
             android:id="@+id/tjzc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/def_padding" />
+            android:orientation="vertical" />
+        <!--<com.aako.zjp2p.widget.FlowLayout
+            android:id="@+id/tjzc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/def_padding" />-->
 
     </LinearLayout>
 </ScrollView>

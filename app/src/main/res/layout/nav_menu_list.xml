@@ -45,7 +45,7 @@
         android:gravity="center_vertical"
         app:img_src="@mipmap/drawer_home"
         app:space="@dimen/nav_header_vertical_spacing"
-        app:text_size="@dimen/nav_menu_size"
+        app:text_size="@dimen/text_big_size"
         app:text_src="@string/main_activity" />
 
     <com.aako.zjp2p.widget.ImageTextButton
@@ -59,7 +59,7 @@
         android:gravity="center_vertical"
         app:img_src="@mipmap/drawer_profile"
         app:space="@dimen/nav_header_vertical_spacing"
-        app:text_size="@dimen/nav_menu_size"
+        app:text_size="@dimen/text_big_size"
         app:text_src="@string/profile" />
 
     <com.aako.zjp2p.widget.ImageTextButton
@@ -72,7 +72,7 @@
         android:gravity="center_vertical"
         app:img_src="@mipmap/drawer_initiate"
         app:space="@dimen/nav_header_vertical_spacing"
-        app:text_size="@dimen/nav_menu_size"
+        app:text_size="@dimen/text_big_size"
         app:text_src="@string/initiate" />
 
     <com.aako.zjp2p.widget.ImageTextButton
@@ -85,7 +85,7 @@
         android:gravity="center_vertical"
         app:img_src="@mipmap/drawer_spreading"
         app:space="@dimen/nav_header_vertical_spacing"
-        app:text_size="@dimen/nav_menu_size"
+        app:text_size="@dimen/text_big_size"
         app:text_src="@string/spreading" />
 
     <com.aako.zjp2p.widget.ImageTextButton
@@ -98,7 +98,7 @@
         android:gravity="center_vertical"
         app:img_src="@mipmap/drawer_participated"
         app:space="@dimen/nav_header_vertical_spacing"
-        app:text_size="@dimen/nav_menu_size"
+        app:text_size="@dimen/text_big_size"
         app:text_src="@string/participated" />
 
     <com.aako.zjp2p.widget.ImageTextButton
@@ -111,7 +111,7 @@
         android:gravity="center_vertical"
         app:img_src="@mipmap/drawer_integral"
         app:space="@dimen/nav_header_vertical_spacing"
-        app:text_size="@dimen/nav_menu_size"
+        app:text_size="@dimen/text_big_size"
         app:text_src="@string/integral" />
 
     <com.aako.zjp2p.widget.ImageTextButton
@@ -125,7 +125,7 @@
         android:gravity="center_vertical"
         app:img_src="@mipmap/drawer_integral"
         app:space="@dimen/nav_header_vertical_spacing"
-        app:text_size="@dimen/nav_menu_size"
+        app:text_size="@dimen/text_big_size"
         app:text_src="@string/logout" />
 
 </RelativeLayout>

@@ -9,15 +9,16 @@
     <color name="colorPrimary">#D94B41</color>
     <color name="textColorPrimary">#e1f5fe</color>
 
-    <color name="title">#333333</color>
-    <color name="loan">#555555</color>
-    <color name="month">#81A0A5</color>
-    <color name="loan_yqnh">#FE0000</color>
-    <color name="loan_text">#A7A7A7</color>
-    <color name="loan_rzje">#565656</color>
-    <color name="zc_title">#787878</color>
+    <color name="title">#FF333333</color>
+    <color name="loan">#FF555555</color>
+    <color name="month">#FF81A0A5</color>
+    <color name="loan_yqnh">#FFFE0000</color>
+    <color name="loan_text">#FFA7A7A7</color>
+    <color name="loan_rzje">#FF565656</color>
+    <color name="zc_title">#FF787878</color>
+    <color name="sort">#FFDA4C42</color>
 
-    <color name="drawer_end">#1D1D27</color>
+    <color name="drawer_end">#FF1D1D27</color>
     <color name="drawer_item">#FF252531</color>
     <color name="drawer_start">#CC1D1D27</color>
     <color name="drawer_center">#FF1D1D27</color>

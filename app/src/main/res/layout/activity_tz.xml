@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.aako.zjp2p.widget.TopBar
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:titleText="@string/p2p" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/menu_big_size"
+        android:orientation="horizontal"
+        android:padding="@dimen/def_padding">
+
+        <!--<TextView
+            android:id="@+id/sort"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/lv"
+            android:textColor="@color/sort"
+            android:textSize="@dimen/text_big_size" />-->
+
+        <com.gc.materialdesign.views.ButtonFlat
+            android:id="@+id/sort"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/sort"
+            android:text="@string/lv"
+            android:textSize="@dimen/text_big_size" />
+
+        <View
+            android:layout_width="@dimen/divider"
+            android:layout_height="match_parent"
+            android:background="@color/divider" />
+
+        <com.gc.materialdesign.views.ButtonFlat
+            android:id="@+id/condition"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/loan"
+            android:text="@string/condition"
+            android:textSize="@dimen/text_big_size" />
+
+        <!--<TextView
+            android:id="@+id/condition"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/condition"
+            android:textColor="@color/loan"
+            android:textSize="@dimen/text_big_size" />-->
+
+    </LinearLayout>
+
+    <com.aako.zjp2p.widget.superrecycler.SuperRecyclerView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_empty="@layout/emptyview"
+        app:layout_moreProgress="@layout/view_more_progress"
+        app:mainLayoutId="@layout/layout_recyclerview_verticalscroll"
+        app:scrollbarStyle="insideInset" />
+
+</LinearLayout>

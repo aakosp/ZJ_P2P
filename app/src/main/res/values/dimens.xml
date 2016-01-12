@@ -36,13 +36,16 @@
     <dimen name="img_zc_size">80dp</dimen>
     <dimen name="item_zc_height">100dp</dimen>
 
+    <dimen name="swipe_progress_bar_height">8dp</dimen>
+
+    <dimen name="menu_big_size">54dp</dimen>
+    <dimen name="menu_middle_size">50dp</dimen>
+
 
     <!-- 字体大小 -->
     <dimen name="title_size">20sp</dimen>
-    <dimen name="nav_menu_size">16sp</dimen>
-    <dimen name="program_size">16sp</dimen>
-    <dimen name="loan_title_size">16sp</dimen>
-    <dimen name="text_size">14sp</dimen>
-    <dimen name="loan_desc_size">12sp</dimen>
+    <dimen name="text_big_size">16sp</dimen>
+    <dimen name="text_middle_size">14sp</dimen>
+    <dimen name="text_small_size">12sp</dimen>
     <dimen name="loan_num_size">24sp</dimen>
 </resources>

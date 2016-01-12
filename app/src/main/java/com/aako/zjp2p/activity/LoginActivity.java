@@ -46,6 +46,7 @@ public class LoginActivity extends BaseAppCompatActivity {
                 case R.id.btnLogin:
                     intent_login_toMain.setClass(LoginActivity.this, MainActivity.class);
                     LoginActivity.this.startActivity(intent_login_toMain);
+                    LoginActivity.this.finish();
                     break;
             }
         }

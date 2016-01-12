@@ -2,7 +2,7 @@ package com.aako.zjp2p.widget;
 /**
  * FlowLayout will arrange child elements horizontally one next to another. If there is not enough
  * space for next view new line will be added.
- * <p/>
+ * <p>
  * User: Blaz Solar
  * Date: 5/6/13
  * Time: 8:17 PM
@@ -66,7 +66,6 @@ public class FlowLayout extends ViewGroup {
                 setGravity(index);
             }
             numColumns = a.getInt(R.styleable.FlowLayout_android_numColumns, Integer.MAX_VALUE);
-            Log.d(TAG, "numColumns : " + numColumns);
         } finally {
             a.recycle();
         }

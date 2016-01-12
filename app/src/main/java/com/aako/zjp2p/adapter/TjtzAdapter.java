@@ -34,6 +34,11 @@ public class TjtzAdapter extends RecyclerView.Adapter<TjtzViewHolder> {
         this.notifyDataSetChanged();
     }
 
+    public void remove(int position){
+        this.list.remove(position);
+        this.notifyItemRemoved(position);
+    }
+
     @Override
     public TjtzViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = View.inflate(parent.getContext(), R.layout.item_loan, null);

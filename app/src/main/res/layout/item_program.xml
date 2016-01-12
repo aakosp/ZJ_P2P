@@ -12,4 +12,4 @@
     app:img_width="@dimen/program_img_height"
     app:space="@dimen/program_middle"
     app:text_color="@color/title"
-    app:text_size="@dimen/program_size" />
+    app:text_size="@dimen/text_big_size" />

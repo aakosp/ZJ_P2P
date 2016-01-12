@@ -93,6 +93,6 @@
         android:layout_gravity="bottom|center_horizontal"
         android:layout_margin="@dimen/def_margin"
         android:text="@string/forgetPwd"
-        android:textSize="@dimen/text_size" />
+        android:textSize="@dimen/text_middle_size" />
 
 </LinearLayout>

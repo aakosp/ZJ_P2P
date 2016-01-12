@@ -28,7 +28,7 @@
             android:layout_alignParentLeft="true"
             android:gravity="center_vertical"
             android:textColor="@color/loan"
-            android:textSize="@dimen/loan_title_size" />
+            android:textSize="@dimen/text_big_size" />
 
         <ImageView
             android:id="@+id/loanType"
@@ -69,13 +69,13 @@
                 app:donut_finished_stroke_width="@dimen/circle_thickness"
                 app:donut_max="100"
                 app:donut_text_color="@color/loan_text"
-                app:donut_text_size="@dimen/loan_title_size"
+                app:donut_text_size="@dimen/text_big_size"
                 app:donut_unfinished_stroke_width="@dimen/circle_thickness" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/program_size"
+                android:layout_marginLeft="@dimen/text_big_size"
                 android:orientation="vertical">
 
                 <TextView
@@ -85,7 +85,7 @@
                     android:layout_gravity="top"
                     android:text="@string/yqnh"
                     android:textColor="@color/loan_text"
-                    android:textSize="@dimen/loan_desc_size" />
+                    android:textSize="@dimen/text_small_size" />
 
                 <TextView
                     android:id="@+id/yqnh"
@@ -101,7 +101,7 @@
                     android:layout_height="wrap_content"
                     android:text="2000起"
                     android:textColor="@color/loan_text"
-                    android:textSize="@dimen/loan_desc_size" />
+                    android:textSize="@dimen/text_small_size" />
 
             </LinearLayout>
         </LinearLayout>
@@ -118,7 +118,7 @@
                 android:layout_gravity="top"
                 android:text="@string/rzje"
                 android:textColor="@color/loan_text"
-                android:textSize="@dimen/loan_desc_size" />
+                android:textSize="@dimen/text_small_size" />
 
             <TextView
                 android:id="@+id/sum"
@@ -139,7 +139,7 @@
                     android:layout_height="wrap_content"
                     android:text="2个月"
                     android:textColor="@color/loan_text"
-                    android:textSize="@dimen/loan_desc_size" />
+                    android:textSize="@dimen/text_small_size" />
 
                 <TextView
                     android:id="@+id/rs"
@@ -149,7 +149,7 @@
                     android:layout_gravity="right"
                     android:text="2人已投"
                     android:textColor="@color/loan_text"
-                    android:textSize="@dimen/loan_desc_size" />
+                    android:textSize="@dimen/text_small_size" />
 
             </RelativeLayout>
 

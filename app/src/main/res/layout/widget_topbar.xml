@@ -18,7 +18,7 @@
         android:minWidth="40dip"
         android:text="@string/back"
         android:textColor="@android:color/white"
-        android:textSize="@dimen/text_size"
+        android:textSize="@dimen/title_size"
         android:visibility="gone" />
 
     <ImageView
@@ -70,7 +70,7 @@
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:minWidth="50dp"
         android:textColor="@color/text"
-        android:textSize="@dimen/text_size"
+        android:textSize="@dimen/title_size"
         android:visibility="gone" />
 
     <ImageView

@@ -21,7 +21,7 @@
         android:layout_toRightOf="@+id/img"
         android:text="云中飞呼啦圈止鼾器"
         android:textColor="@color/zc_title"
-        android:textSize="@dimen/loan_title_size" />
+        android:textSize="@dimen/text_big_size" />
 
     <TextView
         android:id="@+id/describe"
@@ -34,7 +34,7 @@
         android:paddingTop="@dimen/def_padding"
         android:text="一切等待都是值得的！为了提升咱们家磁吸线导电性能，我们不惜成本"
         android:textColor="@color/loan_text"
-        android:textSize="@dimen/loan_desc_size" />
+        android:textSize="@dimen/text_small_size" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -51,7 +51,7 @@
             android:layout_weight="1"
             android:text="16.0%"
             android:textColor="@color/loan_yqnh"
-            android:textSize="@dimen/loan_desc_size" />
+            android:textSize="@dimen/text_small_size" />
 
         <TextView
             android:id="@+id/ycje"
@@ -60,7 +60,7 @@
             android:layout_weight="1"
             android:text="￥1.9万 已筹"
             android:textColor="@color/loan_yqnh"
-            android:textSize="@dimen/loan_desc_size" />
+            android:textSize="@dimen/text_small_size" />
 
         <TextView
             android:id="@+id/syts"
@@ -69,7 +69,7 @@
             android:layout_weight="1"
             android:text="剩 22天"
             android:textColor="@color/loan_yqnh"
-            android:textSize="@dimen/loan_desc_size" />
+            android:textSize="@dimen/text_small_size" />
     </LinearLayout>
 
 
