@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Handler;
 import android.support.annotation.ColorRes;
+import android.support.annotation.LayoutRes;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -56,8 +57,8 @@ public class SuperRecyclerView extends FrameLayout {
     protected boolean isLoadingMore;
     protected SwipeRefreshLayout mPtrLayout;
 
-    protected int mSuperRecyclerViewMainLayout;
-    private int mProgressId;
+    protected int mSuperRecyclerViewMainLayout = R.layout.layout_recyclerview_verticalscroll;
+    private int mProgressId = R.layout.layout_more_progress;
 
     private int[] lastScrollPositions;
 
@@ -92,7 +93,8 @@ public class SuperRecyclerView extends FrameLayout {
     protected void initAttrs(AttributeSet attrs) {
         TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.superrecyclerview);
         try {
-            mSuperRecyclerViewMainLayout = a.getResourceId(R.styleable.superrecyclerview_mainLayoutId, R.layout.widget_recyclerview_layout_progress);
+            mSuperRecyclerViewMainLayout = a.getResourceId(R.styleable.superrecyclerview_mainLayoutId, R.layout.layout_recyclerview_verticalscroll);
+            Log.d(TAG, "mSuperRecyclerViewMainLayout :" + mSuperRecyclerViewMainLayout);
             mClipToPadding = a.getBoolean(R.styleable.superrecyclerview_recyclerClipToPadding, false);
             mPadding = (int) a.getDimension(R.styleable.superrecyclerview_recyclerPadding, -1.0f);
             mPaddingTop = (int) a.getDimension(R.styleable.superrecyclerview_recyclerPaddingTop, 0.0f);
@@ -181,17 +183,14 @@ public class SuperRecyclerView extends FrameLayout {
             } else {
                 mRecycler.setPadding(mPaddingLeft, mPaddingTop, mPaddingRight, mPaddingBottom);
             }
-
             if (mScrollbarStyle != -1) {
                 mRecycler.setScrollBarStyle(mScrollbarStyle);
             }
+            mRecycler.setVerticalScrollBarEnabled(false);
         }
     }
 
     private void processOnMore() {
-
-        Log.d(TAG, " processOnMore ===============================");
-
         RecyclerView.LayoutManager layoutManager = mRecycler.getLayoutManager();
         int lastVisibleItemPosition = getLastVisibleItemPosition(layoutManager);
         int visibleItemCount = layoutManager.getChildCount();
@@ -551,6 +550,37 @@ public class SuperRecyclerView extends FrameLayout {
      */
     public View getEmptyView() {
         return mEmptyView;
+    }
+
+    /**
+     * 设置空占位 view
+     *
+     * @param id
+     */
+    public void setEmptyres(@LayoutRes int id) {
+        mEmptyId = id;
+        mEmpty.setLayoutResource(mEmptyId);
+        if (mEmptyId != 0)
+            mEmptyView = mEmpty.inflate();
+    }
+
+    /**
+     * 设置loading图
+     *
+     * @param id
+     */
+    public void setMoreProgressId(@LayoutRes int id) {
+        mMoreProgressId = id;
+        mMoreProgress.setLayoutResource(mMoreProgressId);
+        if (mMoreProgressId != 0)
+            mMoreProgressView = mMoreProgress.inflate();
+    }
+
+
+    public void setScrollbarStyle(int mScrollbarStyle) {
+        if (mScrollbarStyle != -1) {
+            mRecycler.setScrollBarStyle(mScrollbarStyle);
+        }
     }
 
     /**

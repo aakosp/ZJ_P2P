@@ -10,7 +10,7 @@
     <color name="textColorPrimary">#e1f5fe</color>
 
     <color name="title">#FF333333</color>
-    <color name="loan">#FF555555</color>
+
     <color name="month">#FF81A0A5</color>
     <color name="loan_yqnh">#FFFE0000</color>
     <color name="loan_text">#FFA7A7A7</color>
@@ -25,4 +25,6 @@
 
     <color name="btn_context_menu_normal">#ffffff</color>
     <color name="btn_context_menu_pressed">#252531</color>
+
+    <color name="text_title">#FF555555</color>
 </resources>

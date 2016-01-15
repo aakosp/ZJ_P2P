@@ -29,7 +29,7 @@ public class CircleIndicator extends LinearLayout {
     private int mIndicatorMargin = -1;
     private int mIndicatorWidth = -1;
     private int mIndicatorHeight = -1;
-    private int mAnimatorResId = R.anim.scale_with_alpha;
+    private int mAnimatorResId = R.animator.scale_with_alpha;
     private int mAnimatorReverseResId = 0;
     private int mIndicatorBackgroundResId = R.drawable.white_radius;
     private int mIndicatorUnselectedBackgroundResId = R.drawable.white_radius;
@@ -64,24 +64,13 @@ public class CircleIndicator extends LinearLayout {
         }
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CircleIndicator);
-        mIndicatorWidth =
-                typedArray.getDimensionPixelSize(R.styleable.CircleIndicator_ci_width, -1);
-        mIndicatorHeight =
-                typedArray.getDimensionPixelSize(R.styleable.CircleIndicator_ci_height, -1);
-        mIndicatorMargin =
-                typedArray.getDimensionPixelSize(R.styleable.CircleIndicator_ci_margin, -1);
-
-        mAnimatorResId = typedArray.getResourceId(R.styleable.CircleIndicator_ci_animator,
-                R.anim.scale_with_alpha);
-                R.anim.scale_with_alpha);
-        mAnimatorReverseResId =
-                typedArray.getResourceId(R.styleable.CircleIndicator_ci_animator_reverse, 0);
-        mIndicatorBackgroundResId =
-                typedArray.getResourceId(R.styleable.CircleIndicator_ci_drawable,
-                        R.drawable.white_radius);
-        mIndicatorUnselectedBackgroundResId =
-                typedArray.getResourceId(R.styleable.CircleIndicator_ci_drawable_unselected,
-                        mIndicatorBackgroundResId);
+        mIndicatorWidth = typedArray.getDimensionPixelSize(R.styleable.CircleIndicator_ci_width, -1);
+        mIndicatorHeight = typedArray.getDimensionPixelSize(R.styleable.CircleIndicator_ci_height, -1);
+        mIndicatorMargin = typedArray.getDimensionPixelSize(R.styleable.CircleIndicator_ci_margin, -1);
+        mAnimatorResId = typedArray.getResourceId(R.styleable.CircleIndicator_ci_animator, R.animator.scale_with_alpha);
+        mAnimatorReverseResId = typedArray.getResourceId(R.styleable.CircleIndicator_ci_animator_reverse, 0);
+        mIndicatorBackgroundResId = typedArray.getResourceId(R.styleable.CircleIndicator_ci_drawable, R.drawable.white_radius);
+        mIndicatorUnselectedBackgroundResId = typedArray.getResourceId(R.styleable.CircleIndicator_ci_drawable_unselected, mIndicatorBackgroundResId);
         typedArray.recycle();
     }
 
@@ -90,7 +79,7 @@ public class CircleIndicator extends LinearLayout {
      */
     public void configureIndicator(int indicatorWidth, int indicatorHeight, int indicatorMargin) {
         configureIndicator(indicatorWidth, indicatorHeight, indicatorMargin,
-                R.anim.scale_with_alpha, 0, R.drawable.white_radius, R.drawable.white_radius);
+                R.animator.scale_with_alpha, 0, R.drawable.white_radius, R.drawable.white_radius);
     }
 
     public void configureIndicator(int indicatorWidth, int indicatorHeight, int indicatorMargin,
@@ -181,9 +170,9 @@ public class CircleIndicator extends LinearLayout {
                 mAnimatorIn.setTarget(currentIndicator);
                 mAnimatorIn.start();
             }
-            Log.d(TAG, "position : "+position +" getCurrentItem:"+mViewpager.getRealItem());
+            Log.d(TAG, "position : " + position + " getCurrentItem:" + mViewpager.getRealItem());
             View selectedIndicator = getChildAt(mViewpager.getRealItem());
-            Log.d(TAG, "selectedIndicator==NULL : "+(selectedIndicator==null));
+            Log.d(TAG, "selectedIndicator==NULL : " + (selectedIndicator == null));
             selectedIndicator.setBackgroundResource(mIndicatorBackgroundResId);
             mAnimatorOut.setTarget(selectedIndicator);
             mAnimatorOut.start();
@@ -229,7 +218,7 @@ public class CircleIndicator extends LinearLayout {
 
     private void createIndicators() {
         removeAllViews();
-        int count =  mViewpager.getAdapter().getRealCount();
+        int count = mViewpager.getAdapter().getRealCount();
         if (count <= 0) {
             return;
         }
