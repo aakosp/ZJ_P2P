@@ -69,7 +69,7 @@ public class ActivityTz extends BaseActivity implements SwipeRefreshLayout.OnRef
         mRecycler.getRecyclerView().setItemAnimator(mSparseAnimator);
         mRecycler.setRefreshListener(this);
         mRecycler.setRefreshingColorResources(android.R.color.holo_orange_light, android.R.color.holo_blue_light, android.R.color.holo_green_light, android.R.color.holo_red_light);
-        mRecycler.setupMoreListener(this, 1);
+        mRecycler.setupMoreListener(this, 10);
 
         dropDownMenu = (DropDownMenu) findViewById(R.id.dropDownMenu);
 
@@ -133,7 +133,7 @@ public class ActivityTz extends BaseActivity implements SwipeRefreshLayout.OnRef
 
     @Override
     public void onMoreAsked(int overallItemsCount, int itemsBeforeMore, int maxLastVisiblePosition) {
-        Toast.makeText(this, "Refresh", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "onMoreAsked", Toast.LENGTH_LONG).show();
         dropDownMenu.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -144,7 +144,7 @@ public class ActivityTz extends BaseActivity implements SwipeRefreshLayout.OnRef
 
     @Override
     public void onRefresh() {
-        Toast.makeText(this, "Refresh", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "onRefresh", Toast.LENGTH_LONG).show();
         dropDownMenu.postDelayed(new Runnable() {
             @Override
             public void run() {

@@ -64,6 +64,7 @@ public class SuperRecyclerView extends FrameLayout {
 
     private int mRefreshTimeout = 2000;
     private Handler mTimer;
+    private RestLoadMore restLoadMore;
 
     public SwipeRefreshLayout getSwipeToRefresh() {
         return mPtrLayout;
@@ -159,6 +160,7 @@ public class SuperRecyclerView extends FrameLayout {
                 public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                     super.onScrolled(recyclerView, dx, dy);
 
+                    Log.d(TAG, "dx dy : " + dx + " " + dy);
                     processOnMore();
 
                     if (mExternalOnScrollListener != null)
@@ -196,12 +198,25 @@ public class SuperRecyclerView extends FrameLayout {
         int visibleItemCount = layoutManager.getChildCount();
         int totalItemCount = layoutManager.getItemCount();
 
+        Log.d(TAG, "isLoadingMore:"+isLoadingMore+" totalItemCount:" + totalItemCount + " lastVisibleItemPosition:" + lastVisibleItemPosition + " visibleItemCount:" + visibleItemCount + " ITEM_LEFT_TO_LOAD_MORE:" + ITEM_LEFT_TO_LOAD_MORE);
+
         if (((totalItemCount - lastVisibleItemPosition) <= ITEM_LEFT_TO_LOAD_MORE ||
                 (totalItemCount - lastVisibleItemPosition) == 0 && totalItemCount > visibleItemCount)
                 && !isLoadingMore) {
 
             isLoadingMore = true;
+
+            Log.d(TAG, "isLoadingMoreisLoadingMoreisLoadingMoreisLoadingMore");
+
             if (mOnMoreListener != null) {
+                if (null == mTimer) {
+                    mTimer = new Handler();
+                }
+                if (null == restLoadMore) {
+                    restLoadMore = new RestLoadMore();
+                }
+                mTimer.removeCallbacks(restLoadMore);
+                mTimer.postDelayed(restLoadMore, 5000);
                 mMoreProgress.setVisibility(View.VISIBLE);
                 mOnMoreListener.onMoreAsked(mRecycler.getAdapter().getItemCount(), ITEM_LEFT_TO_LOAD_MORE, lastVisibleItemPosition);
             }
@@ -298,15 +313,7 @@ public class SuperRecyclerView extends FrameLayout {
                 }
 
                 private void update() {
-                    mProgress.setVisibility(View.GONE);
-                    mMoreProgress.setVisibility(View.GONE);
-                    isLoadingMore = false;
-                    mPtrLayout.setRefreshing(false);
-                    if (mRecycler.getAdapter().getItemCount() == 0 && mEmptyId != 0) {
-                        mEmpty.setVisibility(View.VISIBLE);
-                    } else if (mEmptyId != 0) {
-                        mEmpty.setVisibility(View.GONE);
-                    }
+                    reset();
                 }
             });
 
@@ -314,6 +321,28 @@ public class SuperRecyclerView extends FrameLayout {
                 ? View.GONE
                 : View.VISIBLE);
     }
+
+    private class RestLoadMore implements Runnable {
+
+        @Override
+        public void run() {
+            Log.d(TAG, "timeout ------------------------------");
+            reset();
+        }
+    }
+
+    public void reset() {
+        mProgress.setVisibility(View.GONE);
+        mMoreProgress.setVisibility(View.GONE);
+        isLoadingMore = false;
+        mPtrLayout.setRefreshing(false);
+        if (mRecycler.getAdapter().getItemCount() == 0 && mEmptyId != 0) {
+            mEmpty.setVisibility(View.VISIBLE);
+        } else if (mEmptyId != 0) {
+            mEmpty.setVisibility(View.GONE);
+        }
+    }
+
 
     /**
      * Set the layout manager to the recycler
@@ -562,6 +591,7 @@ public class SuperRecyclerView extends FrameLayout {
         mEmpty.setLayoutResource(mEmptyId);
         if (mEmptyId != 0)
             mEmptyView = mEmpty.inflate();
+        mEmptyView.setVisibility(View.GONE);
     }
 
     /**
@@ -574,6 +604,7 @@ public class SuperRecyclerView extends FrameLayout {
         mMoreProgress.setLayoutResource(mMoreProgressId);
         if (mMoreProgressId != 0)
             mMoreProgressView = mMoreProgress.inflate();
+        mMoreProgressView.setVisibility(View.GONE);
     }
 
 
