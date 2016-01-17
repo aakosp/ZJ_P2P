@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Handler;
 import android.support.annotation.ColorRes;
+import android.support.annotation.LayoutRes;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -56,13 +57,14 @@ public class SuperRecyclerView extends FrameLayout {
     protected boolean isLoadingMore;
     protected SwipeRefreshLayout mPtrLayout;
 
-    protected int mSuperRecyclerViewMainLayout;
-    private int mProgressId;
+    protected int mSuperRecyclerViewMainLayout = R.layout.layout_recyclerview_verticalscroll;
+    private int mProgressId = R.layout.layout_more_progress;
 
     private int[] lastScrollPositions;
 
     private int mRefreshTimeout = 2000;
     private Handler mTimer;
+    private RestLoadMore restLoadMore;
 
     public SwipeRefreshLayout getSwipeToRefresh() {
         return mPtrLayout;
@@ -92,7 +94,8 @@ public class SuperRecyclerView extends FrameLayout {
     protected void initAttrs(AttributeSet attrs) {
         TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.superrecyclerview);
         try {
-            mSuperRecyclerViewMainLayout = a.getResourceId(R.styleable.superrecyclerview_mainLayoutId, R.layout.widget_recyclerview_layout_progress);
+            mSuperRecyclerViewMainLayout = a.getResourceId(R.styleable.superrecyclerview_mainLayoutId, R.layout.layout_recyclerview_verticalscroll);
+            Log.d(TAG, "mSuperRecyclerViewMainLayout :" + mSuperRecyclerViewMainLayout);
             mClipToPadding = a.getBoolean(R.styleable.superrecyclerview_recyclerClipToPadding, false);
             mPadding = (int) a.getDimension(R.styleable.superrecyclerview_recyclerPadding, -1.0f);
             mPaddingTop = (int) a.getDimension(R.styleable.superrecyclerview_recyclerPaddingTop, 0.0f);
@@ -157,6 +160,7 @@ public class SuperRecyclerView extends FrameLayout {
                 public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                     super.onScrolled(recyclerView, dx, dy);
 
+                    Log.d(TAG, "dx dy : " + dx + " " + dy);
                     processOnMore();
 
                     if (mExternalOnScrollListener != null)
@@ -181,28 +185,38 @@ public class SuperRecyclerView extends FrameLayout {
             } else {
                 mRecycler.setPadding(mPaddingLeft, mPaddingTop, mPaddingRight, mPaddingBottom);
             }
-
             if (mScrollbarStyle != -1) {
                 mRecycler.setScrollBarStyle(mScrollbarStyle);
             }
+            mRecycler.setVerticalScrollBarEnabled(false);
         }
     }
 
     private void processOnMore() {
-
-        Log.d(TAG, " processOnMore ===============================");
-
         RecyclerView.LayoutManager layoutManager = mRecycler.getLayoutManager();
         int lastVisibleItemPosition = getLastVisibleItemPosition(layoutManager);
         int visibleItemCount = layoutManager.getChildCount();
         int totalItemCount = layoutManager.getItemCount();
+
+        Log.d(TAG, "isLoadingMore:"+isLoadingMore+" totalItemCount:" + totalItemCount + " lastVisibleItemPosition:" + lastVisibleItemPosition + " visibleItemCount:" + visibleItemCount + " ITEM_LEFT_TO_LOAD_MORE:" + ITEM_LEFT_TO_LOAD_MORE);
 
         if (((totalItemCount - lastVisibleItemPosition) <= ITEM_LEFT_TO_LOAD_MORE ||
                 (totalItemCount - lastVisibleItemPosition) == 0 && totalItemCount > visibleItemCount)
                 && !isLoadingMore) {
 
             isLoadingMore = true;
+
+            Log.d(TAG, "isLoadingMoreisLoadingMoreisLoadingMoreisLoadingMore");
+
             if (mOnMoreListener != null) {
+                if (null == mTimer) {
+                    mTimer = new Handler();
+                }
+                if (null == restLoadMore) {
+                    restLoadMore = new RestLoadMore();
+                }
+                mTimer.removeCallbacks(restLoadMore);
+                mTimer.postDelayed(restLoadMore, 5000);
                 mMoreProgress.setVisibility(View.VISIBLE);
                 mOnMoreListener.onMoreAsked(mRecycler.getAdapter().getItemCount(), ITEM_LEFT_TO_LOAD_MORE, lastVisibleItemPosition);
             }
@@ -299,15 +313,7 @@ public class SuperRecyclerView extends FrameLayout {
                 }
 
                 private void update() {
-                    mProgress.setVisibility(View.GONE);
-                    mMoreProgress.setVisibility(View.GONE);
-                    isLoadingMore = false;
-                    mPtrLayout.setRefreshing(false);
-                    if (mRecycler.getAdapter().getItemCount() == 0 && mEmptyId != 0) {
-                        mEmpty.setVisibility(View.VISIBLE);
-                    } else if (mEmptyId != 0) {
-                        mEmpty.setVisibility(View.GONE);
-                    }
+                    reset();
                 }
             });
 
@@ -315,6 +321,28 @@ public class SuperRecyclerView extends FrameLayout {
                 ? View.GONE
                 : View.VISIBLE);
     }
+
+    private class RestLoadMore implements Runnable {
+
+        @Override
+        public void run() {
+            Log.d(TAG, "timeout ------------------------------");
+            reset();
+        }
+    }
+
+    public void reset() {
+        mProgress.setVisibility(View.GONE);
+        mMoreProgress.setVisibility(View.GONE);
+        isLoadingMore = false;
+        mPtrLayout.setRefreshing(false);
+        if (mRecycler.getAdapter().getItemCount() == 0 && mEmptyId != 0) {
+            mEmpty.setVisibility(View.VISIBLE);
+        } else if (mEmptyId != 0) {
+            mEmpty.setVisibility(View.GONE);
+        }
+    }
+
 
     /**
      * Set the layout manager to the recycler
@@ -551,6 +579,39 @@ public class SuperRecyclerView extends FrameLayout {
      */
     public View getEmptyView() {
         return mEmptyView;
+    }
+
+    /**
+     * 设置空占位 view
+     *
+     * @param id
+     */
+    public void setEmptyres(@LayoutRes int id) {
+        mEmptyId = id;
+        mEmpty.setLayoutResource(mEmptyId);
+        if (mEmptyId != 0)
+            mEmptyView = mEmpty.inflate();
+        mEmptyView.setVisibility(View.GONE);
+    }
+
+    /**
+     * 设置loading图
+     *
+     * @param id
+     */
+    public void setMoreProgressId(@LayoutRes int id) {
+        mMoreProgressId = id;
+        mMoreProgress.setLayoutResource(mMoreProgressId);
+        if (mMoreProgressId != 0)
+            mMoreProgressView = mMoreProgress.inflate();
+        mMoreProgressView.setVisibility(View.GONE);
+    }
+
+
+    public void setScrollbarStyle(int mScrollbarStyle) {
+        if (mScrollbarStyle != -1) {
+            mRecycler.setScrollBarStyle(mScrollbarStyle);
+        }
     }
 
     /**

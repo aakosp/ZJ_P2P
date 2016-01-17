@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        android:orientation="vertical">
+
+        <com.aako.zjp2p.widget.TopBar
+            android:id="@+id/topbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/red" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/red"
+            android:orientation="vertical">
+
+            <com.aako.zjp2p.widget.CircleProgress
+                android:id="@+id/cp"
+                android:layout_width="@dimen/circle_progress_p2p"
+                android:layout_height="@dimen/circle_progress_p2p"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="@dimen/def_margin"
+                app:donut_finished_color="@android:color/white"
+                app:donut_finished_stroke_width="@dimen/circle_thickness"
+                app:donut_max="100"
+                app:donut_text_color="@color/loan_text"
+                app:donut_text_size="@dimen/text_big_size"
+                app:donut_unfinished_stroke_width="@dimen/circle_thickness" />
+
+            <TextView
+                android:id="@+id/syje"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="剩余 900,000元"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/text_middle_size" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/item_loan_title"
+                android:layout_marginTop="@dimen/small_margin"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/def_padding"
+                android:paddingRight="@dimen/def_padding">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="已完成"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/text_small_size" />
+
+                    <TextView
+                        android:id="@+id/ywc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/small_margin"
+                        android:text="18%"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/text_middle_size" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="已融资"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/text_small_size" />
+
+                    <TextView
+                        android:id="@+id/yrz"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/small_margin"
+                        android:text="100,000元"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/text_middle_size" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="总金额"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/text_small_size" />
+
+                    <TextView
+                        android:id="@+id/zje"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/small_margin"
+                        android:text="1,000,000元"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/text_middle_size" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/left_time"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/label_height"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/def_padding"
+            android:paddingRight="@dimen/def_padding">
+
+            <com.aako.zjp2p.widget.ImageTextButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                app:img_src="@mipmap/left_time"
+                app:space="@dimen/nav_header_vertical_spacing"
+                app:text_size="@dimen/text_big_size"
+                app:text_src="@string/left_time" />
+
+            <TextView
+                android:id="@+id/str_lefttime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="2天11个小时"
+                android:textColor="@color/p2p_info_text"
+                android:textSize="@dimen/text_big_size" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider"
+            android:background="@color/divider" />
+
+        <RelativeLayout
+            android:id="@+id/rzqx"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/label_height"
+            android:background="@android:color/white"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/def_padding"
+            android:paddingRight="@dimen/def_padding">
+
+            <com.aako.zjp2p.widget.ImageTextButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                app:img_src="@mipmap/rzqx"
+                app:space="@dimen/nav_header_vertical_spacing"
+                app:text_size="@dimen/text_big_size"
+                app:text_src="@string/rzqx" />
+
+            <TextView
+                android:id="@+id/str_rzqx"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="6个月"
+                android:textColor="@color/p2p_info_text"
+                android:textSize="@dimen/text_big_size" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider"
+            android:background="@color/divider" />
+
+        <RelativeLayout
+            android:id="@+id/hkfs"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/label_height"
+            android:background="@android:color/white"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/def_padding"
+            android:paddingRight="@dimen/def_padding">
+
+            <com.aako.zjp2p.widget.ImageTextButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                app:img_src="@mipmap/hkfs"
+                app:space="@dimen/nav_header_vertical_spacing"
+                app:text_size="@dimen/text_big_size"
+                app:text_src="@string/hkfs" />
+
+            <TextView
+                android:id="@+id/str_hkfs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="到期一次性还清"
+                android:textColor="@color/p2p_info_text"
+                android:textSize="@dimen/text_big_size" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider"
+            android:background="@color/divider" />
+
+        <RelativeLayout
+            android:id="@+id/qtje"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/label_height"
+            android:background="@android:color/white"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/def_padding"
+            android:paddingRight="@dimen/def_padding">
+
+            <com.aako.zjp2p.widget.ImageTextButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                app:img_src="@mipmap/qtje"
+                app:space="@dimen/nav_header_vertical_spacing"
+                app:text_size="@dimen/text_big_size"
+                app:text_src="@string/qtje" />
+
+            <TextView
+                android:id="@+id/str_qtje"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="2000元起"
+                android:textColor="@color/p2p_info_text"
+                android:textSize="@dimen/text_big_size" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/wide_divider"
+            android:background="@color/divider" />
+
+        <RelativeLayout
+            android:id="@+id/tzjl"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/label_height"
+            android:background="@android:color/white"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/def_padding"
+            android:paddingRight="@dimen/def_padding">
+
+            <com.aako.zjp2p.widget.ImageTextButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                app:img_src="@mipmap/tzjl"
+                app:space="@dimen/nav_header_vertical_spacing"
+                app:text_size="@dimen/text_big_size"
+                app:text_src="@string/tzjl" />
+
+
+            <com.aako.zjp2p.widget.ImageTextButton
+                android:id="@+id/str_tzjl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                app:img_src="@mipmap/arrow_more"
+                app:space="@dimen/nav_header_vertical_spacing"
+                app:state="start_with_text"
+                app:text_color="@color/red"
+                app:text_size="@dimen/text_big_size"
+                app:text_src="2000" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/jkxx"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/label_height"
+            android:background="@android:color/white"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/def_padding"
+            android:paddingRight="@dimen/def_padding">
+
+            <com.aako.zjp2p.widget.ImageTextButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                app:img_src="@mipmap/jkrxx"
+                app:space="@dimen/nav_header_vertical_spacing"
+                app:text_size="@dimen/text_big_size"
+                app:text_src="@string/jkrxx" />
+
+
+            <com.aako.zjp2p.widget.ImageTextButton
+                android:id="@+id/str_jkrxx"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                app:img_src="@mipmap/arrow_more"
+                app:space="@dimen/nav_header_vertical_spacing"
+                app:state="start_with_text"
+                app:text_color="@color/red"
+                app:text_size="@dimen/text_big_size"
+                app:text_src="2000" />
+        </RelativeLayout>
+
+
+        <com.gc.materialdesign.views.ButtonRectangle
+            android:id="@+id/btnTz"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height"
+            android:layout_margin="@dimen/def_margin"
+            android:layout_marginTop="@dimen/label_height"
+            android:background="@color/red"
+            android:text="@string/tz" />
+
+    </LinearLayout>
+</ScrollView>

@@ -7,6 +7,7 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="def_padding">10dp</dimen>
     <dimen name="def_margin">10dp</dimen>
+    <dimen name="small_margin">6dp</dimen>
     <dimen name="icon_size">24dp</dimen>
     <dimen name="icon_padding">16dp</dimen>
 
@@ -24,7 +25,7 @@
     <dimen name="button_corner">2dp</dimen>
     <dimen name="button_elevation">2dp</dimen>
 
-    <dimen name="label_tjtz">44dp</dimen>
+    <dimen name="label_height">44dp</dimen>
     <dimen name="item_loan">115dp</dimen>
     <dimen name="item_loan_title">41dp</dimen>
     <dimen name="loan_topimg_margin">5dp</dimen>
@@ -41,6 +42,12 @@
     <dimen name="menu_big_size">54dp</dimen>
     <dimen name="menu_middle_size">50dp</dimen>
 
+    <dimen name="circle_progress_p2p">100dp</dimen>
+    <dimen name="wide_divider">20dp</dimen>
+
+    <!-- profile -->
+    <dimen name="profile_top">234dp</dimen>
+    <dimen name="profile_end">90dp</dimen>
 
     <!-- 字体大小 -->
     <dimen name="title_size">20sp</dimen>

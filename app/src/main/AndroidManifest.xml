@@ -30,6 +30,9 @@
         <activity
             android:name=".activity.base.ActivityZc"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ActivityTzInfo"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

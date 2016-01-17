@@ -34,7 +34,7 @@
         <RelativeLayout
             android:id="@+id/label_tzmore"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/label_tjtz"
+            android:layout_height="@dimen/label_height"
             android:layout_marginTop="@dimen/def_padding"
             android:background="@android:color/white"
             android:orientation="horizontal"
@@ -47,7 +47,7 @@
                 android:layout_alignParentLeft="true"
                 android:gravity="center_vertical"
                 android:text="@string/guide_tz"
-                android:textColor="@color/loan"
+                android:textColor="@color/text_title"
                 android:textSize="@dimen/text_big_size" />
 
             <TextView
@@ -56,7 +56,7 @@
                 android:layout_alignParentRight="true"
                 android:gravity="center_vertical"
                 android:text="@string/more"
-                android:textColor="@color/loan"
+                android:textColor="@color/text_title"
                 android:textSize="@dimen/text_big_size" />
 
         </RelativeLayout>
@@ -93,12 +93,12 @@
         <TextView
             android:id="@+id/label_zcmore"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/label_tjtz"
+            android:layout_height="@dimen/label_height"
             android:layout_alignParentLeft="true"
             android:gravity="center_vertical"
             android:padding="@dimen/def_padding"
             android:text="@string/guide_zc"
-            android:textColor="@color/loan"
+            android:textColor="@color/text_title"
             android:textSize="@dimen/text_big_size" />
 
         <LinearLayout

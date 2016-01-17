@@ -14,12 +14,12 @@ import java.net.URL;
 public class OkHttpStack extends HurlStack {
     private final OkUrlFactory mOkUrlFactory;
 
-    public OkHttpStack(OkHttpClient okHttpClient){
+    public OkHttpStack(OkHttpClient okHttpClient) {
         this(new OkUrlFactory(okHttpClient));
     }
 
-    public OkHttpStack(OkUrlFactory okUrlFactory){
-        if(null == okUrlFactory){
+    public OkHttpStack(OkUrlFactory okUrlFactory) {
+        if (null == okUrlFactory) {
             throw new NullPointerException("Client must not be null.");
         }
         this.mOkUrlFactory = okUrlFactory;

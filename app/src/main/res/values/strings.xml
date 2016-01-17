@@ -39,4 +39,17 @@
     <string name="lv">利率</string>
     <string name="rzqx">融资期限</string>
     <string name="condition">筛选条件</string>
+
+    <string name="left_time">剩余时间</string>
+    <string name="hkfs">还款方式</string>
+    <string name="qtje">起投金额</string>
+    <string name="tzjl">起投记录</string>
+    <string name="jkrxx">借款人信息</string>
+
+    <string name="tz">立即投资</string>
+    <string name="sy">我的收益</string>
+    <string name="ye">账户余额</string>
+
+    <string name="cz">账户充值</string>
+    <string name="tx">我的提现</string>
 </resources>

@@ -5,17 +5,25 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.transition.Transition;
 import android.util.Log;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aako.zjp2p.R;
 import com.aako.zjp2p.activity.base.BaseActivity;
+import com.aako.zjp2p.adapter.ConditionAdapter;
+import com.aako.zjp2p.adapter.SortAdapter;
 import com.aako.zjp2p.adapter.TjtzAdapter;
 import com.aako.zjp2p.animation.ViewAnimator;
 import com.aako.zjp2p.entity.Tz;
+import com.aako.zjp2p.widget.DropDownMenu;
 import com.aako.zjp2p.widget.TopBar;
 import com.aako.zjp2p.widget.superrecycler.OnMoreListener;
 import com.aako.zjp2p.widget.superrecycler.SuperRecyclerView;
@@ -24,6 +32,7 @@ import com.aako.zjp2p.widget.superrecycler.swipe.SwipeDismissRecyclerViewTouchLi
 import com.gc.materialdesign.views.ButtonFlat;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -38,16 +47,21 @@ public class ActivityTz extends BaseActivity implements SwipeRefreshLayout.OnRef
     private TopBar topBar;
     private SparseItemRemoveAnimator mSparseAnimator;
     private TjtzAdapter adapter;
-    private View sort;
-    private ButtonFlat btnSort, btnCondition;
+    private DropDownMenu dropDownMenu;
     private OnClickListenerImp onClickListenerImp;
+
+    private String headers[] = {"排序", "帅选条件"};
+    private List<View> popupViews = new ArrayList<>();
 
 
     @Override
     protected void initViews() {
         topBar = (TopBar) findViewById(R.id.topbar);
         topBar.setActivity(this);
-        mRecycler = (SuperRecyclerView) findViewById(R.id.list);
+
+        mRecycler = new SuperRecyclerView(this);
+        mRecycler.setEmptyres(R.layout.emptyview);
+        mRecycler.setMoreProgressId(R.layout.layout_more_progress);
         mLayoutManager = new LinearLayoutManager(this);
         mRecycler.setLayoutManager(mLayoutManager);
         mRecycler.setupSwipeToDismiss(this);
@@ -55,20 +69,28 @@ public class ActivityTz extends BaseActivity implements SwipeRefreshLayout.OnRef
         mRecycler.getRecyclerView().setItemAnimator(mSparseAnimator);
         mRecycler.setRefreshListener(this);
         mRecycler.setRefreshingColorResources(android.R.color.holo_orange_light, android.R.color.holo_blue_light, android.R.color.holo_green_light, android.R.color.holo_red_light);
-        mRecycler.setupMoreListener(this, 1);
+        mRecycler.setupMoreListener(this, 10);
 
-        onClickListenerImp = new OnClickListenerImp();
+        dropDownMenu = (DropDownMenu) findViewById(R.id.dropDownMenu);
 
-        btnSort = (ButtonFlat) findViewById(R.id.sort);
-        btnCondition = (ButtonFlat) findViewById(R.id.condition);
-        btnSort.setOnClickListener(onClickListenerImp);
-        btnCondition.setOnClickListener(onClickListenerImp);
-        sort = View.inflate(this, R.layout.menu_sort, null);
-        Log.d(TAG, "btnSort == null" + (null == btnSort));
 
-//        sort.setOnClickListener(onClickListenerImp);
+        final RecyclerView sortView = new RecyclerView(this);
+        sortView.setLayoutManager(new LinearLayoutManager(this));
+        SortAdapter sortAdapter = new SortAdapter(this);
+        sortView.setAdapter(sortAdapter);
+
+        final RecyclerView conditionView = new RecyclerView(this);
+        conditionView.setLayoutManager(new LinearLayoutManager(this));
+        ConditionAdapter conditionAdapter = new ConditionAdapter();
+        conditionView.setAdapter(conditionAdapter);
+
+        popupViews.add(sortView);
+        popupViews.add(conditionView);
+
+        dropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, mRecycler);
 
         initData();
+
     }
 
     @Override
@@ -77,7 +99,7 @@ public class ActivityTz extends BaseActivity implements SwipeRefreshLayout.OnRef
     }
 
     private void initData() {
-        adapter = new TjtzAdapter();
+        adapter = new TjtzAdapter(this);
         List<Tz> tzs = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
             Tz tz = new Tz();
@@ -112,38 +134,31 @@ public class ActivityTz extends BaseActivity implements SwipeRefreshLayout.OnRef
 
     @Override
     public void onMoreAsked(int overallItemsCount, int itemsBeforeMore, int maxLastVisiblePosition) {
-        Toast.makeText(this, "Refresh", Toast.LENGTH_LONG).show();
-
+        Toast.makeText(this, "onMoreAsked", Toast.LENGTH_LONG).show();
+        dropDownMenu.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                initData();
+            }
+        }, 200);
     }
 
     @Override
     public void onRefresh() {
-
+        Toast.makeText(this, "onRefresh", Toast.LENGTH_LONG).show();
+        dropDownMenu.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                initData();
+            }
+        }, 200);
     }
 
     private class OnClickListenerImp implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            switch (v.getId()){
-                case R.id.sort:
-                    Log.d(TAG, "OnClickListenerImp =====");
-                    sort.setVisibility(View.VISIBLE);
-                    ViewAnimator
-                            .animate(sort)
-                            .translationY(-1000, 0)
-                            .alpha(0, 1)
-                            .andAnimate(sort)
-                            .dp().translationX(-20, 0)
-                            .descelerate()
-                            .duration(2000)
-                            .thenAnimate(sort)
-                            .scale(1f, 0.5f, 1f)
-                            .accelerate()
-                            .duration(1000)
-                            .start();
-                    break;
-                case R.id.condition:
-                    break;
+            switch (v.getId()) {
+
             }
         }
     }

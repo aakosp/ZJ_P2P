@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageView;
@@ -18,18 +19,24 @@ import com.aako.zjp2p.R;
  */
 public class ImageTextButton extends LinearLayout {
 
+    private static final int START_WITH_IMG = 0;
+    private static final int START_WITH_TEXT = 1;
+
     private static final String TAG = "ImageTextButton";
     private TextView mText;
     private ImageView mImg;
     private int resId_img;
     private int img_resId_clicked;
-    private int resId_txt;
+//    private int resId_txt;
+    private String strTxt;
     private int imgWidth;
     private int imgHeight;
     private int textSize;
     private int textColor;
     private String strText;
     private int space;
+    private int mState = START_WITH_IMG;
+
 //    private boolean hasDivider = false;
 
     public ImageTextButton(Context context) {
@@ -54,10 +61,10 @@ public class ImageTextButton extends LinearLayout {
                         R.styleable.imagetextbutton_text_size, 12);
                 textColor = typedArray.getResourceId(
                         R.styleable.imagetextbutton_text_color, R.color.text);
-                resId_txt = typedArray.getResourceId(
-                        R.styleable.imagetextbutton_text_src, 0);
+                strTxt = typedArray.getString(R.styleable.imagetextbutton_text_src);
                 space = typedArray.getDimensionPixelOffset(
                         R.styleable.imagetextbutton_space, R.dimen.program_middle);
+                mState = typedArray.getInt(R.styleable.imagetextbutton_state, START_WITH_IMG);
             }
             typedArray.recycle();
         }
@@ -78,23 +85,30 @@ public class ImageTextButton extends LinearLayout {
         mText.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         mText.setTextColor(getResources().getColor(textColor));
 //        mText.getPaint().setFakeBoldText(true);
-        this.addView(mImg);
-        this.addView(mText);
+        if (mState == START_WITH_IMG) {
+            this.addView(mImg);
+            this.addView(mText);
+        } else {
+            Log.d(TAG, "START_WITH_TEXT=======================");
+            this.addView(mText);
+            this.addView(mImg);
+        }
+
 
         if (resId_img != 0) {
             mImg.setImageResource(resId_img);
         }
 
-        if (resId_txt != 0) {
-            mText.setText(resId_txt);
-        }
+//        if (resId_txt != 0) {
+            mText.setText(strTxt);
+//        }
 
-        if(img_resId_clicked != 0){
+        if (img_resId_clicked != 0) {
 
             this.setOnFocusChangeListener(new OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View v, boolean hasFocus) {
-                    if(hasFocus)
+                    if (hasFocus)
                         mImg.setImageResource(resId_img);
                     else
                         mImg.setImageResource(img_resId_clicked);

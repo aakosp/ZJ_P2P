@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:gravity="center_vertical"
-            android:textColor="@color/loan"
+            android:textColor="@color/text_title"
             android:textSize="@dimen/text_big_size" />
 
         <ImageView

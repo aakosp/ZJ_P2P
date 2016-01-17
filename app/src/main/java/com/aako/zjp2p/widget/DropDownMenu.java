@@ -137,7 +137,6 @@ public class DropDownMenu extends LinearLayout {
             popupViews.get(i).setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             popupMenuViews.addView(popupViews.get(i), i);
         }
-
     }
 
     private void addTab(@NonNull List<String> tabTexts, int i) {
@@ -197,7 +196,6 @@ public class DropDownMenu extends LinearLayout {
         maskView.setVisibility(GONE);
         maskView.setAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.dd_mask_out));
         current_tab_position = -1;
-
     }
 
     /**

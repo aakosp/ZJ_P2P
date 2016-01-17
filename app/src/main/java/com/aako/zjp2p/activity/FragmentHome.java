@@ -79,8 +79,6 @@ public class FragmentHome extends BaseFragment {
         }, bannerUrl);
         bannerView.setCanLoop(true);
 
-//        gridView.setAdapter(new ProjectTypeAdapter(this.getContext()));
-
         int width = (UiUtils.getWidth() - UiUtils.dp2px(getResources(), 1) * 2) / 3;
 
         FlowLayout.LayoutParams params = new FlowLayout.LayoutParams(width, UiUtils.dp2px(getResources(), 85));
@@ -97,7 +95,7 @@ public class FragmentHome extends BaseFragment {
         ViewHolderCreator<TzHolder> tzCreator = new ViewHolderCreator<TzHolder>() {
             @Override
             public TzHolder createHolder() {
-                return new TzHolder();
+                return new TzHolder(FragmentHome.this.getContext());
             }
         };
 

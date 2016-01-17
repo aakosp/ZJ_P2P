@@ -47,6 +47,7 @@ public class TjtzViewHolder extends RecyclerView.ViewHolder implements Holder<Tz
         rs.setText(data.rs);
         cp.setText(data.wcd + "%");
         loanType.setImageResource(data.type == Tz.AY ? R.mipmap.loan_month : R.mipmap.loan_all);
+        this.itemView.setTag(R.id.item_tag, position);
     }
 
 }
