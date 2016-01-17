@@ -33,4 +33,6 @@ dependencies {
     compile 'com.facebook.fresco:imagepipeline-okhttp:0.8.1'
     compile 'com.android.support:recyclerview-v7:23.1.1'
     compile 'de.greenrobot:eventbus:3.0.0-beta1'
+    compile 'in.srain.cube:cube-sdk:1.0.44.38'
+    compile 'in.srain.cube:ultra-ptr:1.0.11'
 }
