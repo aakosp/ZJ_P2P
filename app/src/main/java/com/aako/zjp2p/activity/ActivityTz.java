@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,8 +24,17 @@ import com.aako.zjp2p.adapter.SortAdapter;
 import com.aako.zjp2p.adapter.TjtzAdapter;
 import com.aako.zjp2p.animation.ViewAnimator;
 import com.aako.zjp2p.entity.Tz;
+import com.aako.zjp2p.event.EventCenter;
+import com.aako.zjp2p.util.LogUtil;
+import com.aako.zjp2p.util.UiUtils;
 import com.aako.zjp2p.widget.DropDownMenu;
 import com.aako.zjp2p.widget.TopBar;
+import com.aako.zjp2p.widget.loadmore.ILoadMoreContainer;
+import com.aako.zjp2p.widget.loadmore.ILoadMoreHandler;
+import com.aako.zjp2p.widget.loadmore.LoadMoreRecycleViewContainer;
+import com.aako.zjp2p.widget.loadmore.PtrDefaultHandler;
+import com.aako.zjp2p.widget.loadmore.PtrFrameLayout;
+import com.aako.zjp2p.widget.loadmore.PtrHandler;
 import com.aako.zjp2p.widget.superrecycler.OnMoreListener;
 import com.aako.zjp2p.widget.superrecycler.SuperRecyclerView;
 import com.aako.zjp2p.widget.superrecycler.swipe.SparseItemRemoveAnimator;
@@ -38,12 +48,13 @@ import java.util.List;
 /**
  * Created by aako on 16-1-11.
  */
-public class ActivityTz extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener, OnMoreListener, SwipeDismissRecyclerViewTouchListener.DismissCallbacks {
+public class ActivityTz extends BaseActivity {//implements SwipeRefreshLayout.OnRefreshListener, OnMoreListener, SwipeDismissRecyclerViewTouchListener.DismissCallbacks {
 
     private static final String TAG = " ActivityTz ";
 
     private RecyclerView.LayoutManager mLayoutManager;
-    private SuperRecyclerView mRecycler;
+//    private SuperRecyclerView mRecycler;
+    private RecyclerView mRecycler;
     private TopBar topBar;
     private SparseItemRemoveAnimator mSparseAnimator;
     private TjtzAdapter adapter;
@@ -59,7 +70,7 @@ public class ActivityTz extends BaseActivity implements SwipeRefreshLayout.OnRef
         topBar = (TopBar) findViewById(R.id.topbar);
         topBar.setActivity(this);
 
-        mRecycler = new SuperRecyclerView(this);
+        /*mRecycler = new SuperRecyclerView(this);
         mRecycler.setEmptyres(R.layout.emptyview);
         mRecycler.setMoreProgressId(R.layout.layout_more_progress);
         mLayoutManager = new LinearLayoutManager(this);
@@ -69,7 +80,51 @@ public class ActivityTz extends BaseActivity implements SwipeRefreshLayout.OnRef
         mRecycler.getRecyclerView().setItemAnimator(mSparseAnimator);
         mRecycler.setRefreshListener(this);
         mRecycler.setRefreshingColorResources(android.R.color.holo_orange_light, android.R.color.holo_blue_light, android.R.color.holo_green_light, android.R.color.holo_red_light);
-        mRecycler.setupMoreListener(this, 10);
+        mRecycler.setupMoreListener(this, 10);*/
+
+//        View container = View.inflate(this, R.layout.layout_refresh_recyclerview, null);
+//        mRecycler = (RecyclerView) container.findViewById(R.id.rv);
+//        PtrFrameLayout mPtrFrameLayout = (PtrFrameLayout) container.findViewById(R.id.load_more_list_view_ptr_frame);
+        PtrFrameLayout mPtrFrameLayout = (PtrFrameLayout) View.inflate(this, R.layout.layout_refresh_recyclerview, null);
+        mRecycler = (RecyclerView) mPtrFrameLayout.findViewById(R.id.rv);
+        mPtrFrameLayout.setLoadingMinTime(1000);
+        mPtrFrameLayout.setPtrHandler(new PtrHandler() {
+            @Override
+            public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
+
+                // here check list view, not content.
+                return PtrDefaultHandler.checkContentCanBePulledDown(frame, mRecycler, header);
+            }
+
+            @Override
+            public void onRefreshBegin(PtrFrameLayout frame) {
+                LogUtil.d(TAG, "onRefreshBegin ======");
+            }
+        });
+
+        View headerMarginView = new View(this);
+        headerMarginView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, UiUtils.dp2px(20)));
+
+        // load more container
+        final LoadMoreRecycleViewContainer loadMoreListViewContainer = (LoadMoreRecycleViewContainer) mPtrFrameLayout.findViewById(R.id.load_more_list_view_container);
+        loadMoreListViewContainer.useDefaultFooter();
+        loadMoreListViewContainer.addHeaderView(headerMarginView);
+
+        loadMoreListViewContainer.setLoadMoreHandler(new ILoadMoreHandler() {
+            @Override
+            public void onLoadMore(ILoadMoreContainer loadMoreContainer) {
+                LogUtil.d(TAG, "LoadMoreRecycleViewContainer onLoadMore");
+            }
+        });
+
+
+        // auto load data
+//        mPtrFrameLayout.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                mPtrFrameLayout.autoRefresh(false);
+//            }
+//        }, 150);
 
         dropDownMenu = (DropDownMenu) findViewById(R.id.dropDownMenu);
 
@@ -87,7 +142,7 @@ public class ActivityTz extends BaseActivity implements SwipeRefreshLayout.OnRef
         popupViews.add(sortView);
         popupViews.add(conditionView);
 
-        dropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, mRecycler);
+        dropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, mPtrFrameLayout);
 
         initData();
 
@@ -117,9 +172,10 @@ public class ActivityTz extends BaseActivity implements SwipeRefreshLayout.OnRef
         }
         adapter.addData(tzs);
         mRecycler.setAdapter(adapter);
+
     }
 
-    @Override
+    /*@Override
     public boolean canDismiss(int position) {
         return true;
     }
@@ -152,7 +208,7 @@ public class ActivityTz extends BaseActivity implements SwipeRefreshLayout.OnRef
                 initData();
             }
         }, 200);
-    }
+    }*/
 
     private class OnClickListenerImp implements View.OnClickListener {
         @Override

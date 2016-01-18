@@ -28,13 +28,13 @@ public class UiUtils {
     /**
      * Convert Dp to Pixel
      */
-    public static float sp2px(Resources resources, float sp) {
-        final float scale = resources.getDisplayMetrics().scaledDensity;
+    public static float sp2px(float sp) {
+        final float scale = AppUtils.getInstance().getResources().getDisplayMetrics().scaledDensity;
         return sp * scale;
     }
 
-    public static int dp2px(Resources resources, float dp) {
-        float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, resources.getDisplayMetrics());
+    public static int dp2px(float dp) {
+        float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, AppUtils.getInstance().getResources().getDisplayMetrics());
         return (int) px;
     }
 

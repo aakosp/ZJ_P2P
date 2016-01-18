@@ -23,7 +23,7 @@ public class FragmentSpreading extends Fragment{
             ((ViewGroup) curView.getParent()).removeView(curView);
             return curView;
         }
-        curView = new TextView(this.getContext());
+        curView = new TextView(this.getActivity());
         curView.setText("FragmentSpreading...");
         Log.d("FragmentSpreading", "FragmentSpreading onCreateView begin");
         return curView;
