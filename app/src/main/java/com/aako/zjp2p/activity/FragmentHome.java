@@ -2,20 +2,15 @@ package com.aako.zjp2p.activity;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
 
 import com.aako.zjp2p.R;
-import com.aako.zjp2p.activity.base.ActivityZc;
 import com.aako.zjp2p.activity.base.BaseFragment;
-import com.aako.zjp2p.adapter.TjtzAdapter;
 import com.aako.zjp2p.entity.Tz;
 import com.aako.zjp2p.entity.Zc;
 import com.aako.zjp2p.util.UiUtils;
 import com.aako.zjp2p.viewholder.BannerHolder;
-import com.aako.zjp2p.viewholder.TjtzViewHolder;
 import com.aako.zjp2p.viewholder.TzHolder;
 import com.aako.zjp2p.viewholder.ViewHolderCreator;
 import com.aako.zjp2p.viewholder.ZcHolder;

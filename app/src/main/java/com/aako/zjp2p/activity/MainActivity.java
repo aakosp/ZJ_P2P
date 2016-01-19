@@ -83,18 +83,12 @@ public class MainActivity extends BaseAppCompatActivity
         IUser iUser = RetrofitUtils.getInstance().create(IUser.class);
         final Gson gson = new GsonBuilder().enableComplexMapKeySerialization().create();
         Map<String, String> params = new HashMap<>();
-
-        String tm = "{\"id\":1,\"phone\":\"13838102572\",\"password\":\"62bc1de1ed50474dbdeb7cb18df666b3\",\"nick\":\"\",\"reg_time\":\"0000-00-00 00:00:00\",\"money\":0,\"income\":0,\"id_card_name\":\"\\u674e\\u4e1c\",\"id_card_number\":\"412728198502124919\",\"id_card_pic1\":\"id_card_pic1.jpg\",\"id_card_pic2\":\"id_card_pic3.jpg\",\"is_identified\":1}";
-        User u = gson.fromJson(tm, User.class);
-        LogUtil.d(TAG, "gson : " + u.getId());
-
         params.put("user_id", "1");
-        LogUtil.d(TAG, "gson : " + gson.toJson(params));
         Call<User> call = iUser.getUser(params);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Response<User> response) {
-                LogUtil.d(TAG, "id : " + response.body().getId());
+                LogUtil.d(TAG, "id : " + response.body());
             }
 
             @Override

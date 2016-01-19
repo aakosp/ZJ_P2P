@@ -9,7 +9,7 @@ public class RetrofitUtils {
 
     private static Retrofit retrofit;
 
-    private RetrofitUtils(String baseUrl) {
+    private RetrofitUtils() {
 
     }
 

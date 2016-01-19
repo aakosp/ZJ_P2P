@@ -113,4 +113,9 @@ public class User {
     public void setIs_identified(int is_identified) {
         this.is_identified = is_identified;
     }
+
+    @Override
+    public String toString() {
+        return "id:" + id + " phone:" + phone + " nick:" + nick + " reg_time:" + reg_time;
+    }
 }
