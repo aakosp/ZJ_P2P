@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -131,10 +132,11 @@ public class TopBar extends RelativeLayout implements View.OnClickListener {
         }
 
         if (this.btnRight != null) {
-            bVisible = typedArray.getBoolean(R.styleable.TopBar_rightButtonVisible, true);
-            if (!bVisible) {
+            bVisible = typedArray.getBoolean(R.styleable.TopBar_rightButtonVisible, false);
+            if (bVisible)
+                this.btnRight.setVisibility(View.VISIBLE);
+            else
                 this.btnRight.setVisibility(View.GONE);
-            }
 
             resId = typedArray.getResourceId(R.styleable.TopBar_rightButtonBackground, 0);
             if (resId != 0) {
@@ -142,6 +144,8 @@ public class TopBar extends RelativeLayout implements View.OnClickListener {
             }
 
             this.btnRight.setText(typedArray.getText(R.styleable.TopBar_rightButtonText));
+            this.btnRight.setTextColor(typedArray.getColor(R.styleable.TopBar_rightButtonTextColro,
+                    0XFFFFFFFF));
         }
 
         if (this.tvTitle != null) {

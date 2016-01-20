@@ -1,5 +1,6 @@
 package com.aako.zjp2p.activity;
 
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 
@@ -40,6 +41,14 @@ public class ActivityRegister extends BaseActivity implements View.OnClickListen
     }
 
     public void register(){
-        String phone =
+        String phone = etPhone.getText().toString();
+        if(TextUtils.isEmpty(phone)){
+
+        }
+
+        String code = etCode.getText().toString();
+        if(TextUtils.isEmpty(code)){
+
+        }
     }
 }

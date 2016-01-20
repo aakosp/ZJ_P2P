@@ -61,12 +61,12 @@ public class LoadMoreRecycleViewContainer extends LinearLayout implements ILoadM
         if (null == mRecyclerView) {
             throw new NullPointerException("RecyclerView is null");
         }
-
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         mHeaderView = new View(this.getContext());
         mFooterView = new View(this.getContext());
 
         this.addView(mHeaderView, 0);
-        this.addView(mRecyclerView);
+//        this.addView(mRecyclerView);
         this.useDefaultFooter();
 
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {

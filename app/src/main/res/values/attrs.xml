@@ -31,6 +31,7 @@
         <attr name="leftButtonVisible" format="boolean" />
         <attr name="rightButtonBackground" format="reference" />
         <attr name="rightButtonText" format="reference|string" />
+        <attr name="rightButtonTextColro" format="reference|color" />
         <attr name="rightButtonVisible" format="boolean" />
     </declare-styleable>
 

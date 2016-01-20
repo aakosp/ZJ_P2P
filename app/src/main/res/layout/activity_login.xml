@@ -10,7 +10,10 @@
         android:id="@+id/topbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:rightButtonBackground="@color/red"
         app:rightButtonText="@string/register"
+        app:rightButtonTextColro="@android:color/white"
+        app:rightButtonVisible="true"
         app:titleText="@string/login" />
 
     <LinearLayout
