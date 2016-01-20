@@ -23,7 +23,7 @@ public class FragmentParticipated extends Fragment {
             ((ViewGroup) curView.getParent()).removeView(curView);
             return curView;
         }
-        curView = new TextView(this.getContext());
+        curView = new TextView(this.getActivity());
         curView.setText("FragmentParticipated...");
         Log.d("FragmentParticipated", "FragmentParticipated onCreateView begin");
         return curView;

@@ -28,7 +28,7 @@
             android:name=".activity.ActivityTz"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.base.ActivityZc"
+            android:name=".activity.ActivityZc"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.ActivityTzInfo"

@@ -23,7 +23,7 @@ public class FragmentInitiate extends Fragment {
             ((ViewGroup) curView.getParent()).removeView(curView);
             return curView;
         }
-        curView = new TextView(this.getContext());
+        curView = new TextView(this.getActivity());
         curView.setText("FragmentInitiate...");
         Log.d("FragmentInitiate", "FragmentInitiate onCreateView begin");
         return curView;

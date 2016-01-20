@@ -3,6 +3,8 @@ package com.aako.zjp2p.activity.base;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.aako.zjp2p.debug.ViewServer;
+
 import rx.subscriptions.CompositeSubscription;
 
 /**
@@ -49,6 +51,7 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ViewServer.get(this).addWindow(this);
         setContentView(getContentViewId());
         initViews();
     }
@@ -59,5 +62,12 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
             mCompositeSubscription.unsubscribe();
         }
         super.onDestroy();
+        ViewServer.get(this).removeWindow(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ViewServer.get(this).setFocusedWindow(this);
     }
 }

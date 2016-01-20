@@ -23,7 +23,7 @@ public class FragmentIntegral extends Fragment {
             ((ViewGroup) curView.getParent()).removeView(curView);
             return curView;
         }
-        curView = new TextView(this.getContext());
+        curView = new TextView(this.getActivity());
         curView.setText("FragmentIntegral...");
         Log.d("FragmentIntegral", "FragmentIntegral onCreateView begin");
         return curView;

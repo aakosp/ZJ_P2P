@@ -2,20 +2,15 @@ package com.aako.zjp2p.activity;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
 
 import com.aako.zjp2p.R;
-import com.aako.zjp2p.activity.base.ActivityZc;
 import com.aako.zjp2p.activity.base.BaseFragment;
-import com.aako.zjp2p.adapter.TjtzAdapter;
 import com.aako.zjp2p.entity.Tz;
 import com.aako.zjp2p.entity.Zc;
 import com.aako.zjp2p.util.UiUtils;
 import com.aako.zjp2p.viewholder.BannerHolder;
-import com.aako.zjp2p.viewholder.TjtzViewHolder;
 import com.aako.zjp2p.viewholder.TzHolder;
 import com.aako.zjp2p.viewholder.ViewHolderCreator;
 import com.aako.zjp2p.viewholder.ZcHolder;
@@ -61,9 +56,9 @@ public class FragmentHome extends BaseFragment {
         zcMore.setOnClickListener(onCLickListenerImp);
 
         tzIntent = new Intent();
-        tzIntent.setClass(this.getContext(), ActivityTz.class);
+        tzIntent.setClass(this.getActivity(), ActivityTz.class);
         zcIntent = new Intent();
-        zcIntent.setClass(this.getContext(), ActivityZc.class);
+        zcIntent.setClass(this.getActivity(), ActivityZc.class);
 
 
         List<Uri> bannerUrl = new ArrayList<>();
@@ -79,13 +74,13 @@ public class FragmentHome extends BaseFragment {
         }, bannerUrl);
         bannerView.setCanLoop(true);
 
-        int width = (UiUtils.getWidth() - UiUtils.dp2px(getResources(), 1) * 2) / 3;
+        int width = (UiUtils.getWidth() - UiUtils.dp2px(1) * 2) / 3;
 
-        FlowLayout.LayoutParams params = new FlowLayout.LayoutParams(width, UiUtils.dp2px(getResources(), 85));
+        FlowLayout.LayoutParams params = new FlowLayout.LayoutParams(width, UiUtils.dp2px(85));
 
         flowLayout.setNumColumns(3);
         for (int i = 0; i < 6; i++) {
-            ImageTextButton itb = (ImageTextButton) View.inflate(this.getContext(), R.layout.item_program, null);
+            ImageTextButton itb = (ImageTextButton) View.inflate(this.getActivity(), R.layout.item_program, null);
             itb.setLayoutParams(params);
             itb.setImg(imgs[i]);
             itb.setText(strs[i]);
@@ -95,7 +90,7 @@ public class FragmentHome extends BaseFragment {
         ViewHolderCreator<TzHolder> tzCreator = new ViewHolderCreator<TzHolder>() {
             @Override
             public TzHolder createHolder() {
-                return new TzHolder(FragmentHome.this.getContext());
+                return new TzHolder(FragmentHome.this.getActivity());
             }
         };
 
@@ -120,7 +115,7 @@ public class FragmentHome extends BaseFragment {
             tz.type = i % 2;
 
             TzHolder tzHolder = tzCreator.createHolder();
-            View v = tzHolder.createView(this.getContext());
+            View v = tzHolder.createView(this.getActivity());
             tzHolder.UpdateUI(i, tz);
             flTjtz.addView(v);
 
@@ -135,7 +130,7 @@ public class FragmentHome extends BaseFragment {
             zc.remainingTime = (i + 1) * 10 + "天";
 
             ZcHolder zcHolder = zcCreator.createHolder();
-            View zcView = zcHolder.createView(this.getContext());
+            View zcView = zcHolder.createView(this.getActivity());
             zcHolder.UpdateUI(i, zc);
             flTjzc.addView(zcView);
         }

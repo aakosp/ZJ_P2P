@@ -1,4 +1,6 @@
-package com.aako.zjp2p.activity.base;
+package com.aako.zjp2p.activity;
+
+import com.aako.zjp2p.activity.base.BaseActivity;
 
 /**
  * Created by aako on 16-1-11.
