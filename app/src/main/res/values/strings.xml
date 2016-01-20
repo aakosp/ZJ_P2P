@@ -1,10 +1,5 @@
 <resources>
     <string name="app_name">中金财付通</string>
-    <string name="login">登录</string>
-    <string name="logout">退出</string>
-    <string name="userName">请输入您的手机号</string>
-    <string name="userPwd">请输入进的密码</string>
-    <string name="forgetPwd">忘记密码</string>
 
     <string name="main_activity">首页</string>
     <string name="profile">我的账户</string>
@@ -12,7 +7,7 @@
     <string name="spreading">我的推广</string>
     <string name="participated">我参与的</string>
     <string name="integral">我的积分</string>
-    <string name="register">注册</string>
+
 
     <string name="back">返回</string>
 
@@ -46,6 +41,19 @@
 
     <string name="cz">账户充值</string>
     <string name="tx">我的提现</string>
+
+    <!-- login & register -->
+    <string name="login">登录</string>
+    <string name="logout">退出</string>
+    <string name="userName">请输入您的手机号</string>
+    <string name="userPwd">请输入进的密码</string>
+    <string name="forgetPwd">忘记密码</string>
+    <string name="register">注册</string>
+    <string name="phone">手机号</string>
+    <string name="code">验证码</string>
+    <string name="pwd">密码</string>
+    <string name="nick">昵称</string>
+    <string name="getCode">获取验证码</string>
 
     <!-- load_more  begin -->
     <string name="cube_views_load_more_loading">加载中。。。</string>
