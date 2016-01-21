@@ -19,6 +19,11 @@ android {
     }
 }
 
+repositories {
+    mavenCentral()
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+}
+
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
@@ -26,14 +31,19 @@ dependencies {
     compile 'com.android.support:support-v4:23.0.0'
     compile 'com.android.support:design:23.0.0'
     compile project(':MaterialDesign')
-    compile 'com.squareup.okhttp:okhttp-urlconnection:2.6.0'
     compile 'io.reactivex:rxandroid:1.1.0'
-    compile 'com.facebook.fresco:fresco:0.8.1'
-    compile 'com.facebook.fresco:imagepipeline-okhttp:0.8.1'
     compile 'com.android.support:recyclerview-v7:23.1.1'
     compile 'de.greenrobot:eventbus:3.0.0-beta1'
     compile 'eu.the4thfloor.volley:com.android.volley:2015.05.28'
-    compile 'com.squareup.retrofit2:retrofit:2.0.0-beta3'
-    compile 'com.google.code.gson:gson:2.5'
+
     compile 'com.google.guava:guava:19.0'
+    compile 'com.squareup.okhttp3:okhttp:3.0.1'
+    compile 'com.squareup.okhttp3:okhttp-urlconnection:3.0.1'
+    compile 'com.facebook.fresco:fresco:0.9.0'
+    compile 'com.facebook.fresco:imagepipeline-okhttp:0.9.0'
+
+
+    //retrofit
+    compile 'com.squareup.retrofit2:retrofit:2.0.0-SNAPSHOT'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.0-SNAPSHOT'
 }

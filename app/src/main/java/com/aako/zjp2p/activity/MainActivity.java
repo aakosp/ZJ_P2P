@@ -16,6 +16,7 @@ import com.aako.zjp2p.activity.base.BaseAppCompatActivity;
 import com.aako.zjp2p.api.service.IUser;
 import com.aako.zjp2p.entity.User;
 import com.aako.zjp2p.util.LogUtil;
+import com.aako.zjp2p.util.net.VolleyUtils;
 import com.aako.zjp2p.util.net.retrofit.RetrofitUtils;
 import com.aako.zjp2p.widget.ImageTextButton;
 import com.google.gson.Gson;
@@ -81,21 +82,22 @@ public class MainActivity extends BaseAppCompatActivity
         navigationToFragment(R.id.home);
 
         IUser iUser = RetrofitUtils.getInstance().create(IUser.class);
-        final Gson gson = new GsonBuilder().enableComplexMapKeySerialization().create();
         Map<String, String> params = new HashMap<>();
         params.put("user_id", "1");
         Call<User> call = iUser.getUser(params);
         call.enqueue(new Callback<User>() {
             @Override
-            public void onResponse(Response<User> response) {
+            public void onResponse(Call<User> call, Response<User> response) {
                 LogUtil.d(TAG, "id : " + response.body());
             }
 
             @Override
-            public void onFailure(Throwable t) {
+            public void onFailure(Call<User> call, Throwable t) {
                 LogUtil.d(TAG, "onFailure", t);
             }
         });
+
+//        VolleyUtils.getInstance().doPost("http://zhongjin.w3php.com/api/user/get_user", );
     }
 
     @Override

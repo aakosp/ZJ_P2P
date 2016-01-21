@@ -12,6 +12,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.squareup.okhttp.OkHttpClient;
 import java.util.Map;
+
+import okhttp3.MediaType;
 import rx.Observable;
 
 /**
@@ -19,6 +21,8 @@ import rx.Observable;
  */
 public class VolleyUtils {
 
+
+    private static final String MEDIA_TYPE = "application/json; charset=UTF-8";
     private static VolleyUtils mVolleyUtils;
     private RequestQueue mVolleyRequestQueue;
 
@@ -37,7 +41,7 @@ public class VolleyUtils {
     }
 
     public void init(Context context, OkHttpClient client) {
-        mVolleyRequestQueue = Volley.newRequestQueue(context, new OkHttpStack(client));
+//        mVolleyRequestQueue = Volley.newRequestQueue(context, new OkHttpStack(client));
         mVolleyRequestQueue.start();
     }
 
@@ -65,6 +69,13 @@ public class VolleyUtils {
                         callback.onError();
                     }
                 }) {
+
+
+            @Override
+            public String getBodyContentType() {
+                return MEDIA_TYPE;
+            }
+
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 if (null != params) {

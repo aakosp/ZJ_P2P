@@ -6,6 +6,7 @@ import android.widget.EditText;
 
 import com.aako.zjp2p.R;
 import com.aako.zjp2p.activity.base.BaseActivity;
+import com.aako.zjp2p.widget.TopBar;
 import com.gc.materialdesign.views.ButtonRectangle;
 
 /**
@@ -13,11 +14,14 @@ import com.gc.materialdesign.views.ButtonRectangle;
  */
 public class ActivityRegister extends BaseActivity implements View.OnClickListener {
 
+    private TopBar topBar;
     private EditText etPhone, etCode, etPwd, etNick;
     private ButtonRectangle btnReg;
 
     @Override
     protected void initViews() {
+        topBar = (TopBar) findViewById(R.id.topbar);
+        topBar.setActivity(this);
         etPhone = (EditText) findViewById(R.id.phone);
         etCode = (EditText) findViewById(R.id.code);
         etPwd = (EditText) findViewById(R.id.pwd);

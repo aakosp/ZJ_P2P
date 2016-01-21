@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.Environment;
 
 import com.aako.zjp2p.R;
-import com.aako.zjp2p.util.net.OkHttpConfig;
 import com.facebook.cache.disk.DiskCacheConfig;
 import com.facebook.common.internal.Supplier;
 import com.facebook.common.util.ByteConstants;
@@ -27,6 +26,7 @@ import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.facebook.imagepipeline.decoder.SimpleProgressiveJpegConfig;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
+import com.squareup.okhttp.OkHttpClient;
 
 /**
  * Created by aako on 15-12-24.
@@ -85,7 +85,7 @@ public class FrescoConfig {
         };
 
         //小图片的磁盘配置
-        DiskCacheConfig diskSmallCacheConfig = DiskCacheConfig.newBuilder()
+        DiskCacheConfig diskSmallCacheConfig = DiskCacheConfig.newBuilder(context)
                 .setBaseDirectoryPath(context.getApplicationContext().getCacheDir())//缓存图片基路径
                 .setBaseDirectoryName(IMAGE_PIPELINE_SMALL_CACHE_DIR)//文件夹名
 //            .setCacheErrorLogger(cacheErrorLogger)//日志记录器用于日志错误的缓存。
@@ -98,7 +98,7 @@ public class FrescoConfig {
                 .build();
 
         //默认图片的磁盘配置
-        DiskCacheConfig diskCacheConfig = DiskCacheConfig.newBuilder()
+        DiskCacheConfig diskCacheConfig = DiskCacheConfig.newBuilder(context)
                 .setBaseDirectoryPath(Environment.getExternalStorageDirectory().getAbsoluteFile())//缓存图片基路径
                 .setBaseDirectoryName(IMAGE_PIPELINE_CACHE_DIR)//文件夹名
 //            .setCacheErrorLogger(cacheErrorLogger)//日志记录器用于日志错误的缓存。
@@ -111,7 +111,7 @@ public class FrescoConfig {
                 .build();
 
         //缓存图片配置
-        ImagePipelineConfig.Builder configBuilder = OkHttpImagePipelineConfigFactory.newBuilder(context, OkHttpConfig.getmOkHttpClient())
+        ImagePipelineConfig.Builder configBuilder = OkHttpImagePipelineConfigFactory.newBuilder(context, new OkHttpClient())
 //            .setAnimatedImageFactory(AnimatedImageFactory animatedImageFactory)//图片加载动画
                 .setBitmapMemoryCacheParamsSupplier(mSupplierMemoryCacheParams)//内存缓存配置（一级缓存，已解码的图片）
 //            .setCacheKeyFactory(cacheKeyFactory)//缓存Key工厂

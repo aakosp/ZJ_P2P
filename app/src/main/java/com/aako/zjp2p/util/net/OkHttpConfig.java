@@ -1,9 +1,6 @@
 package com.aako.zjp2p.util.net;
 
-import com.squareup.okhttp.OkHttpClient;
 
-import java.net.CookieManager;
-import java.net.CookiePolicy;
 import java.net.CookieStore;
 import java.net.HttpCookie;
 import java.net.URI;
@@ -14,19 +11,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import okhttp3.OkHttpClient;
+
 /**
  * Created by aako on 15-12-24.
  */
 public class OkHttpConfig {
     private static OkHttpClient mOkHttpClient;
 
-    public static OkHttpClient getmOkHttpClient(){
+    public static OkHttpClient getOkHttpClient(){
         if (null == mOkHttpClient){
             synchronized (OkHttpConfig.class){
                 if(null == mOkHttpClient){
                     mOkHttpClient = new OkHttpClient();
                     //增加Cookie支持
-                    mOkHttpClient.setCookieHandler(new CookieManager(new MyCookieStore(), CookiePolicy.ACCEPT_ALL));
+//                    mOkHttpClient.setCookieHandler(new CookieManager(new MyCookieStore(), CookiePolicy.ACCEPT_ALL));
                 }
             }
         }
