@@ -172,6 +172,8 @@ public class ActivityTz extends BaseActivity {//implements SwipeRefreshLayout.On
         }
         adapter.addData(tzs);
         mRecycler.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+        LogUtil.d(TAG, "mRecycler:"+mRecycler.getAdapter().getItemCount());
 
     }
 

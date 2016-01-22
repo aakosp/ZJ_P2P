@@ -1,12 +1,14 @@
 package com.aako.zjp2p.entity;
 
+import java.io.Serializable;
+
 /**
  * p2p投资
  * Created by aako on 16-1-6.
  */
 
 
-public class Tz {
+public class Tz implements Serializable {
 
     public static int AY = 1;
     public static int YC = 2;

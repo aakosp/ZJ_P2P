@@ -37,21 +37,10 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
         return mHandler;
     }
 
-    void setCompositeSubscription(CompositeSubscription compositeSubscription) {
-        mCompositeSubscription = compositeSubscription;
-    }
-
-    public CompositeSubscription getCompositeSubscription() {
-        if (null == mCompositeSubscription) {
-            mCompositeSubscription = new CompositeSubscription();
-        }
-        return mCompositeSubscription;
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ViewServer.get(this).addWindow(this);
+//        ViewServer.get(this).addWindow(this);
         setContentView(getContentViewId());
         initViews();
     }
@@ -62,12 +51,12 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
             mCompositeSubscription.unsubscribe();
         }
         super.onDestroy();
-        ViewServer.get(this).removeWindow(this);
+//        ViewServer.get(this).removeWindow(this);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        ViewServer.get(this).setFocusedWindow(this);
+//        ViewServer.get(this).setFocusedWindow(this);
     }
 }

@@ -1,9 +1,11 @@
 package com.aako.zjp2p.entity;
 
+import java.io.Serializable;
+
 /**
  * Created by aako on 16-1-18.
  */
-public class User {
+public class User implements Serializable {
 
     private int id;
     private String phone;

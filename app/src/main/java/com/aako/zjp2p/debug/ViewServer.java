@@ -107,6 +107,9 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * </pre>
  */
 public class ViewServer implements Runnable {
+
+//    public static final boolean DEBUG = false;
+
     /**
      * The default port used to start view servers.
      */

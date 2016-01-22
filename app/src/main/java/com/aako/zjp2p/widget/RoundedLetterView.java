@@ -45,11 +45,6 @@ public class RoundedLetterView extends View {
         init(attrs, 0);
     }
 
-    public RoundedLetterView(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
-        init(attrs, defStyle);
-    }
-
     private void init(AttributeSet attrs, int defStyle) {
         final TypedArray a = getContext().obtainStyledAttributes(
                 attrs, R.styleable.RoundedLetterView, defStyle, 0);

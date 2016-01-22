@@ -96,8 +96,6 @@ public class MainActivity extends BaseAppCompatActivity
                 LogUtil.d(TAG, "onFailure", t);
             }
         });
-
-//        VolleyUtils.getInstance().doPost("http://zhongjin.w3php.com/api/user/get_user", );
     }
 
     @Override

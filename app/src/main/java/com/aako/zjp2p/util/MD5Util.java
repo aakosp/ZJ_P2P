@@ -14,12 +14,12 @@ public class MD5Util {
     private static final String TAG = " MD5Util ";
     private static final int STREAM_BUFFER_LENGTH = 1024;
 
-    public static MessageDigest getDigest(final String algorithm) throws NoSuchAlgorithmException {
+    private static MessageDigest getDigest(final String algorithm) throws NoSuchAlgorithmException {
         return MessageDigest.getInstance(algorithm);
     }
 
-    public static byte[] md5(String txt) {
-        return md5(txt.getBytes());
+    public static String md5(String txt) {
+        return getStr(md5(txt.getBytes()));
     }
 
     public static byte[] md5(byte[] bytes) {
@@ -48,4 +48,15 @@ public class MD5Util {
 
         return digest;
     }
+
+    private static String getStr(byte[] hash){
+        StringBuilder hex = new StringBuilder(hash.length * 2);
+        for (byte b : hash) {
+            if ((b & 0xFF) < 0x10)
+                hex.append("0");
+            hex.append(Integer.toHexString(b & 0xFF));
+        }
+        return hex.toString();
+    }
+
 }

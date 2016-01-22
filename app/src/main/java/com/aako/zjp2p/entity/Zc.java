@@ -1,10 +1,12 @@
 package com.aako.zjp2p.entity;
 
+import java.io.Serializable;
+
 /**
  * 众筹
  * Created by aako on 16-1-6.
  */
-public class Zc {
+public class Zc implements Serializable {
     public int id;
     public String img;
     public String title;

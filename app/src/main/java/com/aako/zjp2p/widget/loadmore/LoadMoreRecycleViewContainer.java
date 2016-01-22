@@ -73,6 +73,7 @@ public class LoadMoreRecycleViewContainer extends LinearLayout implements ILoadM
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
+                LogUtil.d(TAG, "onScrollStateChanged ==================");
                 if (newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem + 1 == mRecyclerView.getAdapter().getItemCount()) {
 
                     LogUtil.d(TAG, "scroll 2 end");
@@ -89,6 +90,44 @@ public class LoadMoreRecycleViewContainer extends LinearLayout implements ILoadM
                 lastVisibleItem = linearLayoutManager.findLastVisibleItemPosition();
             }
         });
+
+        /*mRecyclerView.getAdapter().registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onChanged() {
+                super.onChanged();
+                LogUtil.d(TAG, "onChanged=======");
+            }
+
+            @Override
+            public void onItemRangeChanged(int positionStart, int itemCount) {
+                super.onItemRangeChanged(positionStart, itemCount);
+                LogUtil.d(TAG, "onItemRangeChanged 2 =======");
+            }
+
+            @Override
+            public void onItemRangeChanged(int positionStart, int itemCount, Object payload) {
+                super.onItemRangeChanged(positionStart, itemCount, payload);
+                LogUtil.d(TAG, "onItemRangeChanged 3 =======");
+            }
+
+            @Override
+            public void onItemRangeInserted(int positionStart, int itemCount) {
+                super.onItemRangeInserted(positionStart, itemCount);
+                LogUtil.d(TAG, "onItemRangeInserted=======");
+            }
+
+            @Override
+            public void onItemRangeRemoved(int positionStart, int itemCount) {
+                super.onItemRangeRemoved(positionStart, itemCount);
+                LogUtil.d(TAG, "onItemRangeRemoved=======");
+            }
+
+            @Override
+            public void onItemRangeMoved(int fromPosition, int toPosition, int itemCount) {
+                super.onItemRangeMoved(fromPosition, toPosition, itemCount);
+                LogUtil.d(TAG, "onItemRangeMoved=======");
+            }
+        });*/
     }
 
     private void tryToPerformLoadMore() {
