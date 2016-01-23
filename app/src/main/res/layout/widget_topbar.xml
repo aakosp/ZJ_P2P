@@ -71,6 +71,7 @@
         android:minWidth="50dp"
         android:textColor="@color/text"
         android:textSize="@dimen/title_size"
+        android:background="@null"
         android:visibility="gone" />
 
     <ImageView

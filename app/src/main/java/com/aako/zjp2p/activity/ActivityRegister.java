@@ -6,17 +6,28 @@ import android.widget.EditText;
 
 import com.aako.zjp2p.R;
 import com.aako.zjp2p.activity.base.BaseActivity;
+import com.aako.zjp2p.api.ApiFactory;
+import com.aako.zjp2p.api.service.IUser;
+import com.aako.zjp2p.util.net.retrofit.RetrofitUtils;
 import com.aako.zjp2p.widget.TopBar;
 import com.gc.materialdesign.views.ButtonRectangle;
+
+import java.util.HashMap;
+
+import retrofit2.Call;
+import rx.Observable;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
 
 /**
  * Created by aako on 16-1-20.
  */
 public class ActivityRegister extends BaseActivity implements View.OnClickListener {
 
+    private IUser iUser = ApiFactory.getIUserSingleton();
     private TopBar topBar;
     private EditText etPhone, etCode, etPwd, etNick;
-    private ButtonRectangle btnReg;
+    private ButtonRectangle btnReg, getCode;
 
     @Override
     protected void initViews() {
@@ -26,8 +37,10 @@ public class ActivityRegister extends BaseActivity implements View.OnClickListen
         etCode = (EditText) findViewById(R.id.code);
         etPwd = (EditText) findViewById(R.id.pwd);
         etNick = (EditText) findViewById(R.id.nick);
+        getCode = (ButtonRectangle) findViewById(R.id.getCode);
         btnReg = (ButtonRectangle) findViewById(R.id.btnRegister);
         btnReg.setOnClickListener(this);
+        getCode.setOnClickListener(this);
     }
 
     @Override
@@ -40,6 +53,19 @@ public class ActivityRegister extends BaseActivity implements View.OnClickListen
         switch (v.getId()){
             case R.id.btnRegister:
                 register();
+                break;
+            case R.id.getCode:
+                Subscription s = Observable
+                        .doOnNext(iUser.identifyingCode(new HashMap<String, String>()))
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(meizhis -> {
+                            if (clean) mMeizhiList.clear();
+                            mMeizhiList.addAll(meizhis);
+                            mMeizhiListAdapter.notifyDataSetChanged();
+                            setRequestDataRefresh(false);
+                        }, throwable -> loadError(throwable));
+                // @formatter:on
+                addSubscription(s);
                 break;
         }
     }

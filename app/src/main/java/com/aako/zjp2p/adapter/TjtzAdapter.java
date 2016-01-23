@@ -5,12 +5,10 @@ import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.aako.zjp2p.R;
 import com.aako.zjp2p.activity.ActivityTzInfo;
 import com.aako.zjp2p.entity.Tz;
 import com.aako.zjp2p.viewholder.TjtzViewHolder;
-
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,9 +1,7 @@
 package com.aako.zjp2p.util;
 
 import android.app.Application;
-import android.util.Log;
 
-import com.aako.zjp2p.util.net.retrofit.RetrofitUtils;
 import com.facebook.drawee.backends.pipeline.Fresco;
 
 /**
@@ -24,10 +22,9 @@ public class AppUtils extends Application {
 
     private void initApplication() {
         Fresco.initialize(this, FrescoConfig.getImagePipelineConfig(this));
-        RetrofitUtils.init("http://zhongjin.w3php.com/api/");
     }
 
-    public static Application getInstance(){
+    public static Application getInstance() {
         return mInstance;
     }
 }

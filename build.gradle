@@ -14,12 +14,8 @@ allprojects {
     repositories {
         jcenter()
         mavenCentral();
-        maven {
-            url 'https://oss.sonatype.org/content/repositories/releases'
-        }
-        maven {
-            url 'https://oss.sonatype.org/content/repositories/snapshots'
-        }
+        maven { url 'https://oss.sonatype.org/content/repositories/releases' }
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
     }
 }
 task clean(type: Delete) {

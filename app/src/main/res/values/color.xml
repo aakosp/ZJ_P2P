@@ -30,6 +30,11 @@
 
     <color name="p2p_info_text">#FF323232</color>
 
+    <!-- loadmore progress -->
+    <color name="refresh_progress_1">@color/drawer_center</color>
+    <color name="refresh_progress_2">@color/background</color>
+    <color name="refresh_progress_3">@color/colorPrimary</color>
+
     <!-- profile -->
     <color name="profile_end">#FFF4F4F4</color>
     <color name="profile_zh">#FF656565</color>

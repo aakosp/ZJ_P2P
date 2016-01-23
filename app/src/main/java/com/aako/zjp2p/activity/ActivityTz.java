@@ -1,45 +1,27 @@
 package com.aako.zjp2p.activity;
 
-import android.support.v4.widget.SwipeRefreshLayout;
+import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.transition.Transition;
-import android.util.Log;
-import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.ScaleAnimation;
-import android.view.animation.TranslateAnimation;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.aako.commonpulltorefresh.PtrClassicFrameLayout;
+import com.aako.commonpulltorefresh.PtrDefaultHandler;
+import com.aako.commonpulltorefresh.PtrFrameLayout;
+import com.aako.commonpulltorefresh.loadmore.OnLoadMoreListener;
+import com.aako.commonpulltorefresh.recyclerview.RecyclerAdapterWithHF;
 import com.aako.zjp2p.R;
 import com.aako.zjp2p.activity.base.BaseActivity;
 import com.aako.zjp2p.adapter.ConditionAdapter;
 import com.aako.zjp2p.adapter.SortAdapter;
 import com.aako.zjp2p.adapter.TjtzAdapter;
-import com.aako.zjp2p.animation.ViewAnimator;
 import com.aako.zjp2p.entity.Tz;
-import com.aako.zjp2p.event.EventCenter;
 import com.aako.zjp2p.util.LogUtil;
-import com.aako.zjp2p.util.UiUtils;
 import com.aako.zjp2p.widget.DropDownMenu;
+import com.aako.zjp2p.widget.MultiSwipeRefreshLayout;
 import com.aako.zjp2p.widget.TopBar;
-import com.aako.zjp2p.widget.loadmore.ILoadMoreContainer;
-import com.aako.zjp2p.widget.loadmore.ILoadMoreHandler;
-import com.aako.zjp2p.widget.loadmore.LoadMoreRecycleViewContainer;
-import com.aako.zjp2p.widget.loadmore.PtrDefaultHandler;
-import com.aako.zjp2p.widget.loadmore.PtrFrameLayout;
-import com.aako.zjp2p.widget.loadmore.PtrHandler;
-import com.aako.zjp2p.widget.superrecycler.OnMoreListener;
-import com.aako.zjp2p.widget.superrecycler.SuperRecyclerView;
 import com.aako.zjp2p.widget.superrecycler.swipe.SparseItemRemoveAnimator;
-import com.aako.zjp2p.widget.superrecycler.swipe.SwipeDismissRecyclerViewTouchListener;
-import com.gc.materialdesign.views.ButtonFlat;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -53,16 +35,26 @@ public class ActivityTz extends BaseActivity {//implements SwipeRefreshLayout.On
     private static final String TAG = " ActivityTz ";
 
     private RecyclerView.LayoutManager mLayoutManager;
-//    private SuperRecyclerView mRecycler;
-    private RecyclerView mRecycler;
+    //    private SuperRecyclerView mRecycler;
+
+    private MultiSwipeRefreshLayout mSwipeRefreshLayout;
+    private boolean mIsRequestDataRefresh = false;
+
     private TopBar topBar;
     private SparseItemRemoveAnimator mSparseAnimator;
-    private TjtzAdapter adapter;
-    private DropDownMenu dropDownMenu;
     private OnClickListenerImp onClickListenerImp;
 
+    private DropDownMenu dropDownMenu;
     private String headers[] = {"排序", "帅选条件"};
     private List<View> popupViews = new ArrayList<>();
+
+    private RecyclerView mRecyclerView;
+    private TjtzAdapter adapter;
+    private RecyclerAdapterWithHF mAdapter;
+    private PtrClassicFrameLayout ptrClassicFrameLayout;
+    Handler handler = new Handler();
+
+    int page = 0;
 
 
     @Override
@@ -82,49 +74,25 @@ public class ActivityTz extends BaseActivity {//implements SwipeRefreshLayout.On
         mRecycler.setRefreshingColorResources(android.R.color.holo_orange_light, android.R.color.holo_blue_light, android.R.color.holo_green_light, android.R.color.holo_red_light);
         mRecycler.setupMoreListener(this, 10);*/
 
-//        View container = View.inflate(this, R.layout.layout_refresh_recyclerview, null);
-//        mRecycler = (RecyclerView) container.findViewById(R.id.rv);
-//        PtrFrameLayout mPtrFrameLayout = (PtrFrameLayout) container.findViewById(R.id.load_more_list_view_ptr_frame);
-        PtrFrameLayout mPtrFrameLayout = (PtrFrameLayout) View.inflate(this, R.layout.layout_refresh_recyclerview, null);
-        mRecycler = (RecyclerView) mPtrFrameLayout.findViewById(R.id.rv);
-        mPtrFrameLayout.setLoadingMinTime(1000);
-        mPtrFrameLayout.setPtrHandler(new PtrHandler() {
-            @Override
-            public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
+        View container = View.inflate(this, R.layout.layout_refresh_recyclerview, null);
+        ptrClassicFrameLayout = (PtrClassicFrameLayout) container.findViewById(R.id.test_recycler_view_frame);
+        mRecyclerView = (RecyclerView) container.findViewById(R.id.test_recycler_view);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-                // here check list view, not content.
-                return PtrDefaultHandler.checkContentCanBePulledDown(frame, mRecycler, header);
+        /*View container = View.inflate(this, R.layout.layout_swipe_refresh_recyclerview, null);
+        RefreshRecyclerView refreshRecyclerView = (RefreshRecyclerView) container.findViewById(R.id.swipe_refresh_layout);
+        mRecycler = (RecyclerView) container.findViewById(R.id.rv);
+        refreshRecyclerView.setOnRefreshListener(new RefreshRecyclerView.IOnRefreshListener() {
+            @Override
+            public void loadMore() {
+                LogUtil.d(TAG, "loadMore ===============");
             }
 
             @Override
-            public void onRefreshBegin(PtrFrameLayout frame) {
-                LogUtil.d(TAG, "onRefreshBegin ======");
+            public void refresh() {
+                LogUtil.d(TAG, "refresh ===============");
             }
-        });
-
-        View headerMarginView = new View(this);
-        headerMarginView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, UiUtils.dp2px(20)));
-
-        // load more container
-        final LoadMoreRecycleViewContainer loadMoreListViewContainer = (LoadMoreRecycleViewContainer) mPtrFrameLayout.findViewById(R.id.load_more_list_view_container);
-        loadMoreListViewContainer.useDefaultFooter();
-        loadMoreListViewContainer.addHeaderView(headerMarginView);
-
-        loadMoreListViewContainer.setLoadMoreHandler(new ILoadMoreHandler() {
-            @Override
-            public void onLoadMore(ILoadMoreContainer loadMoreContainer) {
-                LogUtil.d(TAG, "LoadMoreRecycleViewContainer onLoadMore");
-            }
-        });
-
-
-        // auto load data
-//        mPtrFrameLayout.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                mPtrFrameLayout.autoRefresh(false);
-//            }
-//        }, 150);
+        });*/
 
         dropDownMenu = (DropDownMenu) findViewById(R.id.dropDownMenu);
 
@@ -142,10 +110,59 @@ public class ActivityTz extends BaseActivity {//implements SwipeRefreshLayout.On
         popupViews.add(sortView);
         popupViews.add(conditionView);
 
-        dropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, mPtrFrameLayout);
+        dropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, container);
 
-        initData();
+        initData(true);
+        init();
+    }
 
+    private void init() {
+        mAdapter = new RecyclerAdapterWithHF(adapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setAdapter(mAdapter);
+        ptrClassicFrameLayout.postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                ptrClassicFrameLayout.autoRefresh(true);
+            }
+        }, 150);
+
+        ptrClassicFrameLayout.setPtrHandler(new PtrDefaultHandler() {
+
+            @Override
+            public void onRefreshBegin(PtrFrameLayout frame) {
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        page = 0;
+                        initData(true);
+                        mAdapter.notifyDataSetChanged();
+                        ptrClassicFrameLayout.refreshComplete();
+                        ptrClassicFrameLayout.setLoadMoreEnable(true);
+                    }
+                }, 2000);
+            }
+        });
+
+        ptrClassicFrameLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+
+            @Override
+            public void loadMore() {
+                handler.postDelayed(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        initData(false);
+                        mAdapter.notifyDataSetChanged();
+                        ptrClassicFrameLayout.loadMoreComplete(true);
+                        page++;
+                        Toast.makeText(ActivityTz.this, "load more complete", Toast.LENGTH_SHORT)
+                                .show();
+                    }
+                }, 1000);
+            }
+        });
     }
 
     @Override
@@ -153,14 +170,16 @@ public class ActivityTz extends BaseActivity {//implements SwipeRefreshLayout.On
         return R.layout.activity_tz;
     }
 
-    private void initData() {
-        adapter = new TjtzAdapter(this);
+    private void initData(boolean clear) {
+        if (null == adapter) {
+            adapter = new TjtzAdapter(this);
+        }
         List<Tz> tzs = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
             Tz tz = new Tz();
             tz.id = i;
             tz.wcd = (i + 1) * 10;
-            tz.title = "title 标题 " + i;
+            tz.title = "title 标题 " + i + (clear?"头部":"尾部");
             tz.describe = "describe 详细描述 详细描述 " + i;
             tz.yqnh = (i + 1) * 2 + "";
             tz.qtje = (i + 1) * 1000 + "";
@@ -170,11 +189,10 @@ public class ActivityTz extends BaseActivity {//implements SwipeRefreshLayout.On
             tz.type = i % 2;
             tzs.add(tz);
         }
-        adapter.addData(tzs);
-        mRecycler.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-        LogUtil.d(TAG, "mRecycler:"+mRecycler.getAdapter().getItemCount());
-
+        if (clear)
+            adapter.setData(tzs);
+        else
+            adapter.addData(tzs);
     }
 
     /*@Override

@@ -17,28 +17,18 @@ import retrofit2.http.POST;
  */
 public interface IP2p {
 
-    @Headers({"Content-Type:Json",
-            "TOKEN:10e8ae80b3d6fe0429d2e7df14679e44"})
     @POST("p2p/create")
     Call<Id> create(@Body Map<String, String> body);
 
-    @Headers({"Content-Type:Json",
-            "TOKEN:10e8ae80b3d6fe0429d2e7df14679e44"})
     @POST("p2p/get_p2p_by_status")
     Call<Page<Tz>> getP2pByStatus(@Body Map<String, String> body);
 
-    @Headers({"Content-Type:Json",
-            "TOKEN:10e8ae80b3d6fe0429d2e7df14679e44"})
     @POST("p2p/filter_p2p")
     Call<Page<Tz>> p2pFilter(@Body Map<String, String> body);
 
-    @Headers({"Content-Type:Json",
-            "TOKEN:10e8ae80b3d6fe0429d2e7df14679e44"})
     @POST("p2p/get_recommend_p2p")
     Call<Page<Tz>> getRecommendP2p(@Body Map<String, String> body);
 
-    @Headers({"Content-Type:Json",
-            "TOKEN:10e8ae80b3d6fe0429d2e7df14679e44"})
     @POST("p2p/get_recommend_p2p")
     Call<Tz> getP2p(@Body Map<String, String> body);
 }

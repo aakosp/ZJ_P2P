@@ -18,31 +18,21 @@ import retrofit2.http.POST;
  * Created by aako on 16-1-18.
  */
 public interface IUser {
-    @Headers({"Content-Type:Json",
-            "TOKEN:10e8ae80b3d6fe0429d2e7df14679e44"})
     @POST("user/reg")
     Call<User> reg(@Body Map<String, String> body);
 
     @POST("user/get_user")
     Call<User> getUser(@Body Map<String, String> body);
 
-    @Headers({"Content-Type:Json",
-            "TOKEN:10e8ae80b3d6fe0429d2e7df14679e44"})
     @POST("user/identify")
     Call<User> auth(@Body Map<String, String> body);
 
-    @Headers({"Content-Type:Json",
-            "TOKEN:10e8ae80b3d6fe0429d2e7df14679e44"})
     @POST("user/send_reg_message")
     Call<User> identifyingCode(@Body Map<String, String> body);
 
-    @Headers({"Content-Type:Json",
-            "TOKEN:10e8ae80b3d6fe0429d2e7df14679e44"})
     @POST("user/chargeLog")
     Call<Page<Amount>> getAmountLog(@Body Map<String, String> body);
 
-    @Headers({"Content-Type:Json",
-            "TOKEN:10e8ae80b3d6fe0429d2e7df14679e44"})
     @POST("user/drawingLog")
     Call<Page<Amount>> getDrawingLog(@Body Map<String, String> body);
 }

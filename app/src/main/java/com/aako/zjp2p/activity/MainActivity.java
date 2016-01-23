@@ -81,6 +81,7 @@ public class MainActivity extends BaseAppCompatActivity
 
         navigationToFragment(R.id.home);
 
+
         IUser iUser = RetrofitUtils.getInstance().create(IUser.class);
         Map<String, String> params = new HashMap<>();
         params.put("user_id", "1");
