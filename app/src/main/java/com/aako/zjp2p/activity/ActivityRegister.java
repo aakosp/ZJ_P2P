@@ -1,33 +1,36 @@
 package com.aako.zjp2p.activity;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.aako.zjp2p.R;
 import com.aako.zjp2p.activity.base.BaseActivity;
 import com.aako.zjp2p.api.ApiFactory;
-import com.aako.zjp2p.api.service.IUser;
-import com.aako.zjp2p.util.net.retrofit.RetrofitUtils;
+import com.aako.zjp2p.entity.User;
 import com.aako.zjp2p.widget.TopBar;
-import com.gc.materialdesign.views.ButtonRectangle;
 
 import java.util.HashMap;
+import java.util.Map;
 
-import retrofit2.Call;
-import rx.Observable;
-import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by aako on 16-1-20.
  */
 public class ActivityRegister extends BaseActivity implements View.OnClickListener {
 
-    private IUser iUser = ApiFactory.getIUserSingleton();
+    private static final String TAG = "ActivityRegister";
+
     private TopBar topBar;
     private EditText etPhone, etCode, etPwd, etNick;
-    private ButtonRectangle btnReg, getCode;
+    private Button btnReg, getCode;
+    private ImageView ivPwdState;
 
     @Override
     protected void initViews() {
@@ -37,10 +40,12 @@ public class ActivityRegister extends BaseActivity implements View.OnClickListen
         etCode = (EditText) findViewById(R.id.code);
         etPwd = (EditText) findViewById(R.id.pwd);
         etNick = (EditText) findViewById(R.id.nick);
-        getCode = (ButtonRectangle) findViewById(R.id.getCode);
-        btnReg = (ButtonRectangle) findViewById(R.id.btnRegister);
+        getCode = (Button) findViewById(R.id.getCode);
+        ivPwdState = (ImageView) findViewById(R.id.pwd_state);
+        btnReg = (Button) findViewById(R.id.btnRegister);
         btnReg.setOnClickListener(this);
         getCode.setOnClickListener(this);
+        ivPwdState.setOnClickListener(this);
     }
 
     @Override
@@ -50,34 +55,62 @@ public class ActivityRegister extends BaseActivity implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.btnRegister:
                 register();
                 break;
             case R.id.getCode:
-                Subscription s = Observable
-                        .doOnNext(iUser.identifyingCode(new HashMap<String, String>()))
+                Map map = new HashMap<>();
+                map.put("phone", "18503860933");
+
+                /*ApiFactory.getIUserSingleton().identifyingCode(map)
+                        .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(meizhis -> {
-                            if (clean) mMeizhiList.clear();
-                            mMeizhiList.addAll(meizhis);
-                            mMeizhiListAdapter.notifyDataSetChanged();
-                            setRequestDataRefresh(false);
-                        }, throwable -> loadError(throwable));
-                // @formatter:on
-                addSubscription(s);
+                        .subscribe(new Subscriber<Message>(){
+
+                            @Override
+                            public void onCompleted() {
+
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+
+                            }
+
+                            @Override
+                            public void onNext(Message msg) {
+                                etCode.setText(msg.message_id);
+                            }
+                        });*/
+//                etCode.setText("12s3");
+                Map<String, String> u = new HashMap<>();
+                u.put("user_id", "1");
+                ApiFactory.getIUserSingleton().getUser(u)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Action1<User>() {
+                            @Override
+                            public void call(User user) {
+                                Log.d(TAG, "user:" + user);
+                                etCode.setText(user.toString());
+                            }
+                        });
+                break;
+            case R.id.pwd_state:
+
                 break;
         }
     }
 
-    public void register(){
+    public void register() {
         String phone = etPhone.getText().toString();
-        if(TextUtils.isEmpty(phone)){
+        if (TextUtils.isEmpty(phone)) {
 
         }
 
         String code = etCode.getText().toString();
-        if(TextUtils.isEmpty(code)){
+        if (TextUtils.isEmpty(code)) {
 
         }
     }

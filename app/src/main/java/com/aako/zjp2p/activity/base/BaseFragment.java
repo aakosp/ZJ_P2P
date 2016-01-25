@@ -12,6 +12,9 @@ import android.view.ViewGroup;
  */
 public abstract class BaseFragment extends Fragment {
 
+    private boolean isCreated = false;
+    private boolean isInitView = false;
+
     public View curView;
 
     /**
@@ -21,6 +24,7 @@ public abstract class BaseFragment extends Fragment {
 
     /**
      * 获取布局 layoutResID
+     *
      * @return id
      */
     protected abstract int getContentViewId();
@@ -32,12 +36,34 @@ public abstract class BaseFragment extends Fragment {
             ((ViewGroup) curView.getParent()).removeView(curView);
             return curView;
         }
+
         curView = inflater.inflate(getContentViewId(), null);
-        initViews();
+        isCreated = true;
+        onVisible();
         return curView;
     }
 
-    public View findViewById(int resId){
+    public View findViewById(int resId) {
         return curView.findViewById(resId);
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (getUserVisibleHint())
+            onVisible();
+        else
+            onInvisible();
+    }
+
+    protected void onVisible() {
+        if (isInitView || (!isCreated)) {
+            return;
+        }
+        initViews();
+        isInitView = true;
+    }
+
+    protected void onInvisible() {
     }
 }

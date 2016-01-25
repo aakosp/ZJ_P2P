@@ -13,22 +13,10 @@ import android.widget.TextView;
 
 import com.aako.zjp2p.R;
 import com.aako.zjp2p.activity.base.BaseAppCompatActivity;
-import com.aako.zjp2p.api.service.IUser;
-import com.aako.zjp2p.entity.User;
-import com.aako.zjp2p.util.LogUtil;
-import com.aako.zjp2p.util.net.VolleyUtils;
-import com.aako.zjp2p.util.net.retrofit.RetrofitUtils;
 import com.aako.zjp2p.widget.ImageTextButton;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends BaseAppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -80,23 +68,6 @@ public class MainActivity extends BaseAppCompatActivity
         mFragments.put(R.id.integral, getSupportFragmentManager().findFragmentById(R.id.fragmentIntegral));
 
         navigationToFragment(R.id.home);
-
-
-        IUser iUser = RetrofitUtils.getInstance().create(IUser.class);
-        Map<String, String> params = new HashMap<>();
-        params.put("user_id", "1");
-        Call<User> call = iUser.getUser(params);
-        call.enqueue(new Callback<User>() {
-            @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                LogUtil.d(TAG, "id : " + response.body());
-            }
-
-            @Override
-            public void onFailure(Call<User> call, Throwable t) {
-                LogUtil.d(TAG, "onFailure", t);
-            }
-        });
     }
 
     @Override

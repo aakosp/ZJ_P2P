@@ -3,14 +3,13 @@ package com.aako.zjp2p.api.service;
 import com.aako.zjp2p.entity.Id;
 import com.aako.zjp2p.entity.Page;
 import com.aako.zjp2p.entity.Tz;
-import com.aako.zjp2p.entity.User;
 
 import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.Headers;
 import retrofit2.http.POST;
+
 
 /**
  * Created by aako on 2016/1/20.

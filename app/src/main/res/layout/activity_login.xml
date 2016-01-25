@@ -81,7 +81,7 @@
     </LinearLayout>
 
 
-    <com.gc.materialdesign.views.ButtonRectangle
+    <com.dd.processbutton.iml.ActionProcessButton
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="@dimen/button_height"
@@ -96,6 +96,13 @@
         android:layout_gravity="bottom|center_horizontal"
         android:layout_margin="@dimen/def_margin"
         android:text="@string/forgetPwd"
-        android:textSize="@dimen/text_middle_size" />
+        android:textSize="@dimen/text_middle_size"
+
+        app:pb_colorComplete="@color/green_complete"
+        app:pb_colorNormal="@color/blue_normal"
+        app:pb_colorPressed="@color/blue_pressed"
+        app:pb_colorProgress="@color/purple_progress"
+        app:pb_textComplete="@string/Success"
+        app:pb_textProgress="@string/Loading"/>
 
 </LinearLayout>

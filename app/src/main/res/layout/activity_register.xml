@@ -34,8 +34,8 @@
             android:layout_height="wrap_content"
             android:background="@null"
             android:hint="@string/phone"
-            android:textColor="@color/text"
             android:inputType="phone"
+            android:textColor="@color/text"
             android:textSize="@dimen/text_big_size" />
 
     </LinearLayout>
@@ -70,10 +70,11 @@
             android:layout_toRightOf="@+id/codeImg"
             android:background="@null"
             android:hint="@string/code"
+            android:minWidth="@dimen/menu_middle_size"
             android:textColor="@color/text"
             android:textSize="@dimen/text_big_size" />
 
-        <com.gc.materialdesign.views.ButtonRectangle
+        <Button
             android:id="@+id/getCode"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -168,7 +169,7 @@
         android:layout_height="@dimen/divider"
         android:background="@color/divider" />
 
-    <com.gc.materialdesign.views.ButtonRectangle
+    <Button
         android:id="@+id/btnRegister"
         android:layout_width="match_parent"
         android:layout_height="@dimen/button_height"

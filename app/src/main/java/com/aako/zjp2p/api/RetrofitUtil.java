@@ -2,6 +2,7 @@ package com.aako.zjp2p.api;
 
 import com.aako.zjp2p.api.service.IP2p;
 import com.aako.zjp2p.api.service.IUser;
+import com.aako.zjp2p.util.LogUtil;
 import com.aako.zjp2p.util.MD5Util;
 
 import java.io.IOException;
@@ -74,6 +75,8 @@ public class RetrofitUtil {
                     .addHeader("Content-Type", "Json")
                     .addHeader("TOKEN", token)
                     .build();
+
+            LogUtil.d(TAG, "token:"+token);
 
             Response response = chain.proceed(newRequest);
 

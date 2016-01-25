@@ -4,12 +4,12 @@ import android.content.Intent;
 
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.aako.zjp2p.R;
 import com.aako.zjp2p.activity.base.BaseAppCompatActivity;
 import com.aako.zjp2p.widget.TopBar;
-import com.gc.materialdesign.views.Button;
 
 /**
  * Created by ZL on 2015/11/23.
