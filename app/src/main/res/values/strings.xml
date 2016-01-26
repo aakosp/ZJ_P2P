@@ -67,4 +67,13 @@
     <string name="navigation_drawer_open">drawer_open</string>
     <string name="navigation_drawer_close">drawer_close</string>
     <!-- Drawer end -->
+
+    <!-- toast -->
+    <string name="hint_phone_empty">请输入正确的手机号</string>
+    <string name="hint_code_empty">请输入正确的验证码</string>
+    <string name="hint_code_error">验证码不正确</string>
+    <string name="hint_pwd_empty">请输入密码</string>
+    <string name="hint_pwd_error">两次输入的密码不一致</string>
+    <string name="hint_nick_empty">昵称为空</string>
+    <string name="hint_reg_success">注册成功</string>
 </resources>

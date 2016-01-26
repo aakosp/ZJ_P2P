@@ -128,10 +128,4 @@
             format="reference"/>
     </declare-styleable>
 
-    <declare-styleable name="ripple_button">
-        <attr name="ripple_bkg" format="color|reference" />
-        <attr name="ripple_text" format="string|reference" />
-        <attr name="ripple_text_color" format="color|reference" />
-        <attr name="ripple_text_size" format="dimension|reference" />
-    </declare-styleable>
 </resources>

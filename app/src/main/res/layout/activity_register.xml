@@ -74,15 +74,17 @@
             android:textColor="@color/text"
             android:textSize="@dimen/text_big_size" />
 
-        <Button
+
+        <com.cengalabs.flatui.views.FlatButton
             android:id="@+id/getCode"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_margin="@dimen/divider"
-            android:background="@color/red"
-            android:text="@string/getCode" />
+            android:padding="@dimen/divider"
+            android:text="@string/getCode"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_small_size" />
 
     </RelativeLayout>
 
@@ -169,12 +171,13 @@
         android:layout_height="@dimen/divider"
         android:background="@color/divider" />
 
-    <Button
+    <com.cengalabs.flatui.views.FlatButton
         android:id="@+id/btnRegister"
         android:layout_width="match_parent"
         android:layout_height="@dimen/button_height"
         android:layout_margin="@dimen/def_margin"
         android:background="@color/red"
-        android:text="@string/register" />
+        android:text="@string/register"
+        android:textColor="@android:color/white" />
 
 </LinearLayout>

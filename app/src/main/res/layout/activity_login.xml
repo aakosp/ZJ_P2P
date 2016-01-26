@@ -81,13 +81,14 @@
     </LinearLayout>
 
 
-    <com.dd.processbutton.iml.ActionProcessButton
+    <com.cengalabs.flatui.views.FlatButton
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="@dimen/button_height"
         android:layout_margin="@dimen/def_margin"
         android:background="@color/red"
-        android:text="@string/login" />
+        android:text="@string/login"
+        android:textColor="@android:color/white" />
 
     <TextView
         android:id="@+id/forgetPwd"
@@ -96,13 +97,6 @@
         android:layout_gravity="bottom|center_horizontal"
         android:layout_margin="@dimen/def_margin"
         android:text="@string/forgetPwd"
-        android:textSize="@dimen/text_middle_size"
-
-        app:pb_colorComplete="@color/green_complete"
-        app:pb_colorNormal="@color/blue_normal"
-        app:pb_colorPressed="@color/blue_pressed"
-        app:pb_colorProgress="@color/purple_progress"
-        app:pb_textComplete="@string/Success"
-        app:pb_textProgress="@string/Loading"/>
+        android:textSize="@dimen/text_middle_size" />
 
 </LinearLayout>

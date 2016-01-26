@@ -2,6 +2,7 @@ package com.aako.zjp2p.util;
 
 import android.app.Application;
 
+import com.cengalabs.flatui.FlatUI;
 import com.facebook.drawee.backends.pipeline.Fresco;
 
 /**
@@ -21,6 +22,7 @@ public class AppUtils extends Application {
     }
 
     private void initApplication() {
+        FlatUI.initDefaultValues(this);
         Fresco.initialize(this, FrescoConfig.getImagePipelineConfig(this));
     }
 
