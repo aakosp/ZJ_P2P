@@ -27,7 +27,7 @@ public interface IUser {
     Call<User> auth(@Body Map<String, String> body);
 
     @POST("user/send_reg_message")
-    Observable<Message> identifyingCode(@Body Map<String, String> body);
+    Observable<Message> identifyingCode(@Body Map body);
 
     @POST("user/chargeLog")
     Call<Page<Amount>> getAmountLog(@Body Map<String, String> body);
