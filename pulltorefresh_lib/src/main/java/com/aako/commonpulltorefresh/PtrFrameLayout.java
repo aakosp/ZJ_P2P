@@ -2,7 +2,6 @@ package com.aako.commonpulltorefresh;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -98,7 +97,7 @@ public class PtrFrameLayout extends ViewGroup {
 
         mPtrIndicator = new PtrIndicator();
 
-        TypedArray arr = context.obtainStyledAttributes(attrs, R.styleable.PtrFrameLayout, 0, 0);
+        TypedArray arr = context.obtainStyledAttributes(attrs, R.styleable.PtrFrameLayout);
         if (arr != null) {
 
             mHeaderId = arr.getResourceId(R.styleable.PtrFrameLayout_ptr_header, mHeaderId);

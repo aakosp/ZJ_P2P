@@ -7,6 +7,7 @@ import com.aako.zjp2p.entity.Message;
 import com.aako.zjp2p.entity.Page;
 import com.aako.zjp2p.entity.Tz;
 import com.aako.zjp2p.entity.User;
+import com.aako.zjp2p.util.AppUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,7 +23,7 @@ public class Api {
      * user                                  *
      ****************************************/
     public static Observable<User> reg(String phone, String pwd, String pwd2, String msgId, String code, String nick) {
-        Map<String, String> body = new HashMap<>();
+        Map body = new HashMap<>();
         body.put("phone", phone);
         body.put("password", pwd);
         body.put("password_", pwd2);
@@ -39,13 +40,13 @@ public class Api {
     }
 
     public static Observable<Message> identifyingCode(String phone){
-        Map<String, String> body = new HashMap<>();
+        Map body = new HashMap<>();
         body.put("phone", phone);
         return ApiFactory.getIUserSingleton().identifyingCode(body);
     }
 
     public static Observable<AuthResult> auth(String id, String cardId, String name, String pic1, String pic2){
-        Map<String, String> body = new HashMap<>();
+        Map body = new HashMap<>();
         body.put("user_id", id);
         body.put("id_card_number", cardId);
         body.put("id_card_name", name);
@@ -55,15 +56,15 @@ public class Api {
     }
 
     public static Observable<Page<Amount>> getChargeLog(int page){
-        Map<String, Integer> body = new HashMap<>();
-        body.put("user_id", id);
+        Map body = new HashMap<>();
+        body.put("user_id", AppUtils.getInstance().getId());
         body.put("page", page);
         return ApiFactory.getIUserSingleton().getChargeLog(body);
     }
 
     public static Observable<Page<Amount>> getDrawingLog(int page){
-        Map<String, Integer> body = new HashMap<>();
-        body.put("user_id", id);
+        Map body = new HashMap<>();
+        body.put("user_id", AppUtils.getInstance().getId());
         body.put("page", page);
         return ApiFactory.getIUserSingleton().getDrawingLog(body);
     }
@@ -105,28 +106,12 @@ public class Api {
         return ApiFactory.getIP2pSingleton().getP2pByStatus(body);
     }
 
-    public static Observable<Page<Tz>> p2pFilter(int page, int pageSize, String rePayType, String timeType, String order){
+    public static Observable<Tz> getP2p(int id){
         Map body = new HashMap();
-        body.put("page", page);
-        body.put("page_size", pageSize);
-        body.put("repayment_method", rePayType);
-        body.put("limit_time", timeType);
-        body.put("order", order);
-
-        page_size	int
-                每页数量
-
-        repayment_method	string
-        还款方式筛选：DEFAULT(全部)|MONTH(按月)|LIMIT_TIME(一次性还清)
-
-        	string
-        还款期限筛选：DEFAULT(全部),TIME_1(区间1),TIME_2(区间2),TIME_(区间3),TIME_4(区间4),TIME_5(区间5),TIME_6((区间6))
-
-
-        return ApiFactory.getIP2pSingleton().getP2pByStatus(body);
+        body.put("id", id);
+        return ApiFactory.getIP2pSingleton().getP2p(body);
     }
 
 
 
-    enum  repaymentMethod{"1", "2","3"}
 }

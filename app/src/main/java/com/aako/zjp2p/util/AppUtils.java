@@ -11,6 +11,7 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 public class AppUtils extends Application {
 
     private static final String TAG = " AppUtils ";
+    private int id;
 
     private static AppUtils mInstance;
 
@@ -26,7 +27,15 @@ public class AppUtils extends Application {
         Fresco.initialize(this, FrescoConfig.getImagePipelineConfig(this));
     }
 
-    public static Application getInstance() {
+    public static AppUtils getInstance() {
         return mInstance;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

@@ -19,20 +19,20 @@ import retrofit2.http.POST;
  */
 public interface IUser {
     @POST("user/reg")
-    Observable<User> reg(@Body Map<String, String> body);
+    Observable<User> reg(@Body Map body);
 
     @POST("user/get_user")
-    Observable<User> getUser(@Body Map<String, String> body);
+    Observable<User> getUser(@Body Map body);
 
     @POST("user/identify")
-    Observable<AuthResult> auth(@Body Map<String, String> body);
+    Observable<AuthResult> auth(@Body Map body);
 
     @POST("user/send_reg_message")
-    Observable<Message> identifyingCode(@Body Map<String, String> body);
+    Observable<Message> identifyingCode(@Body Map body);
 
     @POST("user/chargeLog")
-    Observable<Page<Amount>> getChargeLog(@Body Map<String, Integer> body);
+    Observable<Page<Amount>> getChargeLog(@Body Map body);
 
     @POST("user/drawingLog")
-    Observable<Page<Amount>> getDrawingLog(@Body Map<String, Integer> body);
+    Observable<Page<Amount>> getDrawingLog(@Body Map body);
 }
