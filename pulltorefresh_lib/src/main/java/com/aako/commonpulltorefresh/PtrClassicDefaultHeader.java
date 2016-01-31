@@ -51,7 +51,7 @@ public class PtrClassicDefaultHeader extends FrameLayout implements PtrUIHandler
     }
 
     protected void initViews(AttributeSet attrs) {
-        TypedArray arr = getContext().obtainStyledAttributes(attrs, R.styleable.PtrClassicHeader, 0, 0);
+        TypedArray arr = getContext().obtainStyledAttributes(attrs, R.styleable.PtrClassicHeader);
         if (arr != null) {
             mRotateAniTime = arr.getInt(R.styleable.PtrClassicHeader_ptr_rotate_ani_time, mRotateAniTime);
         }

@@ -6,21 +6,24 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 
-import com.aako.commonpulltorefresh.PtrClassicFrameLayout;
-import com.aako.commonpulltorefresh.PtrDefaultHandler;
-import com.aako.commonpulltorefresh.PtrFrameLayout;
-import com.aako.commonpulltorefresh.loadmore.OnLoadMoreListener;
-import com.aako.commonpulltorefresh.recyclerview.RecyclerAdapterWithHF;
 import com.aako.zjp2p.R;
 import com.aako.zjp2p.activity.base.BaseActivity;
 import com.aako.zjp2p.adapter.ConditionAdapter;
 import com.aako.zjp2p.adapter.SortAdapter;
 import com.aako.zjp2p.adapter.TjtzAdapter;
 import com.aako.zjp2p.entity.Tz;
+import com.aako.zjp2p.event.Event;
 import com.aako.zjp2p.util.LogUtil;
+import com.aako.zjp2p.util.rxbus.annotation.Subscribe;
+import com.aako.zjp2p.util.rxbus.annotation.Tag;
 import com.aako.zjp2p.widget.DropDownMenu;
 import com.aako.zjp2p.widget.MultiSwipeRefreshLayout;
 import com.aako.zjp2p.widget.TopBar;
+import com.aako.zjp2p.widget.pull2refresh.PtrClassicFrameLayout;
+import com.aako.zjp2p.widget.pull2refresh.PtrDefaultHandler;
+import com.aako.zjp2p.widget.pull2refresh.PtrFrameLayout;
+import com.aako.zjp2p.widget.pull2refresh.loadmore.OnLoadMoreListener;
+import com.aako.zjp2p.widget.pull2refresh.recyclerview.RecyclerAdapterWithHF;
 import com.aako.zjp2p.widget.superrecycler.swipe.SparseItemRemoveAnimator;
 
 import java.util.ArrayList;
@@ -53,58 +56,31 @@ public class ActivityTz extends BaseActivity {//implements SwipeRefreshLayout.On
     private RecyclerAdapterWithHF mAdapter;
     private PtrClassicFrameLayout ptrClassicFrameLayout;
     Handler handler = new Handler();
-
     int page = 0;
 
+    SortAdapter sortAdapter;
+    ConditionAdapter conditionAdapter;
 
     @Override
     protected void initViews() {
         topBar = (TopBar) findViewById(R.id.topbar);
         topBar.setActivity(this);
 
-        /*mRecycler = new SuperRecyclerView(this);
-        mRecycler.setEmptyres(R.layout.emptyview);
-        mRecycler.setMoreProgressId(R.layout.layout_more_progress);
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecycler.setLayoutManager(mLayoutManager);
-        mRecycler.setupSwipeToDismiss(this);
-        mSparseAnimator = new SparseItemRemoveAnimator();
-        mRecycler.getRecyclerView().setItemAnimator(mSparseAnimator);
-        mRecycler.setRefreshListener(this);
-        mRecycler.setRefreshingColorResources(android.R.color.holo_orange_light, android.R.color.holo_blue_light, android.R.color.holo_green_light, android.R.color.holo_red_light);
-        mRecycler.setupMoreListener(this, 10);*/
-
         View container = View.inflate(this, R.layout.layout_refresh_recyclerview, null);
         ptrClassicFrameLayout = (PtrClassicFrameLayout) container.findViewById(R.id.test_recycler_view_frame);
         mRecyclerView = (RecyclerView) container.findViewById(R.id.test_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        /*View container = View.inflate(this, R.layout.layout_swipe_refresh_recyclerview, null);
-        RefreshRecyclerView refreshRecyclerView = (RefreshRecyclerView) container.findViewById(R.id.swipe_refresh_layout);
-        mRecycler = (RecyclerView) container.findViewById(R.id.rv);
-        refreshRecyclerView.setOnRefreshListener(new RefreshRecyclerView.IOnRefreshListener() {
-            @Override
-            public void loadMore() {
-                LogUtil.d(TAG, "loadMore ===============");
-            }
-
-            @Override
-            public void refresh() {
-                LogUtil.d(TAG, "refresh ===============");
-            }
-        });*/
-
         dropDownMenu = (DropDownMenu) findViewById(R.id.dropDownMenu);
-
 
         final RecyclerView sortView = new RecyclerView(this);
         sortView.setLayoutManager(new LinearLayoutManager(this));
-        SortAdapter sortAdapter = new SortAdapter(this);
+        sortAdapter = new SortAdapter(this);
         sortView.setAdapter(sortAdapter);
 
         final RecyclerView conditionView = new RecyclerView(this);
         conditionView.setLayoutManager(new LinearLayoutManager(this));
-        ConditionAdapter conditionAdapter = new ConditionAdapter();
+        conditionAdapter = new ConditionAdapter();
         conditionView.setAdapter(conditionAdapter);
 
         popupViews.add(sortView);
@@ -195,40 +171,12 @@ public class ActivityTz extends BaseActivity {//implements SwipeRefreshLayout.On
             adapter.addData(tzs);
     }
 
-    /*@Override
-    public boolean canDismiss(int position) {
-        return true;
+    @Subscribe(tags = {@Tag(Event.SORT)})
+    public void clickDropDownMenu(int position) {
+        LogUtil.d(TAG, "position:"+position);
+        dropDownMenu.setTabText(position == 0 ? headers[0] : sortAdapter.getSort(position));
+        dropDownMenu.closeMenu();
     }
-
-    @Override
-    public void onDismiss(RecyclerView recyclerView, int[] reverseSortedPositions) {
-        for (int position : reverseSortedPositions) {
-            mSparseAnimator.setSkipNext(true);
-            adapter.remove(position);
-        }
-    }
-
-    @Override
-    public void onMoreAsked(int overallItemsCount, int itemsBeforeMore, int maxLastVisiblePosition) {
-        Toast.makeText(this, "onMoreAsked", Toast.LENGTH_LONG).show();
-        dropDownMenu.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                initData();
-            }
-        }, 200);
-    }
-
-    @Override
-    public void onRefresh() {
-        Toast.makeText(this, "onRefresh", Toast.LENGTH_LONG).show();
-        dropDownMenu.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                initData();
-            }
-        }, 200);
-    }*/
 
     private class OnClickListenerImp implements View.OnClickListener {
         @Override
@@ -238,6 +186,5 @@ public class ActivityTz extends BaseActivity {//implements SwipeRefreshLayout.On
             }
         }
     }
-
 
 }

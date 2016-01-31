@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.aako.zjp2p.debug.ViewServer;
+import com.aako.zjp2p.util.rxbus.RxBus;
 
 import rx.subscriptions.CompositeSubscription;
 
@@ -40,6 +41,7 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        RxBus.get().register(this);
 //        ViewServer.get(this).addWindow(this);
         setContentView(getContentViewId());
         initViews();
@@ -47,6 +49,7 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
+        RxBus.get().unregister(this);
         if (null != mCompositeSubscription) {
             mCompositeSubscription.unsubscribe();
         }

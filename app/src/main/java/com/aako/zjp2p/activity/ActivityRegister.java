@@ -1,24 +1,20 @@
 package com.aako.zjp2p.activity;
 
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.aako.zjp2p.R;
 import com.aako.zjp2p.activity.base.BaseActivity;
-import com.aako.zjp2p.api.ApiFactory;
+import com.aako.zjp2p.api.Api;
 import com.aako.zjp2p.entity.Message;
 import com.aako.zjp2p.entity.User;
-import com.aako.zjp2p.util.LogUtil;
+import com.aako.zjp2p.util.StringUtils;
+import com.aako.zjp2p.util.ToastUtils;
 import com.aako.zjp2p.widget.TopBar;
+import com.cengalabs.flatui.views.FlatButton;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
@@ -32,8 +28,10 @@ public class ActivityRegister extends BaseActivity implements View.OnClickListen
 
     private TopBar topBar;
     private EditText etPhone, etCode, etPwd, etNick;
-    private Button btnReg, getCode;
+    private FlatButton btnReg, getCode;
     private ImageView ivPwdState;
+
+    private String msgId;
 
     @Override
     protected void initViews() {
@@ -43,9 +41,9 @@ public class ActivityRegister extends BaseActivity implements View.OnClickListen
         etCode = (EditText) findViewById(R.id.code);
         etPwd = (EditText) findViewById(R.id.pwd);
         etNick = (EditText) findViewById(R.id.nick);
-        getCode = (Button) findViewById(R.id.getCode);
+        getCode = (FlatButton) findViewById(R.id.getCode);
         ivPwdState = (ImageView) findViewById(R.id.pwd_state);
-        btnReg = (Button) findViewById(R.id.btnRegister);
+        btnReg = (FlatButton) findViewById(R.id.btnRegister);
         btnReg.setOnClickListener(this);
         getCode.setOnClickListener(this);
         ivPwdState.setOnClickListener(this);
@@ -63,40 +61,7 @@ public class ActivityRegister extends BaseActivity implements View.OnClickListen
                 register();
                 break;
             case R.id.getCode:
-                Map map = new HashMap<>();
-                map.put("phone", 18503860933L);
-                ApiFactory.getIUserSingleton().identifyingCode(map)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Subscriber<Message>() {
-                            @Override
-                            public void onCompleted() {
-
-                            }
-
-                            @Override
-                            public void onError(Throwable e) {
-                                LogUtil.d(TAG, e.getMessage());
-                            }
-
-                            @Override
-                            public void onNext(Message msg) {
-
-                            }
-                        });
-
-                /*Map<String, String> u = new HashMap<>();
-                u.put("user_id", "1");
-                ApiFactory.getIUserSingleton().getUser(u)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Action1<User>() {
-                            @Override
-                            public void call(User user) {
-                                Log.d(TAG, "user:" + user);
-                                etCode.setText(user.toString());
-                            }
-                        });*/
+                getCode();
                 break;
             case R.id.pwd_state:
 
@@ -104,15 +69,71 @@ public class ActivityRegister extends BaseActivity implements View.OnClickListen
         }
     }
 
+    public void getCode() {
+        String phone = etPhone.getText().toString();
+        if (!StringUtils.isPhone(phone)) {
+            ToastUtils.show(getResources().getString(R.string.hint_phone_empty));
+            return;
+        }
+        Api.identifyingCode(phone)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<Message>() {
+                    @Override
+                    public void call(Message msg) {
+                        etCode.setText(msg.message_id);
+                        msgId = msg.message_id;
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        throwable.printStackTrace();
+                    }
+                });
+    }
+
     public void register() {
         String phone = etPhone.getText().toString();
-        if (TextUtils.isEmpty(phone)) {
-
+        if (!StringUtils.isPhone(phone)) {
+            ToastUtils.show(getResources().getString(R.string.hint_phone_empty));
+            return;
         }
 
         String code = etCode.getText().toString();
         if (TextUtils.isEmpty(code)) {
-
+            ToastUtils.show(getResources().getString(R.string.hint_code_empty));
+            return;
         }
+
+        String nick = etNick.getText().toString();
+        if (TextUtils.isEmpty(nick)) {
+            ToastUtils.show(getResources().getString(R.string.hint_nick_empty));
+            return;
+        }
+
+        String pwd = etPwd.getText().toString();
+        String pwd2 = etPwd.getText().toString();
+        if (pwd.equals(pwd2)) {
+            ToastUtils.show(getResources().getString(R.string.hint_pwd_error));
+            return;
+        }
+
+
+        Api.reg(phone, pwd, pwd2, msgId, code, nick)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<User>() {
+                    @Override
+                    public void call(User u) {
+                        ToastUtils.show(getResources().getString(R.string.hint_reg_success));
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        throwable.printStackTrace();
+                    }
+                });
+
     }
+
 }

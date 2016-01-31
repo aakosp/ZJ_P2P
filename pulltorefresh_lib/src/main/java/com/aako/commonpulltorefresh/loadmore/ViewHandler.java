@@ -7,10 +7,10 @@ public interface ViewHandler {
 
 	/**
 	 * 
-	 * @param view
-	 * @param adapter
+	 * @param contentView
+	 * @param ILoadMoreView
 	 * @param loadMoreView
-	 * @param onClickListener
+	 * @param onClickLoadMoreListener
 	 * @return 是否有 init ILoadMoreView
 	 */
 	public boolean handleSetAdapter(View contentView, ILoadViewMoreFactory.ILoadMoreView loadMoreView, OnClickListener onClickLoadMoreListener);
