@@ -13,9 +13,6 @@ import rx.subscriptions.CompositeSubscription;
  */
 public abstract class BaseActivity extends Activity {
 
-    private WeakRefereneceHandler<BaseActivity> mHandler;
-    private CompositeSubscription mCompositeSubscription;
-
     /**
      * 初始化窗体内Views
      */
@@ -26,17 +23,6 @@ public abstract class BaseActivity extends Activity {
      * @return id
      */
     protected abstract int getContentViewId();
-
-    void setHandler(WeakRefereneceHandler handler){
-        mHandler = handler;
-    }
-
-    public WeakRefereneceHandler getHandler(){
-        if(null == mHandler){
-            mHandler = new WeakRefereneceHandler<>(this);
-        }
-        return mHandler;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +36,6 @@ public abstract class BaseActivity extends Activity {
     @Override
     protected void onDestroy() {
         RxBus.get().unregister(this);
-        if(null != mCompositeSubscription){
-            mCompositeSubscription.unsubscribe();
-        }
         super.onDestroy();
 //        ViewServer.get(this).removeWindow(this);
     }

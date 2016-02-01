@@ -12,8 +12,6 @@ import rx.subscriptions.CompositeSubscription;
  * Created by aako on 2015/12/28.
  */
 public abstract class BaseAppCompatActivity extends AppCompatActivity {
-    private WeakRefereneceHandler<BaseAppCompatActivity> mHandler;
-    private CompositeSubscription mCompositeSubscription;
 
     /**
      * 初始化窗体内Views
@@ -25,18 +23,6 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
      * @return id
      */
     protected abstract int getContentViewId();
-
-
-    void setHandler(WeakRefereneceHandler handler) {
-        mHandler = handler;
-    }
-
-    public WeakRefereneceHandler getHandler() {
-        if (null == mHandler) {
-            mHandler = new WeakRefereneceHandler<>(this);
-        }
-        return mHandler;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +36,6 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         RxBus.get().unregister(this);
-        if (null != mCompositeSubscription) {
-            mCompositeSubscription.unsubscribe();
-        }
         super.onDestroy();
 //        ViewServer.get(this).removeWindow(this);
     }

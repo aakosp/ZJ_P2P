@@ -1,5 +1,6 @@
 package com.aako.zjp2p.util.rxbus;
 
+import com.aako.zjp2p.util.LogUtil;
 import com.aako.zjp2p.util.rxbus.annotation.Tag;
 import com.aako.zjp2p.util.rxbus.entity.DeadEvent;
 import com.aako.zjp2p.util.rxbus.entity.EventType;
@@ -24,6 +25,8 @@ import rx.functions.Action1;
  * Created by aako on 16-1-29.
  */
 public class Bus {
+
+    private static final String TAG = " RxBus ";
 
     public static final String DEFAULT_IDENTIFIER = "default";
 
@@ -124,6 +127,7 @@ public class Bus {
             throw new NullPointerException("Object to register must not be null.");
         }
         enforcer.enforce(this);
+        LogUtil.d(TAG, ""+object.getClass());
 
         Map<EventType, ProducerEvent> foundProducers = finder.findAllProducers(object);
         for (EventType type : foundProducers.keySet()) {
@@ -266,8 +270,12 @@ public class Bus {
             throw new NullPointerException("Event to post must not be null.");
         }
         enforcer.enforce(this);
+        LogUtil.d(TAG, "post:"+event.getClass());
 
         Set<Class<?>> dispatchClasses = flattenHierarchy(event.getClass());
+        for (Class<?> c :dispatchClasses) {
+            LogUtil.d(TAG, "dispatchClasses:"+c);
+        }
 
         boolean dispatched = false;
         for (Class<?> clazz : dispatchClasses) {

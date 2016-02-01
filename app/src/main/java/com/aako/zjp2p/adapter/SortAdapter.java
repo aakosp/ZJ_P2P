@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import com.aako.zjp2p.R;
 import com.aako.zjp2p.event.Event;
+import com.aako.zjp2p.util.LogUtil;
+import com.aako.zjp2p.util.rxbus.RxBus;
 import com.aako.zjp2p.util.rxbus.annotation.Produce;
 import com.aako.zjp2p.util.rxbus.annotation.Tag;
 import com.aako.zjp2p.util.rxbus.thread.EventThread;
@@ -20,14 +22,13 @@ import java.util.List;
 /**
  * Created by aako on 16-1-15.
  */
-public class SortAdapter extends RecyclerView.Adapter<SortAdapter.SortViewHolder> {
+public class SortAdapter extends RecyclerView.Adapter<SortAdapter.SortViewHolder> implements View.OnClickListener{
 
     private static final String TAG = " SortAdapter ";
 
     private Context context;
     private List<String> sortStr = new ArrayList<>();
     private int checkItemPosition = 0;
-    private OnClickListenerImp mOnClickListenerImp;
 
     public void setCheckItem(int position) {
         checkItemPosition = position;
@@ -39,14 +40,13 @@ public class SortAdapter extends RecyclerView.Adapter<SortAdapter.SortViewHolder
         sortStr.add("sort1");
         sortStr.add("sort2");
         sortStr.add("sort3");
-        mOnClickListenerImp = new OnClickListenerImp();
     }
 
     @Override
     public SortAdapter.SortViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View sortItem = View.inflate(context, R.layout.item_sort, null);
         SortViewHolder sortViewHolder = new SortViewHolder(sortItem);
-        sortViewHolder.itemView.setOnClickListener(mOnClickListenerImp);
+        sortViewHolder.itemView.setOnClickListener(this);
         return sortViewHolder;
     }
 
@@ -79,6 +79,18 @@ public class SortAdapter extends RecyclerView.Adapter<SortAdapter.SortViewHolder
         }
     }
 
+    @Override
+    public void onClick(View v) {
+        click((Integer) v.getTag(R.id.item_tag));
+    }
+
+    public int click(int position){
+        setCheckItem(position);
+        RxBus.get().post(Event.SORT, position);
+        LogUtil.d(TAG, "RxBus.get().post");
+        return position;
+    }
+
     public static class SortViewHolder extends RecyclerView.ViewHolder {
 
         public TextView textView;
@@ -89,18 +101,4 @@ public class SortAdapter extends RecyclerView.Adapter<SortAdapter.SortViewHolder
         }
     }
 
-    private class OnClickListenerImp implements View.OnClickListener {
-
-        @Override
-
-        public void onClick(View v) {
-            click((Integer) v.getTag(R.id.item_tag));
-        }
-
-        @Produce(tags = {@Tag(Event.SORT)})
-        public int click(int position){
-            setCheckItem(position);
-            return position;
-        }
-    }
 }

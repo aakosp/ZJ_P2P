@@ -14,8 +14,11 @@ import com.aako.zjp2p.adapter.TjtzAdapter;
 import com.aako.zjp2p.entity.Tz;
 import com.aako.zjp2p.event.Event;
 import com.aako.zjp2p.util.LogUtil;
+import com.aako.zjp2p.util.rxbus.RxBus;
+import com.aako.zjp2p.util.rxbus.annotation.Produce;
 import com.aako.zjp2p.util.rxbus.annotation.Subscribe;
 import com.aako.zjp2p.util.rxbus.annotation.Tag;
+import com.aako.zjp2p.util.rxbus.thread.EventThread;
 import com.aako.zjp2p.widget.DropDownMenu;
 import com.aako.zjp2p.widget.MultiSwipeRefreshLayout;
 import com.aako.zjp2p.widget.TopBar;
@@ -45,7 +48,6 @@ public class ActivityTz extends BaseActivity {//implements SwipeRefreshLayout.On
 
     private TopBar topBar;
     private SparseItemRemoveAnimator mSparseAnimator;
-    private OnClickListenerImp onClickListenerImp;
 
     private DropDownMenu dropDownMenu;
     private String headers[] = {"排序", "帅选条件"};
@@ -63,6 +65,7 @@ public class ActivityTz extends BaseActivity {//implements SwipeRefreshLayout.On
 
     @Override
     protected void initViews() {
+
         topBar = (TopBar) findViewById(R.id.topbar);
         topBar.setActivity(this);
 
@@ -171,12 +174,14 @@ public class ActivityTz extends BaseActivity {//implements SwipeRefreshLayout.On
             adapter.addData(tzs);
     }
 
+
     @Subscribe(tags = {@Tag(Event.SORT)})
     public void clickDropDownMenu(int position) {
         LogUtil.d(TAG, "position:"+position);
         dropDownMenu.setTabText(position == 0 ? headers[0] : sortAdapter.getSort(position));
         dropDownMenu.closeMenu();
     }
+
 
     private class OnClickListenerImp implements View.OnClickListener {
         @Override
