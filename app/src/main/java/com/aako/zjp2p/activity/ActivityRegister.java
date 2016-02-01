@@ -8,16 +8,12 @@ import android.widget.ImageView;
 import com.aako.zjp2p.R;
 import com.aako.zjp2p.activity.base.BaseActivity;
 import com.aako.zjp2p.api.Api;
-import com.aako.zjp2p.api.ApiFactory;
 import com.aako.zjp2p.entity.Message;
 import com.aako.zjp2p.entity.User;
 import com.aako.zjp2p.util.StringUtils;
 import com.aako.zjp2p.util.ToastUtils;
 import com.aako.zjp2p.widget.TopBar;
 import com.cengalabs.flatui.views.FlatButton;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;

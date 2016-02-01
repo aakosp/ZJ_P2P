@@ -1,4 +1,7 @@
 <resources>
+    <string name="Success">Success</string>
+    <string name="Loading">Loading...</string>
+
     <string name="app_name">中金财付通</string>
 
     <string name="main_activity">首页</string>

@@ -8,8 +8,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.aako.zjp2p.R;
+import com.aako.zjp2p.event.Event;
+import com.aako.zjp2p.util.rxbus.annotation.Produce;
+import com.aako.zjp2p.util.rxbus.annotation.Tag;
+import com.aako.zjp2p.util.rxbus.thread.EventThread;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -48,13 +53,17 @@ public class SortAdapter extends RecyclerView.Adapter<SortAdapter.SortViewHolder
     @Override
     public void onBindViewHolder(SortViewHolder holder, int position) {
         holder.textView.setText(sortStr.get(position));
+        holder.itemView.setTag(R.id.item_tag, position);
         fillValue(position, holder);
     }
-
 
     @Override
     public int getItemCount() {
         return sortStr.size();
+    }
+
+    public String getSort(int position){
+        return sortStr.get(position);
     }
 
     private void fillValue(int position, SortViewHolder viewHolder) {
@@ -70,7 +79,6 @@ public class SortAdapter extends RecyclerView.Adapter<SortAdapter.SortViewHolder
         }
     }
 
-
     public static class SortViewHolder extends RecyclerView.ViewHolder {
 
         public TextView textView;
@@ -84,8 +92,15 @@ public class SortAdapter extends RecyclerView.Adapter<SortAdapter.SortViewHolder
     private class OnClickListenerImp implements View.OnClickListener {
 
         @Override
-        public void onClick(View v) {
 
+        public void onClick(View v) {
+            click((Integer) v.getTag(R.id.item_tag));
+        }
+
+        @Produce(tags = {@Tag(Event.SORT)})
+        public int click(int position){
+            setCheckItem(position);
+            return position;
         }
     }
 }

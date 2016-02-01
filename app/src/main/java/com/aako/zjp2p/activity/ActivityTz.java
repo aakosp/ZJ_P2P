@@ -12,6 +12,10 @@ import com.aako.zjp2p.adapter.ConditionAdapter;
 import com.aako.zjp2p.adapter.SortAdapter;
 import com.aako.zjp2p.adapter.TjtzAdapter;
 import com.aako.zjp2p.entity.Tz;
+import com.aako.zjp2p.event.Event;
+import com.aako.zjp2p.util.LogUtil;
+import com.aako.zjp2p.util.rxbus.annotation.Subscribe;
+import com.aako.zjp2p.util.rxbus.annotation.Tag;
 import com.aako.zjp2p.widget.DropDownMenu;
 import com.aako.zjp2p.widget.MultiSwipeRefreshLayout;
 import com.aako.zjp2p.widget.TopBar;
@@ -52,9 +56,10 @@ public class ActivityTz extends BaseActivity {//implements SwipeRefreshLayout.On
     private RecyclerAdapterWithHF mAdapter;
     private PtrClassicFrameLayout ptrClassicFrameLayout;
     Handler handler = new Handler();
-
     int page = 0;
 
+    SortAdapter sortAdapter;
+    ConditionAdapter conditionAdapter;
 
     @Override
     protected void initViews() {
@@ -70,12 +75,12 @@ public class ActivityTz extends BaseActivity {//implements SwipeRefreshLayout.On
 
         final RecyclerView sortView = new RecyclerView(this);
         sortView.setLayoutManager(new LinearLayoutManager(this));
-        SortAdapter sortAdapter = new SortAdapter(this);
+        sortAdapter = new SortAdapter(this);
         sortView.setAdapter(sortAdapter);
 
         final RecyclerView conditionView = new RecyclerView(this);
         conditionView.setLayoutManager(new LinearLayoutManager(this));
-        ConditionAdapter conditionAdapter = new ConditionAdapter();
+        conditionAdapter = new ConditionAdapter();
         conditionView.setAdapter(conditionAdapter);
 
         popupViews.add(sortView);
@@ -166,40 +171,12 @@ public class ActivityTz extends BaseActivity {//implements SwipeRefreshLayout.On
             adapter.addData(tzs);
     }
 
-    /*@Override
-    public boolean canDismiss(int position) {
-        return true;
+    @Subscribe(tags = {@Tag(Event.SORT)})
+    public void clickDropDownMenu(int position) {
+        LogUtil.d(TAG, "position:"+position);
+        dropDownMenu.setTabText(position == 0 ? headers[0] : sortAdapter.getSort(position));
+        dropDownMenu.closeMenu();
     }
-
-    @Override
-    public void onDismiss(RecyclerView recyclerView, int[] reverseSortedPositions) {
-        for (int position : reverseSortedPositions) {
-            mSparseAnimator.setSkipNext(true);
-            adapter.remove(position);
-        }
-    }
-
-    @Override
-    public void onMoreAsked(int overallItemsCount, int itemsBeforeMore, int maxLastVisiblePosition) {
-        Toast.makeText(this, "onMoreAsked", Toast.LENGTH_LONG).show();
-        dropDownMenu.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                initData();
-            }
-        }, 200);
-    }
-
-    @Override
-    public void onRefresh() {
-        Toast.makeText(this, "onRefresh", Toast.LENGTH_LONG).show();
-        dropDownMenu.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                initData();
-            }
-        }, 200);
-    }*/
 
     private class OnClickListenerImp implements View.OnClickListener {
         @Override
@@ -209,6 +186,5 @@ public class ActivityTz extends BaseActivity {//implements SwipeRefreshLayout.On
             }
         }
     }
-
 
 }
