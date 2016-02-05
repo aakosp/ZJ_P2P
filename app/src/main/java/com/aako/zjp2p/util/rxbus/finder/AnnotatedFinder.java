@@ -1,6 +1,9 @@
 package com.aako.zjp2p.util.rxbus.finder;
 
 
+import android.support.design.widget.TabLayout;
+
+import com.aako.zjp2p.util.LogUtil;
 import com.aako.zjp2p.util.rxbus.annotation.Produce;
 import com.aako.zjp2p.util.rxbus.annotation.Subscribe;
 import com.aako.zjp2p.util.rxbus.annotation.Tag;
@@ -67,6 +70,7 @@ public final class AnnotatedFinder {
                 }
 
                 Class<?> parameterClazz = parameterTypes[0];
+                LogUtil.d(" parameterClazz", "parameterClazz:"+parameterClazz);
                 if (parameterClazz.isInterface()) {
                     throw new IllegalArgumentException("Method " + method + " has @Subscribe annotation on " + parameterClazz
                             + " which is an interface.  Subscription must be on a concrete class type.");
@@ -170,6 +174,7 @@ public final class AnnotatedFinder {
      */
     static Map<EventType, Set<SubscriberEvent>> findAllSubscribers(Object listener) {
         Class<?> listenerClass = listener.getClass();
+        LogUtil.d(" findAllSubscribers ", " listener:"+listenerClass);
         Map<EventType, Set<SubscriberEvent>> subscribersInMethod = new HashMap<>();
 
         Map<EventType, Set<SourceMethod>> methods = SUBSCRIBERS_CACHE.get(listenerClass);

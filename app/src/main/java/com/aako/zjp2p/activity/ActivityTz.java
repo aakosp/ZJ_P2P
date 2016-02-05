@@ -11,14 +11,12 @@ import com.aako.zjp2p.activity.base.BaseActivity;
 import com.aako.zjp2p.adapter.ConditionAdapter;
 import com.aako.zjp2p.adapter.SortAdapter;
 import com.aako.zjp2p.adapter.TjtzAdapter;
+import com.aako.zjp2p.api.Api;
 import com.aako.zjp2p.entity.Tz;
 import com.aako.zjp2p.event.Event;
 import com.aako.zjp2p.util.LogUtil;
-import com.aako.zjp2p.util.rxbus.RxBus;
-import com.aako.zjp2p.util.rxbus.annotation.Produce;
 import com.aako.zjp2p.util.rxbus.annotation.Subscribe;
 import com.aako.zjp2p.util.rxbus.annotation.Tag;
-import com.aako.zjp2p.util.rxbus.thread.EventThread;
 import com.aako.zjp2p.widget.DropDownMenu;
 import com.aako.zjp2p.widget.MultiSwipeRefreshLayout;
 import com.aako.zjp2p.widget.TopBar;
@@ -40,39 +38,30 @@ public class ActivityTz extends BaseActivity {//implements SwipeRefreshLayout.On
 
     private static final String TAG = " ActivityTz ";
 
-    private RecyclerView.LayoutManager mLayoutManager;
-    //    private SuperRecyclerView mRecycler;
-
-    private MultiSwipeRefreshLayout mSwipeRefreshLayout;
-    private boolean mIsRequestDataRefresh = false;
-
     private TopBar topBar;
-    private SparseItemRemoveAnimator mSparseAnimator;
-
+    //下拉菜单
     private DropDownMenu dropDownMenu;
     private String headers[] = {"排序", "帅选条件"};
     private List<View> popupViews = new ArrayList<>();
+    private SortAdapter sortAdapter;
+    private ConditionAdapter conditionAdapter;
 
+    //下拉刷新列表
     private RecyclerView mRecyclerView;
     private TjtzAdapter adapter;
     private RecyclerAdapterWithHF mAdapter;
     private PtrClassicFrameLayout ptrClassicFrameLayout;
     Handler handler = new Handler();
+
+    //查询条件
     int page = 0;
 
-    SortAdapter sortAdapter;
-    ConditionAdapter conditionAdapter;
 
     @Override
     protected void initViews() {
 
         topBar = (TopBar) findViewById(R.id.topbar);
         topBar.setActivity(this);
-
-        View container = View.inflate(this, R.layout.layout_refresh_recyclerview, null);
-        ptrClassicFrameLayout = (PtrClassicFrameLayout) container.findViewById(R.id.test_recycler_view_frame);
-        mRecyclerView = (RecyclerView) container.findViewById(R.id.test_recycler_view);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         dropDownMenu = (DropDownMenu) findViewById(R.id.dropDownMenu);
 
@@ -88,6 +77,11 @@ public class ActivityTz extends BaseActivity {//implements SwipeRefreshLayout.On
 
         popupViews.add(sortView);
         popupViews.add(conditionView);
+
+        View container = View.inflate(this, R.layout.layout_refresh_recyclerview, null);
+        ptrClassicFrameLayout = (PtrClassicFrameLayout) container.findViewById(R.id.test_recycler_view_frame);
+        mRecyclerView = (RecyclerView) container.findViewById(R.id.test_recycler_view);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         dropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, container);
 
@@ -153,12 +147,12 @@ public class ActivityTz extends BaseActivity {//implements SwipeRefreshLayout.On
         if (null == adapter) {
             adapter = new TjtzAdapter(this);
         }
-        List<Tz> tzs = new ArrayList<>();
+        /*List<Tz> tzs = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
             Tz tz = new Tz();
             tz.id = i;
             tz.wcd = (i + 1) * 10;
-            tz.title = "title 标题 " + i + (clear?"头部":"尾部");
+            tz.title = "title 标题 " + i + (clear ? "头部" : "尾部");
             tz.describe = "describe 详细描述 详细描述 " + i;
             tz.yqnh = (i + 1) * 2 + "";
             tz.qtje = (i + 1) * 1000 + "";
@@ -171,25 +165,15 @@ public class ActivityTz extends BaseActivity {//implements SwipeRefreshLayout.On
         if (clear)
             adapter.setData(tzs);
         else
-            adapter.addData(tzs);
+            adapter.addData(tzs);*/
     }
 
 
     @Subscribe(tags = {@Tag(Event.SORT)})
     public void clickDropDownMenu(int position) {
-        LogUtil.d(TAG, "position:"+position);
+        LogUtil.d(TAG, "position:" + position);
         dropDownMenu.setTabText(position == 0 ? headers[0] : sortAdapter.getSort(position));
         dropDownMenu.closeMenu();
-    }
-
-
-    private class OnClickListenerImp implements View.OnClickListener {
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()) {
-
-            }
-        }
     }
 
 }

@@ -33,7 +33,7 @@ public class Api {
         return ApiFactory.getIUserSingleton().reg(body);
     }
 
-    public static Observable<User> get(String id) {
+    public static Observable<User> getUser(String id) {
         Map body = new HashMap();
         body.put("user_id", id);
         return ApiFactory.getIUserSingleton().getUser(body);

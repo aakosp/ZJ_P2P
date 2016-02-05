@@ -84,10 +84,10 @@ public class SortAdapter extends RecyclerView.Adapter<SortAdapter.SortViewHolder
         click((Integer) v.getTag(R.id.item_tag));
     }
 
+    @Produce(tags = {@Tag(Event.SORT)})
     public int click(int position){
         setCheckItem(position);
         RxBus.get().post(Event.SORT, position);
-        LogUtil.d(TAG, "RxBus.get().post");
         return position;
     }
 

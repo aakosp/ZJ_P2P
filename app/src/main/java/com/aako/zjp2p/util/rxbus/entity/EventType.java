@@ -1,9 +1,12 @@
 package com.aako.zjp2p.util.rxbus.entity;
 
+import com.aako.zjp2p.util.LogUtil;
+
 /**
  * Created by aako on 16-1-29.
  */
 public class EventType {
+    private static final String TAG = "EventType";
 
     private final String tag;
 
@@ -54,6 +57,7 @@ public class EventType {
 
         final EventType other = (EventType) obj;
 
+        LogUtil.d(TAG, this+" other:"+other);
         return tag.equals(other.tag) && clazz == other.clazz;
     }
 }

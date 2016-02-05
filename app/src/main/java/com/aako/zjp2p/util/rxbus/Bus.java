@@ -9,6 +9,7 @@ import com.aako.zjp2p.util.rxbus.entity.SubscriberEvent;
 import com.aako.zjp2p.util.rxbus.finder.Finder;
 import com.aako.zjp2p.util.rxbus.thread.ThreadEnforcer;
 
+import java.lang.reflect.Field;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -127,7 +128,6 @@ public class Bus {
             throw new NullPointerException("Object to register must not be null.");
         }
         enforcer.enforce(this);
-        LogUtil.d(TAG, ""+object.getClass());
 
         Map<EventType, ProducerEvent> foundProducers = finder.findAllProducers(object);
         for (EventType type : foundProducers.keySet()) {
@@ -270,15 +270,14 @@ public class Bus {
             throw new NullPointerException("Event to post must not be null.");
         }
         enforcer.enforce(this);
-        LogUtil.d(TAG, "post:"+event.getClass());
+
+        LogUtil.d(TAG, event.getClass().toString());
 
         Set<Class<?>> dispatchClasses = flattenHierarchy(event.getClass());
-        for (Class<?> c :dispatchClasses) {
-            LogUtil.d(TAG, "dispatchClasses:"+c);
-        }
 
         boolean dispatched = false;
         for (Class<?> clazz : dispatchClasses) {
+            LogUtil.d(TAG, "dispatchClasses:"+clazz.toString());
             Set<SubscriberEvent> wrappers = getSubscribersForEventType(new EventType(tag, clazz));
 
             if (wrappers != null && !wrappers.isEmpty()) {
@@ -354,6 +353,22 @@ public class Bus {
         Set<Class<?>> classes = new HashSet<>();
 
         parents.add(concreteClass);
+
+        //Add 基本类型判断
+        Field f = null;
+        try {
+            f = concreteClass.getDeclaredField("TYPE");
+            if (f != null) {
+                try {
+                    classes.add((Class) f.get(null));
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        }
+
 
         while (!parents.isEmpty()) {
             Class<?> clazz = parents.remove(0);
