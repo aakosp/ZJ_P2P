@@ -1,7 +1,6 @@
 package com.aako.zjp2p.util;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.View;
@@ -13,7 +12,6 @@ import android.view.WindowManager;
 public class UiUtils {
 
     private static DisplayMetrics displaysMetrics = null;
-    private static float scale = -1.0f;
 
     public static DisplayMetrics getDisplayMetrics() {
         if (null == displaysMetrics) {
@@ -29,12 +27,11 @@ public class UiUtils {
      * Convert Dp to Pixel
      */
     public static float sp2px(float sp) {
-        final float scale = AppUtils.getInstance().getResources().getDisplayMetrics().scaledDensity;
-        return sp * scale;
+        return sp * getDisplayMetrics().scaledDensity;
     }
 
     public static int dp2px(float dp) {
-        float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, AppUtils.getInstance().getResources().getDisplayMetrics());
+        float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, getDisplayMetrics());
         return (int) px;
     }
 
@@ -55,24 +52,18 @@ public class UiUtils {
     /**
      * 获取屏幕高度
      *
-     * @return
+     * @return int
      */
     public static int getHeight() {
-        if (null == displaysMetrics) {
-            getDisplayMetrics();
-        }
-        return displaysMetrics.heightPixels;
+        return getDisplayMetrics().heightPixels;
     }
 
     /**
      * 获取屏幕宽度
      *
-     * @return
+     * @return int
      */
     public static int getWidth() {
-        if (null == displaysMetrics) {
-            getDisplayMetrics();
-        }
-        return displaysMetrics.widthPixels;
+        return getDisplayMetrics().widthPixels;
     }
 }

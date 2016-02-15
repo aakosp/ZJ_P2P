@@ -90,7 +90,7 @@ public class CircleProgress extends View {
         super(context, attrs, defStyleAttr);
 
         default_text_size = UiUtils.sp2px(18);
-        min_size = (int) UiUtils.dp2px(100);
+        min_size = UiUtils.dp2px(100);
         default_stroke_width = UiUtils.dp2px(10);
         default_inner_bottom_text_size =UiUtils.sp2px(18);
 
