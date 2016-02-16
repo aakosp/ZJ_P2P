@@ -7,8 +7,11 @@ import android.widget.LinearLayout;
 
 import com.aako.zjp2p.R;
 import com.aako.zjp2p.activity.base.BaseFragment;
+import com.aako.zjp2p.api.Api;
+import com.aako.zjp2p.entity.Page;
 import com.aako.zjp2p.entity.Tz;
 import com.aako.zjp2p.entity.Zc;
+import com.aako.zjp2p.util.LogUtil;
 import com.aako.zjp2p.util.UiUtils;
 import com.aako.zjp2p.viewholder.BannerHolder;
 import com.aako.zjp2p.viewholder.TzHolder;
@@ -20,6 +23,12 @@ import com.aako.zjp2p.widget.ImageTextButton;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by aako on 15-12-15.
@@ -134,6 +143,28 @@ public class FragmentHome extends BaseFragment {
             zcHolder.UpdateUI(i, zc);
             flTjzc.addView(zcView);
         }
+
+        //获取推荐项目
+        Api.getRecommendP2p(3)
+                .flatMap(new Func1<List<Tz>, Observable<Tz>>() {
+                    @Override
+                    public Observable<Tz> call(List<Tz> tzs) {
+                        return Observable.from(tzs);
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<Tz>() {
+                    @Override
+                    public void call(Tz tz) {
+                        LogUtil.d(TAG, tz.toString());
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        throwable.printStackTrace();
+                    }
+                });
     }
 
     @Override

@@ -10,6 +10,7 @@ import com.aako.zjp2p.entity.User;
 import com.aako.zjp2p.util.AppUtils;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import rx.Observable;
@@ -72,7 +73,7 @@ public class Api {
     /*****************************************
      * p2p                                   *
      ****************************************/
-    public static Observable<Page<Tz>> getRecommendP2p(int number) {
+    public static Observable<List<Tz>> getRecommendP2p(int number) {
         Map body = new HashMap();
         body.put("number", number);
         return ApiFactory.getIP2pSingleton().getRecommendP2p(body);

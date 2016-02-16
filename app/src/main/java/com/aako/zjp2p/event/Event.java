@@ -5,4 +5,5 @@ package com.aako.zjp2p.event;
  */
 public class Event{
     public static final String SORT = "SORT";
+    public static final String MENU = "MENU";
 }

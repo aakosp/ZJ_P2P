@@ -6,6 +6,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,9 +15,16 @@ import android.widget.TextView;
 
 import com.aako.zjp2p.R;
 import com.aako.zjp2p.activity.base.BaseAppCompatActivity;
+import com.aako.zjp2p.adapter.NavMenuAdapter;
+import com.aako.zjp2p.event.Event;
+import com.aako.zjp2p.util.LogUtil;
+import com.aako.zjp2p.util.rxbus.annotation.Subscribe;
+import com.aako.zjp2p.util.rxbus.annotation.Tag;
 import com.aako.zjp2p.widget.ImageTextButton;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends BaseAppCompatActivity
@@ -24,10 +33,11 @@ public class MainActivity extends BaseAppCompatActivity
     private static final String TAG = " MainActivity ";
 
     private TextView tv_mainActivity_title;
-    private ImageTextButton home, profile, initiate, spreading, participated, integral;
+    private RecyclerView menuList;
 
-    private Map<Integer, Fragment> mFragments = new HashMap<>();
-    private OnClickLinstenerImp onClickLinstenerImp;
+    private List<Fragment> mFragments = new ArrayList<>();
+    private NavMenuAdapter adapter;
+    public static int menuSelectPosition = 0;
 
     @Override
     protected void initViews() {
@@ -50,24 +60,19 @@ public class MainActivity extends BaseAppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        home = (ImageTextButton) findViewById(R.id.home);
-        profile = (ImageTextButton) findViewById(R.id.profile);
+        menuList = (RecyclerView) findViewById(R.id.menus);
+        menuList.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new NavMenuAdapter(this);
+        menuList.setAdapter(adapter);
 
-        onClickLinstenerImp = new OnClickLinstenerImp();
-        home.setOnClickListener(onClickLinstenerImp);
-        profile.setOnClickListener(onClickLinstenerImp);
+        mFragments.add(getSupportFragmentManager().findFragmentById(R.id.fragmentHome));
+        mFragments.add(getSupportFragmentManager().findFragmentById(R.id.fragmentProfile));
+        mFragments.add(getSupportFragmentManager().findFragmentById(R.id.fragmentInitiate));
+        mFragments.add(getSupportFragmentManager().findFragmentById(R.id.fragmentSpreading));
+        mFragments.add(getSupportFragmentManager().findFragmentById(R.id.fragmentParticipated));
+        mFragments.add(getSupportFragmentManager().findFragmentById(R.id.fragmentIntegral));
 
-//        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-//        navigationView.setNavigationItemSelectedListener(this);
-
-        mFragments.put(R.id.home, getSupportFragmentManager().findFragmentById(R.id.fragmentHome));
-        mFragments.put(R.id.profile, getSupportFragmentManager().findFragmentById(R.id.fragmentProfile));
-        mFragments.put(R.id.initiate, getSupportFragmentManager().findFragmentById(R.id.fragmentInitiate));
-        mFragments.put(R.id.spreading, getSupportFragmentManager().findFragmentById(R.id.fragmentSpreading));
-        mFragments.put(R.id.participated, getSupportFragmentManager().findFragmentById(R.id.fragmentParticipated));
-        mFragments.put(R.id.integral, getSupportFragmentManager().findFragmentById(R.id.fragmentIntegral));
-
-        navigationToFragment(R.id.home);
+        navigationToFragment(0);
     }
 
     @Override
@@ -95,29 +100,25 @@ public class MainActivity extends BaseAppCompatActivity
         return true;
     }
 
-    private void navigationToFragment(int id) {
-        if (!mFragments.containsKey(id)) {
-            return;
-        }
+    private void navigationToFragment(int position) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out,
                 android.R.anim.fade_in, android.R.anim.fade_out);
-        for (int key : mFragments.keySet()) {
-            fragmentTransaction = fragmentTransaction.hide(mFragments.get(key));
+        for (Fragment fragment : mFragments) {
+            fragmentTransaction = fragmentTransaction.hide(fragment);
         }
-        fragmentTransaction.show(mFragments.get(id)).commit();
+        fragmentTransaction.show(mFragments.get(position)).commit();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
     }
 
-    private class OnClickLinstenerImp implements View.OnClickListener {
-
-        @Override
-        public void onClick(View v) {
-            v.setEnabled(false);
-            navigationToFragment(v.getId());
-            v.setEnabled(true);
-        }
+    @Subscribe(tags={@Tag(Event.MENU)})
+    public void onItemClick(int position) {
+        LogUtil.d(TAG, "onItemClick:" + position);
+        adapter.notifyItemChanged(menuSelectPosition);
+        menuSelectPosition = position;
+        adapter.notifyItemChanged(position);
+        navigationToFragment(position);
     }
 
 /*    @Override

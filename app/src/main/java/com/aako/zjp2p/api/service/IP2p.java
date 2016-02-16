@@ -4,6 +4,7 @@ import com.aako.zjp2p.entity.Id;
 import com.aako.zjp2p.entity.Page;
 import com.aako.zjp2p.entity.Tz;
 
+import java.util.List;
 import java.util.Map;
 
 import retrofit2.http.Body;
@@ -26,7 +27,7 @@ public interface IP2p {
     Observable<Page<Tz>> p2pFilter(@Body Map body);
 
     @POST("p2p/get_recommend_p2p")
-    Observable<Page<Tz>> getRecommendP2p(@Body Map body);
+    Observable<List<Tz>> getRecommendP2p(@Body Map body);
 
     @POST("p2p/get_one")
     Observable<Tz> getP2p(@Body Map body);

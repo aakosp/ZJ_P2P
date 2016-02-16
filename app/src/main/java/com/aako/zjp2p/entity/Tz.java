@@ -26,7 +26,7 @@ public class Tz implements Serializable {
     public int borrower;     //借款人
     public String repayment_method;//还款方式
     public float staring_investment_amount;//起投金额
-    public int submit_time;     //项目提交时间
+    public String submit_time;     //项目提交时间
     public String stauts;//状态
     public int is_recommend;//是否推荐
 
@@ -44,4 +44,11 @@ public class Tz implements Serializable {
     public String rs;
     public int type;
 
+
+    @Override
+    public String toString() {
+        return "id:"+id+" name:"+name+" page_view:"+page_view+" amount:"+amount+" interest_rate:"+interest_rate+" limit_time:"+limit_time +" borrower:"+borrower+
+                " repayment_method:"+repayment_method+" staring_investment_amount:"+staring_investment_amount+" submit_time:"+submit_time+" stauts:"+stauts+
+        " is_recommend:"+is_recommend;
+    }
 }
