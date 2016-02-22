@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/item_zc_height">
+    android:layout_height="wrap_content"
+    android:minHeight="@dimen/item_zc_height">
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/img"
@@ -11,6 +12,11 @@
         android:layout_alignParentLeft="true"
         android:layout_margin="@dimen/def_padding"
         fresco:actualImageScaleType="focusCrop" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider"
+        android:background="@color/divider" />
 
 
     <TextView
@@ -22,6 +28,22 @@
         android:text="云中飞呼啦圈止鼾器"
         android:textColor="@color/zc_title"
         android:textSize="@dimen/text_big_size" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="@dimen/def_padding"
+        android:layout_marginTop="@dimen/def_padding"
+        android:background="@mipmap/zc_flag"
+        android:gravity="center"
+        android:paddingBottom="@dimen/item_zc_flag_bottom"
+        android:paddingLeft="@dimen/def_padding"
+        android:paddingRight="@dimen/def_padding"
+        android:text="热筹中"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/text_small_size" />
 
     <TextView
         android:id="@+id/describe"
@@ -44,7 +66,7 @@
         android:orientation="horizontal"
         android:paddingBottom="@dimen/def_padding">
 
-        <TextView
+        <com.aako.zjp2p.widget.CustomText
             android:id="@+id/wcd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -53,7 +75,7 @@
             android:textColor="@color/loan_yqnh"
             android:textSize="@dimen/text_small_size" />
 
-        <TextView
+        <com.aako.zjp2p.widget.CustomText
             android:id="@+id/ycje"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -62,7 +84,7 @@
             android:textColor="@color/loan_yqnh"
             android:textSize="@dimen/text_small_size" />
 
-        <TextView
+        <com.aako.zjp2p.widget.CustomText
             android:id="@+id/syts"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

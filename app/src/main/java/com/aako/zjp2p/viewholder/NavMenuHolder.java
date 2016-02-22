@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.aako.zjp2p.R;
 import com.aako.zjp2p.activity.MainActivity;
 import com.aako.zjp2p.entity.NavMenu;
+import com.aako.zjp2p.util.LogUtil;
 
 /**
  * Created by aako on 16-2-16.
@@ -32,6 +33,7 @@ public class NavMenuHolder extends RecyclerView.ViewHolder implements Holder<Nav
 
     @Override
     public void UpdateUI(int position, NavMenu data) {
+        LogUtil.d("item", "item width:"+itemView.getWidth());
         if (position == MainActivity.menuSelectPosition)
             img.setImageResource(data.selectedIconId);
         else

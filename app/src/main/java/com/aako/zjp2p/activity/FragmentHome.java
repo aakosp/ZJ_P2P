@@ -136,7 +136,7 @@ public class FragmentHome extends BaseFragment {
             zc.sum = (i + 1) * (i % 3 + 1) * 1000 + "";
             zc.title = "title 标题 " + i;
             zc.wcd = (i + 1) * 10;
-            zc.remainingTime = (i + 1) * 10 + "天";
+            zc.remainingTime = (i + 1) * 10 + "";
 
             ZcHolder zcHolder = zcCreator.createHolder();
             View zcView = zcHolder.createView(this.getActivity());

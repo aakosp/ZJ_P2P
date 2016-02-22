@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import com.aako.zjp2p.R;
 import com.aako.zjp2p.entity.NavMenu;
 import com.aako.zjp2p.event.Event;
+import com.aako.zjp2p.util.LogUtil;
+import com.aako.zjp2p.util.UiUtils;
 import com.aako.zjp2p.util.rxbus.RxBus;
 import com.aako.zjp2p.viewholder.NavMenuHolder;
 
@@ -39,6 +41,10 @@ public class NavMenuAdapter extends RecyclerView.Adapter<NavMenuHolder>{
     @Override
     public NavMenuHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = View.inflate(context, R.layout.nav_menu, null);
+        if(null != parent){
+            ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(parent.getWidth(), ViewGroup.LayoutParams.WRAP_CONTENT);
+            view.setLayoutParams(params);
+        }
         view.setOnClickListener(onMenuCLick);
         NavMenuHolder holder = new NavMenuHolder(view);
         return holder;

@@ -6,6 +6,8 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.WindowManager;
 
+import com.aako.zjp2p.R;
+
 /**
  * Created by ZL on 2015/11/23.
  */
@@ -65,5 +67,18 @@ public class UiUtils {
      */
     public static int getWidth() {
         return getDisplayMetrics().widthPixels;
+    }
+
+    /**
+     * 获取色值
+     * @param colorRes
+     * @return
+     */
+    public static int getColorFromRes(int colorRes){
+        return AppUtils.getInstance().getResources().getColor(colorRes);
+    }
+
+    public static int getTextSizeFromRes(int dimenRes){
+        return AppUtils.getInstance().getResources().getDimensionPixelSize(dimenRes);
     }
 }

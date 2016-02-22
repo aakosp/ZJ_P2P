@@ -14,17 +14,6 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/nav_header_height" />
 
-        <!--<GridView
-            android:id="@+id/grid"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/grid_program"
-            android:background="@color/divider"
-            android:columnWidth="@dimen/divider"
-            android:gravity="center"
-            android:horizontalSpacing="@dimen/divider"
-            android:numColumns="3"
-            android:stretchMode="columnWidth"
-            android:verticalSpacing="@dimen/divider" />-->
         <com.aako.zjp2p.widget.FlowLayout
             android:id="@+id/flowlayout"
             android:layout_width="match_parent"
@@ -67,22 +56,6 @@
             android:layout_height="@dimen/divider"
             android:background="@color/divider" />
 
-        <!--<android.support.v7.widget.RecyclerView
-    android:id="@+id/tjtz"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content" />
-
-    <android.support.v7.widget.RecyclerView
-    android:id="@+id/tjzc"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/def_padding" />-->
-
-        <!--<com.aako.zjp2p.widget.FlowLayout
-            android:id="@+id/tjtz"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />-->
-
         <LinearLayout
             android:id="@+id/tjtz"
             android:layout_width="match_parent"
@@ -101,16 +74,16 @@
             android:textColor="@color/text_title"
             android:textSize="@dimen/text_big_size" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider"
+            android:background="@color/divider" />
+
         <LinearLayout
             android:id="@+id/tjzc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" />
-        <!--<com.aako.zjp2p.widget.FlowLayout
-            android:id="@+id/tjzc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/def_padding" />-->
 
     </LinearLayout>
 </ScrollView>

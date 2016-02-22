@@ -2,8 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/item_loan"
+    android:layout_height="wrap_content"
     android:background="@android:color/white"
+    android:minHeight="@dimen/item_loan"
     android:orientation="vertical"
     android:paddingBottom="@dimen/def_padding">
 
@@ -49,7 +50,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/circle_outside"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/circle_outside"
         android:orientation="horizontal"
         android:paddingLeft="@dimen/def_padding"
         android:paddingRight="@dimen/def_padding">
@@ -87,7 +89,7 @@
                     android:textColor="@color/loan_text"
                     android:textSize="@dimen/text_small_size" />
 
-                <TextView
+                <com.aako.zjp2p.widget.CustomText
                     android:id="@+id/yqnh"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -120,12 +122,12 @@
                 android:textColor="@color/loan_text"
                 android:textSize="@dimen/text_small_size" />
 
-            <TextView
+            <com.aako.zjp2p.widget.CustomText
                 android:id="@+id/sum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="31600元"
-                android:textColor="@color/loan_rzje"
+                android:textColor="@color/drawer_center"
                 android:textSize="@dimen/loan_num_size" />
 
             <RelativeLayout
